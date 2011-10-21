@@ -1,0 +1,3638 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass classicthesis
+\use_default_options true
+\maintain_unincluded_children false
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Experimental Results
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:ExperimentalResults"
+
+\end_inset
+
+During the development of this thesis, little work has been spent on studying
+ the actual behavior of human agents.
+ Most certainly it is a highly complex topic.
+ While the behavior of the agents simulated in the implementation can not
+ be described as realistic, especially when analyzing the trajectory of
+ individual agents, the overall flow exhibits some of the properties that
+ can be seen in real crowds 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "PLEdestrians"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Quality of the Simulation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement !b
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/quality/arching.png
+	lyxscale 22
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:emergent-a"
+
+\end_inset
+
+Jamming, arching, and wake effect.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/quality/edge.png
+	lyxscale 22
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:emergent-b"
+
+\end_inset
+
+Edge effect.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/quality/lanes.png
+	lyxscale 22
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:emergent-c"
+
+\end_inset
+
+Lane formation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Emergent phenomena in crowds.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:emergent-a
+\end_layout
+
+\end_inset
+
+ shows how agents 
+\emph on
+jam
+\emph default
+ tight openings.
+ The subsequent agents form 
+\emph on
+arches
+\emph default
+ around these congested areas.
+ As the agents continue through the opening, they spread out in a pattern
+ called 
+\emph on
+wake effect
+\emph default
+.
+ Of course the direction of this pattern also depends on the location of
+ the goal area.
+ In 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+fig:emergent-b
+\end_layout
+
+\end_inset
+
+ the agents at the edge of the flow move faster than those in the middle,
+ exposing the 
+\emph on
+edge effect
+\emph default
+.
+ Agents moving in opposite directions form 
+\emph on
+lanes
+\emph default
+ as shown by the dotted lines in 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+fig:emergent-c
+\end_layout
+
+\end_inset
+
+.
+ Furthermore, if a passage gets blocked by too many agents or by the user-placed
+ discomfort brush, some agents will take a different route, exhibiting 
+\emph on
+congestion avoidance
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Much of the exposure of these effects and the crowd movement in general,
+ depends on the choice of cost weights.
+\begin_inset Float figure
+placement !t
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/quality/cost_normal.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:cost_normal"
+
+\end_inset
+
+
+\begin_inset Formula $\left(1,1,1\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/quality/cost_length.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:cost_length"
+
+\end_inset
+
+
+\begin_inset Formula $\left(0,1,1\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/quality/cost_time.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:cost_time"
+
+\end_inset
+
+
+\begin_inset Formula $\left(1,0,1\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/quality/cost_discomfort.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:cost_discomfort"
+
+\end_inset
+
+
+\begin_inset Formula $\left(1,1,0\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Different-views.-1-1"
+
+\end_inset
+
+
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Effect of cost weights.
+\end_layout
+
+\end_inset
+
+Effect of cost weights.
+ The three weights are given as 
+\begin_inset Formula $\left(Length,Time,Discomfort\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Different-views.-1-1
+\end_layout
+
+\end_inset
+
+ provides a comparison of four extreme cases.
+ The exits are located in the outer wall openings at the upper left and
+ lower right.
+ Each image shows the same scene after approximately ten seconds, but with
+ different cost weights.
+ The weights are given as a triple.
+ In 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:cost_normal
+\end_layout
+
+\end_inset
+
+ the costs are all the same.
+ Agents exhibit the emergent phenomena mentioned above.
+ Agents waiting at the rear of arches usually wander and turn around very
+ much.
+ 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+fig:cost_length
+\end_layout
+
+\end_inset
+
+ shows the scene with zero cost for path length.
+ This causes the agents to wander around much more and form loser structures.
+ After all, it does not cost more to move, as long as the agents can get
+ to the goal fast.
+ In 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+fig:cost_time
+\end_layout
+
+\end_inset
+
+ the opposite can be seen.
+ The agents don't take detours anymore to evade other agents and congestion.
+ They will wait as long as it takes to move along their chosen path.
+ Unfortunately, some will never reach their goal, because they are blocked
+ by other agents with similar stubbornness.
+ In 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+fig:cost_discomfort
+\end_layout
+
+\end_inset
+
+ walls are meaningless and agents can take the direct route to the exits.
+ These examples highlight the importance of the individual cost weight factors.
+ Many different crowd behaviors can be simulated by tweaking these values.
+ For instance, if agents, waiting at a small passage, tend to move around
+ too much, lowering the cost incurred by waiting in place, can lead to a
+ more relaxed crowd movement.
+\end_layout
+
+\begin_layout Standard
+Still, very detailed individual agent behavior can not be replicated with
+ this simulation model, as the whole scene is affected by changes to the
+ weights.
+ The system could be modified so that each agent group has different costs,
+ but for controlling individuals other approaches like those using 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+VO
+\end_layout
+
+\end_inset
+
+ are more suitable.
+ 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+VO
+\end_layout
+
+\end_inset
+
+ could also be added as an additional layer that controls the agent movement.
+ In the Froblins demo of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Froblins"
+
+\end_inset
+
+ the authors used this local navigation technique for avoiding other agents.
+ This would be a useful extension to the current implementation for this
+ thesis, because sometimes two agents get stuck at each other because the
+ granularity and symmetry of the discretization grid, does not provide a
+ resolution.
+ In this case it looks as if the agents can not decide on which side to
+ pass the other agent, so they just stop.
+ In 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Froblins"
+
+\end_inset
+
+ the evasion direction is coded into the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VO
+\end_layout
+
+\end_inset
+
+ system.
+ The navigation system used in this thesis already prevents agents following
+ other agents to move up too close.
+ This lowers the probability of intersections.
+ Still, if two agent streams cross orthogonally, many intersections occur
+ and need to be resolved by the collision detection process.
+ This can be seen by temporary disabling the collision resolution in the
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+ options.
+\end_layout
+
+\begin_layout Standard
+Three scenarios have been simulated with the given implementation, an office
+ evacuation (
+\emph on
+Office
+\emph default
+), a circular crowd movement (Circle), and a scene with paths leading through
+ hills and other obstacles (Hills), as depicted in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:scenes
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/office.png
+	lyxscale 20
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Office."
+
+\end_inset
+
+Office.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/circle.png
+	lyxscale 20
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Circle."
+
+\end_inset
+
+Circle.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/hills.png
+	lyxscale 20
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Hills."
+
+\end_inset
+
+Hills.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:scenes"
+
+\end_inset
+
+Three simulated situations.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ The Office scene (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Office.
+\end_layout
+
+\end_inset
+
+) shows an evacuation scenario with 
+\begin_inset Formula $4096$
+\end_inset
+
+ agents of radius one leaving the 
+\begin_inset Formula $256\times256$
+\end_inset
+
+ grid area, for testing the Park meta movement scheme.
+ In 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Circle.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $65536$
+\end_inset
+
+ agents with a radius of 
+\begin_inset Formula $0.4$
+\end_inset
+
+ start out randomly distributed over the 
+\begin_inset Formula $256\times256$
+\end_inset
+
+ map.
+ After several minutes a circle forms and the agents move counter-clockwise
+ around the central obstacle.
+ This scenario has been realized by setting diagonal goal areas where agent
+ groups meet in the image.
+ With the Change Group movement method, agents move from sector to sector
+ switching agent group and destination.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Hills.
+\end_layout
+
+\end_inset
+
+ shows an environment with multiple obstacles of different discomfort.
+ The 
+\begin_inset Formula $16384$
+\end_inset
+
+ agents of radius 
+\begin_inset Formula $0.4$
+\end_inset
+
+ traverse this landscape towards the exit areas in the upper left corner.
+ Then they respawn along the lower and right border of the 
+\begin_inset Formula $256\times256$
+\end_inset
+
+ map.
+\end_layout
+
+\begin_layout Standard
+Overall, the simulation system provides a reasonable but not accurate simulation
+ of human crowd movement.
+ Similar systems have been used in computer games 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "FlowFieldAndHeavyRainSPU,heavyRain"
+
+\end_inset
+
+, and if the agent density is not too high, to prevent agents from starting
+ to wander rapidly behind arches, a believable experience can be presented.
+ In very crowded environments, the simulation of individual agents is still
+ suitable for non-human agents.
+ The overall crowd flow could also be used for background scenes in movies,
+ or for the analysis of architectural designs.
+ While no accurate simulation of human psychological is performed, the consequen
+ces of emergency exit width and location choices can be witnessed.
+ As such, it can be used as a rapid iteration tool during the design process.
+ Longer running and more accurate simulations could afterwards verify the
+ results.
+\end_layout
+
+\begin_layout Section
+Efficiency
+\end_layout
+
+\begin_layout Standard
+To analyze the efficiency of the program, profiling information must be
+ gathered.
+ Four methods have been used to estimate the efficiency of the algorithm
+ on the Radeon HD 6950, client-side time measuring, OpenCL command-queue
+ profiling, the AMD APP Profiler tool, and memory bookkeeping.
+\end_layout
+
+\begin_layout Subsection
+Client-side Profiling
+\end_layout
+
+\begin_layout Standard
+Client-side profiling works by storing the current wall clock time at the
+ instant before the component that needs to be measured executes, and then
+ comparing it with the time after the execution.
+ A system of classes and C++ macros ensures that the profiling code does
+ not clutter the regular execution code more than necessary.
+ The program uses the function 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+clock_gettime
+\end_layout
+
+\end_inset
+
+ with the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+CLOCK_MONOTONIC
+\end_layout
+
+\end_inset
+
+ parameter to get the current system time, as recommended in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDProgrammingGuide"
+
+\end_inset
+
+.
+ For each part of the program that needs to be profiled, ten time measurements
+ are taken and averaged afterwards.
+ This only happens if the printing to the profiling text window is enabled.
+\end_layout
+
+\begin_layout Standard
+Because the execution of 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ commands on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ happens asynchronous to the time measurement on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+, the two processors must be synchronized, in order to get valid times.
+ Otherwise, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ would only measure the time it takes to issue the commands to the command-queue.
+ Hence, before and after each region that should be measured, a synchronization
+ command is added in the code.
+ For this thesis 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+clFinish
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+glFinish
+\end_layout
+
+\end_inset
+
+ are used.
+ These instructions guarantee that after their execution all pending 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ commands have executed on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ While this synchronization allows to measure the performance of the individual
+ components involved in the simulation, it obviously increases the overall
+ execution time of the application.
+ Therefore, detailed profiling of individual computation components is only
+ performed if explicitly requested in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+ options.
+ Otherwise, only whole simulation steps are measured.
+ This does not incur performance penalties because the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ do already synchronize to present and swap rendering buffers after each
+ simulation step and frame for double-buffered animation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+lis:Client-side-execution-times.
+\end_layout
+
+\end_inset
+
+ shows an example output with the detailed profiling option enabled, for
+ the Office scene with 
+\begin_inset Formula $30$
+\end_inset
+
+ outer iterations.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:Client-side-execution-times."
+
+\end_inset
+
+Client-side execution times.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Client-side execution times:
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Write discomfort:                  0.436167 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+Splat densities:                   0.557921 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+Read splat buffer:                 0.276342 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+Compute average velocity:          0.750590 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+Compute speed:                     0.950256 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+Compute cost:                      1.280601 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+Compute potential:                13.348872 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+Compute gradient:                  0.898579 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+--------------------------------------------------
+\end_layout
+
+\begin_layout Plain Layout
+
+Continuum sum:                    18.499328 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+Move agents:                       2.897998 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+Resolve collisions:                1.634542 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+--------------------------------------------------
+\end_layout
+
+\begin_layout Plain Layout
+
+Computation sum:                  23.031868 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+Render agents:                     1.508184 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+--------------------------------------------------
+\end_layout
+
+\begin_layout Plain Layout
+
+Computation and render:           28.059699 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+Overhead:                          8.271146 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+Total:                            36.330845 ms
+\end_layout
+
+\end_inset
+
+ If the option is disabled, only the last four elements are computed and
+ displayed.
+ The first entry represents the time it takes to write the information from
+ the discomfort file, buffered in 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VRAM
+\end_layout
+
+\end_inset
+
+, to a copy on which the computation is performed.
+ This is followed by the time for splatting all the agents, and the discomfort
+ brush into the Mixed Buffer, and rendering the splat areas.
+ Next the time for a copy of the Mixed Buffer is given.
+ In this case the data must be copied so it can be used in 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ buffers.
+ This might not be required if 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ images were used.
+ The copy is executed on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+, which explains the short amount of time.
+ The following five entries list the execution times of navigation components
+ that use 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ kernel programs.
+ Here, the large contribution of the potential computation becomes apparent.
+ Below the first line is the sum of all previous computation steps used
+ to derive the navigation data.
+ Then the times for agent movement and collision resolution follow.
+ Below the second line the complete sum for the agent navigation and movement
+ is presented, and followed the time it takes to render the agent sprites
+ at the current zoom scale.
+ Below the last line the complete sum of the execution times for the simulation
+ are given.
+ The overhead it measured from the end of the computation to the next start,
+ in order to measure the operating system and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+ involvement.
+ The total time summarizes all results and provides the effective time used
+ for simulation steps and visualization frames in the given computing environmen
+t.
+ Without the detailed profiling the simulation performs twice as fast.
+\end_layout
+
+\begin_layout Subsection
+OpenCL Command-Queue Profiling
+\end_layout
+
+\begin_layout Standard
+The profiling scheme just mentioned, allows to measure the execution times
+ of whole program sections.
+ For instance, it can be measured how long it takes for the Collision Resolver
+ to fix all agent intersections, regardless of how many kernel programs
+ are involved.
+ For detailed kernel profiling 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ allows to deep profile the command-queue.
+ Because it slows the execution down, this ability needs to be explicitly
+ activated in the code at command-queue creation.
+ By providing event objects to each kernel, invocation information about
+ the runtime of the kernel can be gathered.
+ This includes kernel start and end times.
+ To ensure that the kernel has actually finished executing, another 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+clFinish
+\end_layout
+
+\end_inset
+
+ call must be used before evaluating the results.
+\end_layout
+
+\begin_layout Standard
+In the program a pair of 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+clFinish
+\end_layout
+
+\end_inset
+
+ instructions encloses each 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ command that is profiled.
+ This is necessary because 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+'s implementation of the standard does not guarantee accurate kernel finish
+ times 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDProgrammingGuide"
+
+\end_inset
+
+.
+ If several kernels or commands are enqueued, they are batched by the runtime
+ and issued in packets.
+ The reported finish times of all commands in a batch are then the same.
+ By calling a 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+clFinish
+\end_layout
+
+\end_inset
+
+ before and after the command, it is guaranteed that it is the only one
+ being batched and executed.
+\end_layout
+
+\begin_layout Standard
+This deep profiling is only performed if command-queue profiling is enabled
+ in the configuration file, and the detailed profiling option is selected
+ in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+.
+ Again, this is averaged over several steps.
+ For the potential kernel ten times the outer loop count samples are collected,
+ for all other kernels ten samples.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+lis:kernel-execution-times
+\end_layout
+
+\end_inset
+
+ shows an example output for the command-queue profiling and the Office
+ scene.
+ 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:kernel-execution-times"
+
+\end_inset
+
+Kernel execution times.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Single kernel execution times:
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  AverageVelocity:                 0.019500 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+  Speed:                           0.019344 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+  Cost:                            0.030155 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+  PotentialSolver:                 0.202028 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+  Gradient:                        0.039112 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+  Move:                            0.311955 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+  SortAgentsIntoBuckets:           0.022489 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+  ResolveCollisions:               0.142722 ms
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ The time for a single execution of the potential solver kernel is not large,
+ but the kernel must be invoked once per outer iteration, 
+\begin_inset Formula $30$
+\end_inset
+
+ times in the example.
+ It is also noteworthy, that the kernel execution times are much lower than
+ the times for whole components listed above.
+ This comes from the additional setup of kernel parameters and other overhead
+ contained in the body of the measured functions.
+ Also the explicit processor synchronization required for command-queue
+ profiling does cause a large performance hit.
+ As mentioned previously in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+sub:CellUpdateOrder
+\end_layout
+
+\end_inset
+
+, this is especially costly for the repeated potential kernel invocation
+ and synchronization.
+ Hence, all these detailed profiling methods are only useful to gather informati
+on about a single component or kernel.
+ No correlation between several parts can be analyzed based on this data.
+ The whole program execution time decreases by a large amount if all the
+ synchronization is disabled.
+\end_layout
+
+\begin_layout Subsection
+AMD APP Profiler
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+APP
+\end_layout
+
+\end_inset
+
+ Profiler 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDAPPProfiler"
+
+\end_inset
+
+ is a tool that allows to gather additional information about a program.
+ This includes the kernel execution times as can be gathered directly with
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ commands as mentioned above, but also detailed information about, memory
+ and register usage, memory bandwidth occupation, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ utilization, and more.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/profiling.pdf
+	scale 50
+	BoundingBox 60bp 100bp 580bp 650bp
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:AMDAPPProfiler"
+
+\end_inset
+
+
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+APP
+\end_layout
+
+\end_inset
+
+ Profiler information for potential kernel with Selective Update (fastest
+ iteration in gray, slowest iteration in yellow) and Update All (teal).
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+APP
+\end_layout
+
+\end_inset
+
+ Profiler information for potential kernel with Selective Update and Update
+ All.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:AMDAPPProfiler
+\end_layout
+
+\end_inset
+
+ shows a selection of performance counter values gathered with the Profiler
+ for the potential kernel running the Hills example.
+ Each bar is related to a different property.
+ The information is based on two profiling runs with the application, one
+ with Selective Update and one with the Update All method.
+ For the Update All scheme, the Profiler lists approximately the same results
+ per kernel invocation for each outer iteration.
+ For the Selective Update method, the results of each iteration differ.
+ They start with short kernel execution times, when only a few tiles are
+ active, increase over a peak execution time, where many tiles are computing
+ solutions, until all tiles have converged, with very short execution time
+ and hardly any computation performed.
+ The values in gray represent the kernel run, where no tiles need to be
+ updated because all have converged.
+ This has the shortest execution time of 
+\begin_inset Formula $\unit[0.03]{ms}$
+\end_inset
+
+.
+ The yellow values are from the longest running iteration of the Selective
+ Update algorithm, with 
+\begin_inset Formula $\unit[0.38]{ms}$
+\end_inset
+
+.
+ All other iterations have execution times that lie somewhere in between
+ those two values.
+ The other properties are not necessarily inside the ranges given by these
+ two iterations.
+ The teal colored values are from the Update All method for comparison.
+ This iteration had an execution time of 
+\begin_inset Formula $\unit[0.3]{ms}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Next, each property is explained based on the description in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDProgrammingGuide"
+
+\end_inset
+
+ and accompanied by a short analysis.
+ 
+\end_layout
+
+\begin_layout Description
+Time is the kernel execution time.
+ This is the time it takes to update all tiles.
+ The gray value has a very short time, because the whole grid has converged,
+ and the kernel does not need to perform any inner iterations.
+ Interestingly, the time for the Update All pass is smaller than the largest
+ one of the Selective Update method.
+ This can happen when all, or nearly all, tiles are active and in the Update
+ state.
+ Then the kernel has to perform all the work that the Update All version
+ has to do, plus the state management.
+ This explains the increased time.
+ Averaged over all outer iterations the execution time of the Selective
+ Update scheme is smaller.
+\end_layout
+
+\begin_layout Description
+ALUInsts gives the average number of 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ instructions executed by a work-item.
+ The yellow iteration executes less instructions than an Update All iteration.
+ This indicates that not all tiles were active.
+ Still, the execution time is longer.
+ Hence, some memory transfers must have slowed the operation down.
+\end_layout
+
+\begin_layout Description
+
+\emph off
+\begin_inset Flex CT - Description Label
+status collapsed
+
+\begin_layout Plain Layout
+
+\emph off
+FetchInsts and WriteInsts
+\end_layout
+
+\end_inset
+
+
+\emph default
+ list the average instructions per work-item that access global memory.
+ And as expected, the numbers in the yellow case surpass those in the teal
+ iteration.
+ More global memory accesses have been performed.
+ The additional accesses come from the tile state management buffers.
+ 
+\end_layout
+
+\begin_layout Description
+
+\emph off
+\begin_inset Flex CT - Description Label
+status collapsed
+
+\begin_layout Plain Layout
+
+\emph off
+LDSFetchInsts and LDSWriteInsts
+\end_layout
+
+\end_inset
+
+
+\emph default
+ refer to the average local memory accesses per work-item.
+ These counts are part of the ALUInsts.
+ As mentioned previously, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LDS
+\end_layout
+
+\end_inset
+
+ instructions are grouped in the same clauses.
+ The values in the gray iteration indicate, that the kernel does not perform
+ any potential computations.
+ Only the tiles and the state of its neighbors is retrieved by one work-item
+ and shared with the other items through local memory.
+\end_layout
+
+\begin_layout Description
+ALUBusy refers to the percentage of the execution time that is spent on
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ instructions.
+ This value should be high in order to optimally utilize the processing
+ power of the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ The potential kernel only utilizes about 
+\begin_inset Formula $50\%$
+\end_inset
+
+ even in the Update All case.
+ This suggests that the algorithm is not optimal for execution on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+, memory operations take up a large part of the process.
+\end_layout
+
+\begin_layout Description
+ALUFetchRatio provides 
+\begin_inset Formula $\frac{ALUInsts}{FetchInsts}$
+\end_inset
+
+, and is a measure of how many 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ and local memory operations are performed in relation to fetches from global
+ memory.
+ This number should be large, so that the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ can hide the global memory latency with computation.
+\end_layout
+
+\begin_layout Description
+ALUPacking with the high values around 
+\begin_inset Formula $80\%$
+\end_inset
+
+ indicate that the kernel compiler can fill the 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+VLIW
+\end_layout
+
+\end_inset
+
+ with close to four 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ operations in the busy iterations.
+ This indicates that the vectorization of the algorithm for the Radeon HD
+ 6950 architecture is good.
+ Still, the authors of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Froblins"
+
+\end_inset
+
+ reported an 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ utilization of 
+\begin_inset Formula $98\%$
+\end_inset
+
+ with their shader implementation.
+ This could suggest that additional optimizations in the kernel code or
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ runtime would be possible, even though their implementation differs.
+\end_layout
+
+\begin_layout Description
+FetchSize sums the total amount of memory loaded from 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VRAM
+\end_layout
+
+\end_inset
+
+, including reloading from caches.
+ In the examples about 
+\begin_inset Formula $\unit[2]{MB}$
+\end_inset
+
+ are transfered in one direction.
+\end_layout
+
+\begin_layout Description
+CacheHit gives the percentage of fetches that could be served by the data
+ caches.
+ About a quarter of the loads can be handled by caches in the busy kernel
+ instantiations.
+\end_layout
+
+\begin_layout Description
+FastPath lists the number of kilobytes transfered over the fast memory access
+ path.
+ For this kernel all writes to global memory go over the Fast Path.
+ The Profiler also provides a counter for the Complete Path, but it was
+ zero in this case.
+ The amount is approximately half of the FetchSize.
+ Most likely this is because each work-item loads the potential and the
+ cost at a grid location, but writes only the potential.
+\end_layout
+
+\begin_layout Description
+LDSBankConflict provides the percentage of the execution time spent on 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LDS
+\end_layout
+
+\end_inset
+
+ bank conflicts.
+ As mentioned earlier, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ can not switch processing to another wavefront or clause, if a local memory
+ access is stalled.
+ Thus, valuable execution time can be wasted.
+ In the examples the amount of time that is lost to stalls is low, as is
+ to be expected with the optimal local memory layout.
+ The conflicts that still occur come from the additional loading of potential
+ values along the edges of the tile.
+\end_layout
+
+\begin_layout Standard
+It seems as if the value of ALUBusy is around 
+\begin_inset Formula $50\%$
+\end_inset
+
+ because the rest of the time is spent on 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LDS
+\end_layout
+
+\end_inset
+
+ instructions.
+ This coincides with the algorithm that does many local memory accesses
+ but only few arithmetic operations.
+ Additional performance counters list the percentage of execution time that
+ is spent on waiting for global memory fetches.
+ These values are less than 
+\begin_inset Formula $1\%$
+\end_inset
+
+, and thus not explicitly listed here.
+ This suggests that only few conflicts arise during global memory accesses.
+\end_layout
+
+\begin_layout Subsection
+Memory Usage
+\end_layout
+
+\begin_layout Standard
+The application keeps track of how much global memory each component requires.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+lis:memoryusage
+\end_layout
+
+\end_inset
+
+ provides the global memory occupation for an example with a 
+\begin_inset Formula $1024\times1024$
+\end_inset
+
+ grid and over one million (
+\begin_inset Formula $2^{20}$
+\end_inset
+
+) agents.
+ 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:memoryusage"
+
+\end_inset
+
+Global memory usage.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Total VRAM usage.
+ This is the sum of OpenGL texture, OpenGL
+\end_layout
+
+\begin_layout Plain Layout
+
+buffer, OpenCL buffer, and OpenCL image memory used by each
+\end_layout
+
+\begin_layout Plain Layout
+
+component in bytes.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Splatterer                         38797392
+\end_layout
+
+\begin_layout Plain Layout
+
+Cost Calculator                    16777216
+\end_layout
+
+\begin_layout Plain Layout
+
+Speed Calculator                   16777216
+\end_layout
+
+\begin_layout Plain Layout
+
+Potential Calculator               29360129
+\end_layout
+
+\begin_layout Plain Layout
+
+Gradient Calculator                33554432
+\end_layout
+
+\begin_layout Plain Layout
+
+Agent Mover                        37748800
+\end_layout
+
+\begin_layout Plain Layout
+
+Collision Resolver                 20971520
+\end_layout
+
+\begin_layout Plain Layout
+
+Work Groups Calculator              4194304
+\end_layout
+
+\begin_layout Plain Layout
+
+Work Items Calculator               4194304
+\end_layout
+
+\begin_layout Plain Layout
+
+Crowd Calculator                   33554432
+\end_layout
+
+\begin_layout Plain Layout
+
+Discomfort Renderer                     144
+\end_layout
+
+\begin_layout Plain Layout
+
+Density Renderer                        144
+\end_layout
+
+\begin_layout Plain Layout
+
+Potential Renderer                      144
+\end_layout
+
+\begin_layout Plain Layout
+
+Work Groups Renderer                    144
+\end_layout
+
+\begin_layout Plain Layout
+
+Work Items Renderer                     144
+\end_layout
+
+\begin_layout Plain Layout
+
+Gradient Renderer                       144
+\end_layout
+
+\begin_layout Plain Layout
+
+Splat Areas Renderer                    144
+\end_layout
+
+\begin_layout Plain Layout
+
+Cost Renderer                           144
+\end_layout
+
+\begin_layout Plain Layout
+
+Average Velocity Renderer               144
+\end_layout
+
+\begin_layout Plain Layout
+
+Speed Renderer                          144
+\end_layout
+
+\begin_layout Plain Layout
+
+Map Renderer                            144
+\end_layout
+
+\begin_layout Plain Layout
+
+Group States Renderer                   144
+\end_layout
+
+\begin_layout Plain Layout
+
+Agents Renderer                     1048592
+\end_layout
+
+\begin_layout Plain Layout
+
+Sum                               236980065 bytes = 226 MB
+\end_layout
+
+\end_inset
+
+ A total of approximately 
+\begin_inset Formula $\unit[226]{MB}$
+\end_inset
+
+ is being used by this application and most of the 
+\begin_inset Formula $\unit[2]{GB}$
+\end_inset
+
+ of 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VRAM
+\end_layout
+
+\end_inset
+
+ on the Radeon HD 6950 is free for other purposes.
+ This could be used for a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+3D
+\end_layout
+
+\end_inset
+
+ visualization of the environment.
+ First all the computation and afterwards the rendering related components
+ are listed.
+ The 
+\emph on
+Work Groups Calculator
+\emph default
+ and 
+\emph on
+Work Items Calculator
+\emph default
+ provide and manage the textures for the checkerboard pattern overlays.
+ 
+\begin_inset Formula $1024\cdot1024\cdot4=4194304$
+\end_inset
+
+ bytes is the amount of memory required to store an uncompressed 
+\begin_inset Formula $1024\times1024$
+\end_inset
+
+ texture with four byte-sized components per texel.
+ Most renderers only list a few bytes, because the texture that they render
+ is actually shared with 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+, and thus listed with one of the computation related components.
+ The 
+\begin_inset Formula $144$
+\end_inset
+
+ bytes come from additional data required to render the texture (two triangles
+ of three vertices each, with four floating-point components per vertex
+ position, plus six 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ texture coordinates), and could alternatively be shared between all the
+ renderers.
+ In other applications, where no visualization of the individual buffers
+ is required, the content of the Mixed Buffer could be overwritten to save
+ memory.
+ In the example this would free up 
+\begin_inset Formula $\unit[16]{MB}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Component Comparison
+\end_layout
+
+\begin_layout Standard
+Some parts of the simulation primarily depend on the cell count of the domain
+ grid and others on the number of agents.
+ 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+fig:Execution-times-and
+\end_layout
+
+\end_inset
+
+ shows how the number of cells influences the execution time of the whole
+ navigation pipeline, containing all the steps from splatting to gradient
+ computation.
+ Several examples with grid sizes between 
+\begin_inset Formula $16\times16$
+\end_inset
+
+ and 
+\begin_inset Formula $1024\times1024$
+\end_inset
+
+ have been profiled.
+ The work-group size is 
+\begin_inset Formula $256$
+\end_inset
+
+, and the splatting of 
+\begin_inset Formula $2{}^{20}$
+\end_inset
+
+ agents took about 
+\begin_inset Formula $\unit[16]{ms}$
+\end_inset
+
+.
+ The scene features a constant discomfort of zero and goal areas along the
+ south and west border.
+ The agent movement is set to Change Group.
+ The gray curve depicts the number of outer iterations that had to be set
+ for the potential solver.
+ These values originate from experimentations and visually judging the quality
+ of the gradient field.
+ If a tile has not been updated at all because the iteration count is too
+ low, it will be visible as a black square in the gradient view.
+ Low-quality results can be spotted as tile-sized, quadratic shapes in the
+ visualization of the gradient directions.
+ The required iteration count depends on the complexity of the map.
+ Only the agent placement influences the complexity in these examples.
+ In small maps many agents overlap, in larger maps they are more spaced-out
+ in the environment.
+ The appropriate choice of the number of steps can be difficult, if the
+ gradient view changes rapidly between simulation steps.
+ The orange curve shows the execution time.
+ Between the grid sizes 
+\begin_inset Formula $256\times256$
+\end_inset
+
+ and 
+\begin_inset Formula $512\times512$
+\end_inset
+
+ a huge increase in execution time can be seen.
+ The 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+APP
+\end_layout
+
+\end_inset
+
+ Profiler does not list any significant difference in performance counters
+ for these two cases.
+ Still, it can be estimated that the increase memory traffic is the cause,
+ although the stall counters don't reflect this.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/navigation.pdf
+	lyxscale 60
+	scale 60
+	BoundingBox 20bp 540bp 500bp 792bp
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Execution-times-and"
+
+\end_inset
+
+Execution times and outer potential iterations for different cell counts.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+fig:Execution-times-for
+\end_layout
+
+\end_inset
+
+ continues the component analysis by presenting the timing results for movement
+ (gray), collision resolution (orange), and visualization (yellow).
+ In this case several experiments with different agent counts from 
+\begin_inset Formula $256$
+\end_inset
+
+ to 
+\begin_inset Formula $2^{20}=1048576$
+\end_inset
+
+ have been performed.
+ The grid size is 
+\begin_inset Formula $1024\times1024$
+\end_inset
+
+, the work-group size 
+\begin_inset Formula $256$
+\end_inset
+
+, and the agent radius 
+\begin_inset Formula $0.4$
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/movementCollisionVisualization.pdf
+	lyxscale 60
+	scale 60
+	BoundingBox 0bp 540bp 540bp 791bp
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Execution-times-for"
+
+\end_inset
+
+Execution times for different agent counts.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ The movement shows a linear increase with agent count.
+ This is as expected, because the agents are moved independently of each
+ other.
+ The visualization also increases linearly.
+ In experiments, the time to visualize agents grows dramatically if the
+ agent radius is increased.
+ This is understandable, because the number of pixels that the rasterizer
+ must produce increases with the square of the agent radius.
+ The execution time curve for the collision resolution appears to be linear,
+ although there is a bend at 
+\begin_inset Formula $262144$
+\end_inset
+
+ agents.
+ In fact, the curve must reflect a function somewhere between a linear and
+ a quadratic increase.
+ It would be quadratic if each agent was checked against all other agents.
+ Because of the binning method, the number is much lower.
+ For each agent up to 
+\begin_inset Formula $8\cdot4+3=35$
+\end_inset
+
+ other agents must be checked with the given radius of 
+\begin_inset Formula $0.4$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Different Work-Group Sizes
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/work-groups.pdf
+	lyxscale 60
+	scale 60
+	BoundingBox 0bp 570bp 260bp 791bp
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:work-groupsizes"
+
+\end_inset
+
+Execution time.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/efficiency.pdf
+	lyxscale 60
+	scale 60
+	BoundingBox 0bp 570bp 260bp 791bp
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:efficiency"
+
+\end_inset
+
+Efficiency.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - results/speedup.pdf
+	lyxscale 60
+	scale 60
+	BoundingBox 10bp 650bp 580bp 791bp
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:speedup"
+
+\end_inset
+
+Speedup.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Efficiency analysis for different work-group sizes.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:work-groupsizes
+\end_layout
+
+\end_inset
+
+ shows how the work-group size influences the execution time for the computation
+al part of the simulation, from splatting to collision resolution.
+ Again the empty map of size 
+\begin_inset Formula $1024\times1024$
+\end_inset
+
+ with the south and west border goals has been used, together with 
+\begin_inset Formula $2^{20}$
+\end_inset
+
+ agents to splat.
+ The Splatterer is based on 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ shader programs, therefore the work-group size can not be changed for the
+ splatting itself.
+ All the other computational kernels are influenced by it though.
+ The tested work-group sizes are in the range from 
+\begin_inset Formula $1$
+\end_inset
+
+ to 
+\begin_inset Formula $256$
+\end_inset
+
+.
+ For 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+1D
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ this is just the given numbers, for 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ these are the sizes 
+\begin_inset Formula $\left(1,1\right)$
+\end_inset
+
+ to 
+\begin_inset Formula $\left(16,16\right)$
+\end_inset
+
+.
+ The number of outer iterations for the potential solving is 
+\begin_inset Formula $64$
+\end_inset
+
+ and has not been adjusted to the resulting tile sizes.
+ For smaller work-group and therefore tile sizes the number of steps must
+ be increased in order to compute a valid gradient solution.
+ For a tile size of 
+\begin_inset Formula $1\times1$
+\end_inset
+
+ approximately 
+\begin_inset Formula $2n=2\cdot1024=2048$
+\end_inset
+
+ steps would be required to get at least some result, where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the side length of the grid.
+ With four seconds the execution time is already large, as shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:work-groupsizes
+\end_layout
+
+\end_inset
+
+.
+ With the adapted iteration count it would be approximately two minutes.
+ Still, the gradient solution is likely suboptimal and even more steps would
+ be required.
+\end_layout
+
+\begin_layout Standard
+Instead of adapting the step count, it is analyzed how the work-group size
+ influences the execution time for a fixed amount of work.
+ In the figure the time radically decreases until 
+\begin_inset Formula $64$
+\end_inset
+
+ work-items process a tile concurrently.
+ This is the wavefront size of the Radeon HD 6950.
+ Interestingly, with a larger work-group size the time slightly increases.
+ This is probably caused by some overhead for managing several wavefronts
+ per work-group.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+sec:3.2TheRadeonHD6950
+\end_layout
+
+\end_inset
+
+ mentions that the graphics card processes two wavefronts per 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ to hide the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ latency.
+ With a work-group size of 
+\begin_inset Formula $64$
+\end_inset
+
+, matching the wavefronts size, the wavefronts must be from different tiles.
+ With a size of 
+\begin_inset Formula $256$
+\end_inset
+
+ items, they are from the same tile and additional synchronization inside
+ the work-group has to be managed.
+ Unfortunately a work-group with 
+\begin_inset Formula $128$
+\end_inset
+
+ items could not be tested because of the tile size constraints.
+\end_layout
+
+\begin_layout Standard
+As mentioned above, for this application the outer iteration count would
+ need to be increased for 
+\begin_inset Formula $64$
+\end_inset
+
+ work-items to provide a valid gradient solution.
+ In experiments 
+\begin_inset Formula $130$
+\end_inset
+
+ iterations have been determined as sufficient.
+ This raised the time to approximately 
+\begin_inset Formula $\unit[500]{ms}$
+\end_inset
+
+, which is more than the largest work-group size requires, as depicted by
+ the horizontal dotted line.
+ Consequently, 
+\begin_inset Formula $256$
+\end_inset
+
+ work-items per work-group and tile are optimal and achieve the highest
+ performance for the application.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:speedup
+\end_layout
+
+\end_inset
+
+ compares the different speedups resulting from dividing the execution time
+ for a work group-size of one by the time for the work-group size, as in
+ 
+\begin_inset Formula 
+\[
+Speedup_{s}=\frac{Time_{1}}{Time_{s}}.
+\]
+
+\end_inset
+
+ It is important to note, that the execution times are not based on thread
+ or wavefront counts, but on work-group sizes.
+ The 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ still issues several wavefronts to run on the 
+\begin_inset Formula $22$
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ even if the work-group size is one.
+ Nonetheless, the curve provides an interesting insight into the behavior.
+ Linear speedup is indicated by the dotted black line.
+ The speedup actually achieved is much lower.
+ For constant work no improvement can be seen beyond 
+\begin_inset Formula $64$
+\end_inset
+
+ work-items, where a speedup of 
+\begin_inset Formula $14.4$
+\end_inset
+
+ is achieved.
+ With 
+\begin_inset Formula $256$
+\end_inset
+
+ items the speedup lies at 
+\begin_inset Formula $10.9$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The curve in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:efficiency
+\end_layout
+
+\end_inset
+
+ shows the resulting efficiency, computed as 
+\begin_inset Formula 
+\[
+Efficiency_{s}=\frac{Speedup_{s}}{s}.
+\]
+
+\end_inset
+
+ Again, this is linked to the work-group size and not the number of processors.
+ The figure depicts how the efficiency rapidly falls off with increased
+ work-group size.
+ For 
+\begin_inset Formula $64$
+\end_inset
+
+ work-items it is 
+\begin_inset Formula $23\%$
+\end_inset
+
+, with 
+\begin_inset Formula $256$
+\end_inset
+
+ items only 
+\begin_inset Formula $4\%$
+\end_inset
+
+.
+ Still, the parallelized algorithm with the largest work-group size brings
+ the fastest performance for the required number of iterations, in this
+ application.
+\end_layout
+
+\begin_layout Standard
+Unfortunately, the program currently does not provide correct results when
+ run on 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+'s 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ implementation of the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ standard.
+ The problem seems to lie in the interoperability with 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+.
+ Although this means that no meaningful performance comparison can be given,
+ it can be said that the program ran much slower on an 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ Phenom II X4 920.
+\end_layout
+
+\begin_layout Standard
+Furthermore, it has been attempted to speed up the simulation of the agent
+ movement, by only updating the navigation information every other step,
+ and distributing the outer potential iterations over several frames.
+ This behaves badly if the agents move fast enough to reach another cell
+ before the information is updated.
+ In this case, the cell will suddenly update based on old information and
+ the agents exhibit rapid turns.
+ Hence, such an optimization can only work if the cell size is large in
+ relation to the agent speed, as in the demo of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Froblins"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Map Making
+\end_layout
+
+\begin_layout Standard
+The program requires a configuration file, based on Qt's settings system,
+ that sets several parameters and also refers to the image files that define
+ the map area.
+ An empty default configuration file can be generated by running the program
+ without any arguments.
+ The file then must be specified as the single argument to the application.
+\end_layout
+
+\begin_layout Standard
+The discomfort image file describes the discomfort distribution in the scene.
+ The program only uses the red color component's intensity to load the values.
+ For convenience different intensities of white can be used in the image
+ manipulation program.
+ Areas that have a value of larger or equal to 
+\begin_inset Formula $0.99$
+\end_inset
+
+ in the red channel will be walls with infinite discomfort in the simulation.
+ The easiest way to draw walls is by using a full white intensity.
+ Corridors must be at least two grid cells wide to allow the algorithm to
+ derive a path.
+\end_layout
+
+\begin_layout Standard
+The exit image file contains the goal areas for the four agent groups.
+ This is encoded in the four color channels, red, green, blue, and alpha.
+ If a pixel contains a value of zero in the red channel, this means, that
+ agents in group Group0 will be heading towards that location.
+ Any value larger than zero will be initialized to infinity for the potential
+ solver.
+ The same holds for the other three channels and agent groups.
+ To paint such exit maps, GIMP 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "GIMP"
+
+\end_inset
+
+, or any equivalent image manipulation program, can be used as follows
+\end_layout
+
+\begin_layout Enumerate
+Create a new square image that has a side length which is a multiple of
+ the work-group side length set in the configuration file.
+\end_layout
+
+\begin_layout Enumerate
+Select Colors > Components > Decompose.
+\end_layout
+
+\begin_layout Enumerate
+Select 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+RGBA
+\end_layout
+
+\end_inset
+
+ as the color model and tick the option to decompose to layers.
+\end_layout
+
+\begin_layout Enumerate
+This results in four layers that can be painted with black and white color
+ to create the exit maps for each group.
+\end_layout
+
+\begin_layout Enumerate
+When done, select Colors > Components > Compose.
+\end_layout
+
+\begin_layout Enumerate
+Again, select 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+RGBA
+\end_layout
+
+\end_inset
+
+ as the color model and assign the layers to the channels as required for
+ the scenario.
+\end_layout
+
+\begin_layout Enumerate
+Save the image, for instance as a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+PNG
+\end_layout
+
+\end_inset
+
+ file.
+\end_layout
+
+\begin_layout Standard
+The configuration settings contain an entry for the map image file.
+ This image can be viewed as an overlay in the application.
+ For instance, showing a scenery from the top or a floor plan.
+ Its resolution can be higher than those of the other images, but it also
+ must be a square image.
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,64 @@
+Client-side execution times:
+
+Write discomfort:                  0.694048 ms
+Splat densities:                  22.150187 ms
+Read splat buffer:                 0.682247 ms
+Compute average velocity:          1.162005 ms
+Compute speed:                     1.746555 ms
+Compute cost:                      2.552827 ms
+Compute potential:               282.487428 ms
+Compute gradient:                  1.739344 ms
+--------------------------------------------------
+Continuum sum:                   313.214641 ms
+Move agents:                      65.142449 ms
+Resolve collisions:               32.699976 ms
+--------------------------------------------------
+Computation sum:                 411.057066 ms
+Render agents:                    11.669460 ms
+--------------------------------------------------
+Computation and render:          425.433292 ms
+Overhead:                         24.620761 ms
+Total:                           450.054053 ms
+
+
+
+Single kernel execution times:
+
+  AverageVelocity:                 0.259011 ms
+  Speed:                           0.264833 ms
+  Cost:                            0.395322 ms
+  PotentialSolver:                 3.417913 ms
+  Gradient:                        0.666045 ms
+  Move:                           62.366756 ms
+  SortAgentsIntoBuckets:           4.179511 ms
+  ResolveCollisions:              25.943644 ms
+
+
+
+Total VRAM usage. This is the sum of OpenGL texture, OpenGL buffer,
+OpenCL buffer, and OpenCL image memory used by each component in bytes.
+
+Splatterer                         38797392
+Cost Calculator                    16777216
+Speed Calculator                   16777216
+Potential Calculator               29360129
+Gradient Calculator                33554432
+Agent Mover                        37748800
+Collision Resolver                 20971520
+Work Groups Calculator              4194304
+Work Items Calculator               4194304
+Crowd Calculator                   33554432
+Discomfort Renderer                     144
+Density Renderer                        144
+Potential Renderer                      144
+Work Groups Renderer                    144
+Work Items Renderer                     144
+Gradient Renderer                       144
+Splat Areas Renderer                    144
+Cost Renderer                           144
+Average Velocity Renderer               144
+Speed Renderer                          144
+Map Renderer                            144
+Group States Renderer                   144
+Agents Renderer                     1048592
+Sum                               236980065 bytes = 226 MB

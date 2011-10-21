@@ -1,0 +1,814 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass classicthesis
+\use_default_options true
+\maintain_unincluded_children false
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Introduction
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Introduction"
+
+\end_inset
+
+This thesis investigates how crowd simulations with up to one million agents
+ can be performed primarily on the graphics cards of modern 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+PC
+\end_layout
+
+\end_inset
+
+ through the use of the 
+\begin_inset Flex CT - acronym full
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+.
+ Crowd simulation techniques and applications are surveyed and put into
+ the context of developing parallel programs on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ An example implementation has been created that runs the simulation of
+ large and dense crowds on the graphics hardware without any significant
+ participation of the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+.
+ The simulation runs in near real-time for the intended one million agents
+ and in real-time for a medium to high number of agents.
+ This document contains a detailed explanation of the program's method of
+ operation, and ends with experimental results, summarizing the outcome
+ of this endeavor.
+ This document and the implementation is made publicly available on the
+ web at
+\end_layout
+
+\begin_layout Itemize
+\begin_inset CommandInset href
+LatexCommand href
+name "https://github.com/hduregger/crowd"
+target "https://github.com/hduregger/crowd"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so that others may learn from it.
+ This chapter continues with a general overview about crowd simulation and
+ ends with the document overview.
+\end_layout
+
+\begin_layout Standard
+Wikipedia defines crowd simulation as 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+dots
+\end_layout
+
+\end_inset
+
+
+\emph on
+ the process of simulating the movement of a large number of objects 
+\emph default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+dots
+\end_layout
+
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Aniboy:2004:Online"
+
+\end_inset
+
+.
+ This very broad definition already suggests the size of this topic.
+ Depending on the application the objects (agents) could be humans, animals,
+ vehicles, alien lifeforms, or something else completely.
+ The number of agents may adept a theoretically infinite number of values.
+ The methods applicable for displaying movement on computers encompass the
+ listing of position vectors in a spreadsheet, as well as the detailed animation
+ and visualization of 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+3D
+\end_layout
+
+\end_inset
+
+ models.
+ Crowd simulation encompasses many topics rooted in psychology, artificial
+ intelligence, robotics, animation, rendering, physics, navigation, and
+ more.
+ Hence this chapter can only scratch the surface and give a short overview
+ of the numerous aspects of simulating crowds on computers.
+ Nonetheless some information about applications in the film industry, biology,
+ civil engineering, emergency scenarios and computer games will be given.
+\end_layout
+
+\begin_layout Standard
+Simulations fall into the two categories 
+\emph on
+offline
+\emph default
+ and 
+\emph on
+real-time
+\emph default
+.
+ An offline simulation computes the result of the simulation and presents
+ it afterwards, or it exposes intermediate results in time steps that are
+ greater than the time steps in the simulation.
+ This allows for computations to take longer than the steps being simulated.
+ Such simulations often run on dedicated hardware and server farms.
+ This is common in the film industry and scientific community.
+\end_layout
+
+\begin_layout Standard
+In a real-time simulation the current intermediate result can be inspected
+ immediately and the program might even take input and allow interaction
+ with the simulation.
+ The time steps between updates are equal to or smaller than the time spent
+ for computation.
+ This extra requirement of real-time presentation and interactivity makes
+ it more difficult to avoid compromises in the quality of the movement and
+ visualization.
+ Even more so, if the underlying platform is consumer-grade hardware, like
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+PC
+\end_layout
+
+\end_inset
+
+, gaming consoles or even mobile devices, that features less computational
+ power than dedicated hardware might offer.
+\end_layout
+
+\begin_layout Standard
+City designers profit from crowd simulation when planning to link residential,
+ commercial, and industrial areas with transportation.
+ An example simulation of a busy street crossing 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "shibuja1,shibuja2"
+
+\end_inset
+
+ is given in the video accompanying 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "PLEdestrians"
+
+\end_inset
+
+.
+ Some simulations deal with the psychological and social aspects of human
+ behavior as the designers need to know where people move to and at what
+ time.
+ In a wide-scale city simulation the architect does not need a detailed
+ visual representation of each individual agent.
+ Instead, statistical data and graphical overviews, as presented in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Keychallenges:4067603"
+
+\end_inset
+
+, are more meaningful.
+ 
+\end_layout
+
+\begin_layout Standard
+The computations required to simulate the large number of agents in a city
+ are infeasible for real-time applications like computer games.
+ The computer game Grand Theft Auto IV simulates a lively city including
+ pedestrians and vehicles 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gta4realityIV"
+
+\end_inset
+
+.
+ The environment and agents are visualized with detailed and animated 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+3D
+\end_layout
+
+\end_inset
+
+ models.
+ In order to lower the computational workload, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LOD
+\end_layout
+
+\end_inset
+
+ methods are used.
+ In close-ups, detailed models are being rendered, in the distance the game
+ renders objects with lower triangle counts.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:LOD
+\end_layout
+
+\end_inset
+
+ shows an example of the technique.
+ From left to right the models feature decreasing 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+LOD
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/lod.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LOD"
+
+\end_inset
+
+
+\lang american
+Models with different level of detail.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The concept of a 
+\emph on
+bubble
+\emph default
+ further allows for optimization.
+ The bubble is a shape surrounding the player character in the game.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/bubble.pdf
+	lyxscale 40
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:2DBubble"
+
+\end_inset
+
+
+\lang american
+A player character surrounded by a bubble.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+It separates agents that are located inside the bubble from those that are
+ situated outside of the bubble.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:2DBubble
+\end_layout
+
+\end_inset
+
+ shows a player character surrounded by a circular bubble inside a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ environment.
+ Only agents inside the bubble are simulated with very detailed methods.
+ Agents outside of the bubble are either simulated in some abstract fashion
+ or not at all.
+ Usually this poses no problem because the player can't tell the difference.
+ But this concept of a bubble can become obvious when users start to follow
+ agents around and analyze their behavior.
+ For instance, cars might loop on simple routes.
+ This is unproblematic when they only drive through the player's bubble.
+ But the player might discover this unnatural behavior by following them
+ on their tour.
+ Even worse, agents might sometimes vanish in front of the player's eyes,
+ because their preplanned route and lifetime ended, and the developers did
+ not include a solution that adepts to the situation.
+ Another difficulty lies in the necessity to have agents move into the bubble,
+ while other agents leave that area.
+ If this diffusion of agents is not balanced, over time the bubble will
+ either be drained of or filled up with agents which can ruin the player's
+ immersion.
+\end_layout
+
+\begin_layout Standard
+In order to prevent such problems 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sunshine:Alibi"
+
+\end_inset
+
+ use a detailed offline simulation that simulates a whole city to gather
+ data.
+ The agents follow a number of daily routines that involve actions like
+ moving from home to the work place, or from the work place to a café for
+ lunch break.
+ Then they approximate that simulation with statistical methods to get a
+ real-time simulation that is perceptually indistinguishable from the detailed
+ simulation without the need for computing all the rigorous agent planning
+ and simulation steps.
+\end_layout
+
+\begin_layout Standard
+The design of a subway station with paths leading on and off the platforms
+ focuses on optimizing the flow speed of the crowd, and how many people
+ can get on and off the trains in limited time and space.
+ This notion of flow indicates a similarity between crowd movement and liquids.
+ An occurrence of dense crowd flows in the Moscow subway is presented in
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "moscow"
+
+\end_inset
+
+, and a concrete example application of crowd simulation is given in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Underground:2010:Online"
+
+\end_inset
+
+, where London Underground conducted studies about how the passenger flow
+ through ticket gates can be improved.
+\end_layout
+
+\begin_layout Standard
+When planning evacuations and emergency exits space is an even more limiting
+ factor and the density of the crowd is of great interest as high densities
+ can lead to injuries or even fatalities 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Lee2006712"
+
+\end_inset
+
+.
+ Therefore architects attempt to minimize the density at choke points to
+ lower the risk to human life.
+ Real-time simulation and response would be very beneficial when dealing
+ with emergency scenarios.
+ Optimally, surveillance staff could be notified of dangerous situations
+ before they occur 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "predictingCrowdFlow"
+
+\end_inset
+
+.
+ Still, such simulations often run offline on dedicated hardware and only
+ afterwards can the operator analyze the results.
+ In interactive media like computer games crowd simulations must respond
+ immediately to input while still maintaining a minimal degree of accuracy.
+ This puts additional constraints on the implementation of the simulation
+ because 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+PC
+\end_layout
+
+\end_inset
+
+ and gaming consoles don't feature the computational power of dedicated
+ simulation hardware.
+\end_layout
+
+\begin_layout Standard
+Biologists can use simulations to study the behavior of animals in herds,
+ swarms or schools.
+ The impressive displays generated by starlings 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "starlings:youtube"
+
+\end_inset
+
+ have been studies in works such as 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "hildenbrandt-2009"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Large battle scenes like the ones presented in the Lord of the Rings 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "lordOfTheRings"
+
+\end_inset
+
+ or Star Wars films draw the audience deeper into the storyline.
+ The employed systems allow designers and artists to rapidly prototype different
+ scenes with placeholder agents before rendering the final sequence, all
+ without the need to organize a large number of actors.
+\end_layout
+
+\begin_layout Standard
+In the computer game StarCraft 2 the agents of the fictional Zerg race exhibit
+ a distinctive flow behavior when attacking in large numbers 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StarCraft2Zerg:2010:Online"
+
+\end_inset
+
+.
+ While this looks impressive, there are also issues with the path finding
+ system where agents get stuck, seemingly because they can not decide on
+ what direction to take 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StarCraft2Path:2010:Online"
+
+\end_inset
+
+.
+ Another game, Supreme Commander 2 supports lane formation when groups of
+ agents cross 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gas:2010:Online"
+
+\end_inset
+
+.
+ In Left 4 Dead the zombie agents attacking in hordes dynamically circumvent
+ obstacles by casting rays into the environment 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "L4D:2009:Online"
+
+\end_inset
+
+.
+ This makes level design easier because designers don't need to tag objects
+ so that agents can climb over them.
+ But it also poses problems where agents climb over objects they should
+ not climb over like street lamps 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "L4DStreetlamp:2009:Online"
+
+\end_inset
+
+.
+ Heavy Rain simulates human crowds in a believable manner 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "heavyRain"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This short excursion into a small number of selected applications and techniques
+ should emphasize the need to compromise while developing crowd simulation
+ systems.
+ Negative examples just highlight this necessity, and should be seen as
+ an educational opportunity for improvement.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:CrowdSimulation
+\end_layout
+
+\end_inset
+
+ continues with specific algorithms and methods related to crowd simulation.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:GPGPU
+\end_layout
+
+\end_inset
+
+ mentions how 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ can be used for computations unrelated to graphics and how the development
+ system, an 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ Radeon HD 6950, functions.
+ The central goal of this thesis is given in 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+chap:ProblemStatement
+\end_layout
+
+\end_inset
+
+.
+ The three subsequent chapters describe how agents find to their goal in
+ the implementation (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:Computing the Navigation Data
+\end_layout
+
+\end_inset
+
+), how they move and how intersections are prevented (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:AgentMovement
+\end_layout
+
+\end_inset
+
+), and how the simulation results are presented to the user (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:Visualization
+\end_layout
+
+\end_inset
+
+).
+ Experimental results are listed in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:ExperimentalResults
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:RelatedWork
+\end_layout
+
+\end_inset
+
+ summarizes related work and 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:Conclusion
+\end_layout
+
+\end_inset
+
+ provides a final conclusion.
+\end_layout
+
+\end_body
+\end_document

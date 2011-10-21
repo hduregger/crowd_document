@@ -1,0 +1,2141 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass classicthesis
+\use_default_options true
+\maintain_unincluded_children false
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Related Work
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:RelatedWork"
+
+\end_inset
+
+Although related work has been mentioned throughout this document, no overview
+ has been provided yet.
+ 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+tab:OverviewOfRelated
+\end_layout
+
+\end_inset
+
+ summarizes related work in the field of crowd simulation and compares it
+ with this thesis.
+ The table mentions the relevant platform, execution mode, and some example
+ applications mentioned in the works.
+ If no information is available, the corresponding entry is marked by a
+ hyphen.
+ The update rates of the algorithms are given in 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+FPS
+\end_layout
+
+\end_inset
+
+.
+ Here it means updates per second.
+\end_layout
+
+\begin_layout Standard
+Continuum Crowds presented by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Treuille06continuumcrowds"
+
+\end_inset
+
+ is the central work around which the others have been developed.
+ Their flow-field implementation for crowd simulation runs on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+.
+ Although simulating a respectable number of agents, the performance of
+ the algorithm on the given platform was insufficient for computer games
+ or similar interactive applications.
+\end_layout
+
+\begin_layout Standard
+The works by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "ContinuumCrowdComplexEnvironment,SemanticEnvironment"
+
+\end_inset
+
+ extend the continuum approach to multi-storied buildings.
+ This allows to simulate staircases and footbridges, which is not currently
+ possible with the implementation for this thesis.
+ Their simulations don't run in real-time, but they are able to playback
+ the recordings of their offline simulation.
+ They mention the intent to parallelize the technique for performance improvemen
+t and future publications.
+\end_layout
+
+\begin_layout Standard
+GPU Continuum Crowds by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "GPUContinuumCrowds"
+
+\end_inset
+
+ is a parallel implementation that runs on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ using 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+Cg
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+.
+ As mention in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+sub:SectionDiscretization
+\end_layout
+
+\end_inset
+
+ they were confronted with artifacts in their solutions, potentially related
+ to similar problems encountered during the development of this thesis.
+ This caused them to add additional precautions which lowered the performance
+ of their algorithm.
+\end_layout
+
+\begin_layout Standard
+March of the Froblins by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Froblins,Froblins2"
+
+\end_inset
+
+ is another parallel implementation running on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ The authors use 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+HLSL
+\end_layout
+
+\end_inset
+
+ and Direct3D for their implementation.
+ On contemporary hardware the algorithm ran in highly interactive rates.
+ Although the mentioned update rate of 
+\begin_inset Formula $20$
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+FPS
+\end_layout
+
+\end_inset
+
+ seems to be the one of the rendering algorithm.
+ When studying the output of the navigation algorithm, it appears to run
+ in a slower rate.
+ As mentioned earlier, this is not a problem because the Froblins move slowly
+ in relation to the size of the grid cells.
+ In comparison, this thesis uses the same update rate for rendering and
+ movement simulation.
+ Because of the problems encountered during the attempt to implement their
+ algorithm (see 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+sub:SectionDiscretization
+\end_layout
+
+\end_inset
+
+), it can be speculated that their algorithm also suffered from artifacts.
+ This theory would support their choice of environment, which is very open
+ without any walls and tight restrictions.
+ It is important to note that this is highly speculative.
+ Still, the algorithm used in this thesis is able to deal with tight environment
+s containing walls, causing congestion, typical for office buildings.
+ It remains unclear, if March of the Froblins has the same capability.
+ Nonetheless, their visual representation of the environment and agents
+ is far superior to the one presented in this thesis.
+ Noteworthy is also their additional implementation of 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+VO
+\end_layout
+
+\end_inset
+
+, which would be a useful addition to the simulation in this thesis.
+\end_layout
+
+\begin_layout Standard
+Although 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "FlowFieldAndHeavyRainSPU"
+
+\end_inset
+
+ mentions that Supreme Commander 2, StarCraft 2, and Heavy Rain use flow-field-b
+ased methods, it is unclear how closely related they are to Continuum Crowds.
+ The agents in Supreme Commander 2 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gas:2010:Online"
+
+\end_inset
+
+ exhibit lane formation, which this thesis is also capable of, but no additional
+ information or numbers could be found.
+ It is also unclear whether the implementation runs solely on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ or if some 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ acceleration is used.
+ A similar situation exists with StarCraft 2 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StarCraft2Path:2010:Online,StarCraft2Zerg:2010:Online,FlowFieldAndHeavyRainSPU"
+
+\end_inset
+
+.
+ Not much information is available.
+ Still, the simulation looks impressive, and at least 800 agents are possible.
+ This includes the simulation of combat, not covered at all in this thesis.
+ According to 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "FlowFieldAndHeavyRainSPU"
+
+\end_inset
+
+ the implementation for Heavy Rain 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "heavyRain"
+
+\end_inset
+
+ runs in parallel on the 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+SPE
+\end_layout
+
+\end_inset
+
+ of the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+Cell
+\end_layout
+
+\end_inset
+
+ processor.
+\end_layout
+
+\begin_layout Standard
+The secretive nature prevalent in game development prevents the release
+ of information and implementation details.
+ It is unlikely that any of the game developers would provide the source
+ code to their implementations.
+ Similarly many researches don't provide their implementations together
+ with easy access to source code and documentation, even though free hosting
+ platforms make it easy to release information to the general public.
+ This is where this thesis can make a significant contribution.
+ By making all the source code and documentation available on the web, easily
+ accessible to anyone with access to the Internet (see 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:Introduction
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+In the overall comparison, the application developed for this thesis can
+ simulate more agents in interactive rates, than mentioned in related works.
+ Compared with March of the Froblins, it seems to provide a more stable
+ algorithm, allowing more restricted environments and higher agent speeds.
+ Still, it would benefit from the addition of the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VO
+\end_layout
+
+\end_inset
+
+ algorithm.
+ From the known implementations, this is the first one to use the combination
+ of OpenGL and OpenCL for the computation of the navigation data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways true
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="12" columns="4">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Work
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Platform
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Mode
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Examples
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Continuum Crowds 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Treuille06continuumcrowds"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intel Pentium 
+\begin_inset Formula $\unit[3.4]{GHz}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sequential
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $10000$
+\end_inset
+
+ agents, 
+\begin_inset Formula $60\times60$
+\end_inset
+
+ grid, 
+\begin_inset Formula $5$
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+FPS
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2000$
+\end_inset
+
+ agents, 
+\begin_inset Formula $120\times120$
+\end_inset
+
+ grid, 
+\begin_inset Formula $5$
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+FPS
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\SpecialChar \ldots{}
+ complex environment(s) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ContinuumCrowdComplexEnvironment,SemanticEnvironment"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intel Core2 Duo E8300 
+\begin_inset Formula $\unit[2.83]{GHz}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sequential
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPU Continuum Crowds 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "GPUContinuumCrowds"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NVIDIA GeForce 8800 GTX, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+Cg
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parallel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $8000$
+\end_inset
+
+ agents, 
+\begin_inset Formula $256\times256$
+\end_inset
+
+ grid, 
+\begin_inset Formula $15$
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+FPS
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+March of the Froblins 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Froblins,Froblins2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ Radeon HD 4870, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+HLSL
+\end_layout
+
+\end_inset
+
+, Direct3D
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parallel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $65000$
+\end_inset
+
+ agents, 
+\begin_inset Formula $256\times256$
+\end_inset
+
+ grid, 
+\begin_inset Formula $20$
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+FPS
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fn:Apparently-this-is"
+
+\end_inset
+
+Apparently this is the update rate for rendering, the navigation simulation
+ seems to run at a lower rate.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3000$
+\end_inset
+
+ Froblins, 
+\begin_inset Formula $256\times256$
+\end_inset
+
+ grid, 
+\begin_inset Formula $20$
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+FPS
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Same as above.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Supreme Commander 2 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gas:2010:Online,FlowFieldAndHeavyRainSPU"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+StarCraft 2 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StarCraft2Path:2010:Online,StarCraft2Zerg:2010:Online,FlowFieldAndHeavyRainSPU"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $800$
+\end_inset
+
+ agents
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Heavy Rain 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "heavyRain,FlowFieldAndHeavyRainSPU"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+Cell
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parallel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+This thesis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ Radeon HD 6950, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GLSL
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parallel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1048576$
+\end_inset
+
+ agents, 
+\begin_inset Formula $1024\times1024$
+\end_inset
+
+ grid, 
+\begin_inset Formula $2.5$
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+FPS
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $65536$
+\end_inset
+
+ agents, 
+\begin_inset Formula $256\times256$
+\end_inset
+
+ grid, 
+\begin_inset Formula $30$
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+FPS
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:OverviewOfRelated"
+
+\end_inset
+
+Comparison with related crowd simulation works.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Work
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Platform
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Real-Time Rigid\SpecialChar \ldots{}
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:rigid"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NVIDIA GeForce 8800 GTX, shaders
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Broad-Phase Collision\SpecialChar \ldots{}
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:broad-phase"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NVIDIA GeForce 8800 GTX, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CUDA
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parallel Prefix Sum\SpecialChar \ldots{}
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:radixSort"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NVIDIA GeForce 8800 GTX, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CUDA
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Real-time Collision Culling\SpecialChar \ldots{}
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Real-timecollisionculling"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NVIDIA Tesla C1060, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CUDA
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+This thesis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ Radeon HD 6950, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:OverviewOfRelatedColl"
+
+\end_inset
+
+Comparison with works related to collision detection.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+tab:OverviewOfRelatedColl
+\end_layout
+
+\end_inset
+
+ shows a number of works related to algorithms used for collision detection
+ and compares the used platforms.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "gpugems3:rigid"
+
+\end_inset
+
+ uses shader programs and a concept similar to binning to detect collisions
+ between objects.
+ It requires multiple rendering passes per object.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "gpugems3:broad-phase"
+
+\end_inset
+
+ uses 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CUDA
+\end_layout
+
+\end_inset
+
+ and explains an approach to parallel radix sorting.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "gpugems3:radixSort"
+
+\end_inset
+
+ define an alternative implementation of parallel radix sorting with 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CUDA
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Real-timecollisionculling"
+
+\end_inset
+
+ provide a very sophisticated approach to collision detection with 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CUDA
+\end_layout
+
+\end_inset
+
+.
+ It served as the basis for the Sweep and Prune implementation mentioned
+ in this thesis, but also lists a number of additional optimizations.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways true
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Work
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Platform
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Examples
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+A fast eikonal\SpecialChar \ldots{}
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "FastEikonalParallel"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NVIDIA GeForce 7900 GTX, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+Cg
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $256\times256\times256$
+\end_inset
+
+ grid
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+A fast Iterative\SpecialChar \ldots{}
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "FastIterative"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NVIDIA Quadro FX 5600, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CUDA
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $256\times256\times256$
+\end_inset
+
+ grid
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Interactive Visualization\SpecialChar \ldots{}
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "InteractiveVisualization"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NVIDIA GeForce 8800 GTX, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CUDA
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $256\times256\times100$
+\end_inset
+
+ grid
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+This thesis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ Radeon HD 6950, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1024\times1024$
+\end_inset
+
+ grid
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:OverviewOfRelatedFIM"
+
+\end_inset
+
+Comparison with 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+FIM
+\end_layout
+
+\end_inset
+
+ solvers unrelated to crowd simulation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Related 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+FIM
+\end_layout
+
+\end_inset
+
+ solvers are listed in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+tab:OverviewOfRelatedFIM
+\end_layout
+
+\end_inset
+
+.
+ The scientific works rooted in medicine and oil exploration 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "FastEikonalParallel,FastIterative,InteractiveVisualization"
+
+\end_inset
+
+ deal with 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+3D
+\end_layout
+
+\end_inset
+
+ domains.
+ This is in contrast to the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ domains commonly used for crowd simulation.
+ Additionally, the solvers used in these applications don't terminate after
+ some fixed number of iterations.
+ Instead, the computation stops if the required accuracy of the result has
+ been achieved.
+ In 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "InteractiveVisualization"
+
+\end_inset
+
+ the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ synchronizes with the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ to control the algorithm's execution.
+ This is required in order to terminate the computation.
+ In this thesis the number of iterations is controlled by the user, and
+ determined empirically.
+ Therefore no 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ interference is required and the algorithm can be implemented solely on
+ the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ in 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+.
+ All this makes performance comparisons less meaningful, therefore no execution
+ times have been listed.
+ For the interested reader, the works contain explicit information about
+ execution times.
+ It is noteworthy that no other 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ implementation of the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+FIM
+\end_layout
+
+\end_inset
+
+ was encountered during the development of this thesis, but no dedicated
+ search was performed.
+\end_layout
+
+\end_body
+\end_document

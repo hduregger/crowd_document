@@ -1,0 +1,429 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass classicthesis
+\use_default_options true
+\maintain_unincluded_children false
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Problem Statement
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:ProblemStatement"
+
+\end_inset
+
+The previous chapters provide a frame for understanding crowd simulation
+ related challenges and techniques.
+ They also explain the functionality of the development system that provides
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ on a contemporary 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ Now that this base has been set, the goal of the experimental part of this
+ thesis can be stated.
+\end_layout
+
+\begin_layout Standard
+The objective is to simulate up to a million agents, that navigate through
+ an environment without intersecting with other agents or obstacles.
+ Preferably the agents should be visualized and animated in a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+3D
+\end_layout
+
+\end_inset
+
+ scene and the program should allow some form of interactivity with them.
+ The simulation should run in real time or at least close to real time for
+ the interaction to remain enjoyable and it should use 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ to perform its processing on a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ with hardly any interaction of the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+, in order to keep that processor available to other tasks.
+\end_layout
+
+\begin_layout Standard
+Based on these extensive requirements and the information provided in the
+ introductory chapters a number of assumptions can be stated.
+ Global path planning with methods like A
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+*
+\end_layout
+
+\end_inset
+
+ are unlikely to succeed as they have been termed too costly for large numbers
+ of agents, even if the cost could be controlled with a hierarchical approach.
+ They still require conditional tracking of multiple solution paths for
+ a single agent, which seems inappropriate for 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ architectures that prefer simple data streams instead of complex decision
+ logics.
+ Steering based approaches with their difficult predictability and controllabili
+ty seem less suitable as a solution to the problem.
+ As hinted previously, flow-fields seem to map well to the kind of data
+ processing that 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ favor and they have been applied on graphics cards before.
+ Their regular cell structure is similar to pixel grids in graphics processing.
+ It should be possible to process large numbers of cells concurrently and
+ dynamic objects are implicitly dealt with.
+ Simple object placement, like the one in the March of the Froblins demo,
+ should provide interactivity.
+ Collision detection and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VO
+\end_layout
+
+\end_inset
+
+ like methods remain problematic because they indicate random memory access
+ patterns occurring when an agent checks its neighbors.
+ Still, the previous chapters mention 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+-based approaches for both so this seems achievable.
+ Visualization is the domain of graphics cards therefore no problems should
+ be expected.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement !t
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - problem statement/coarse_overview.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Basic-building-blocks"
+
+\end_inset
+
+Basic building blocks of the simulation loop.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/application.png
+	lyxscale 50
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:program"
+
+\end_inset
+
+An instance of the program.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Basic-building-blocks
+\end_layout
+
+\end_inset
+
+ shows the basic building blocks that constitute the intended simulation
+ loop.
+ The agents and the environment information is fed into the navigation planning
+ step that derives movement directions for each agent.
+ Next the agents are offset from their current position into their movement
+ direction.
+ Eventual collisions and intersections are resolved and the agents and the
+ environment can be visualized.
+ Finally, the updated information reenters the loop.
+\end_layout
+
+\begin_layout Standard
+If this undertaking succeeds, developers will have a working example of
+ the given approaches that is available to everyone.
+ This is in contrast to the existing solutions that are unavailable to the
+ general public and where the CPU involvement is unclear.
+ Furthermore the implementation should provide enough opportunity for experiment
+ation to allow a comparison with other techniques.
+ Last but not least, it will provide a base for further development.
+ It reveals possibilities for improvement and students can learn from its
+ faults.
+\end_layout
+
+\begin_layout Standard
+Because it is based on 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ it will be easier to extend the functionality and apply it to specific
+ applications.
+ For instance it could be transformed into a tool for architects.
+ This would allow the use of consumer-grade hardware to model scenarios
+ involving large crowds, as is relevant for building design.
+ The large interactivity would allow rapid prototyping of choke points and
+ evacuation paths.
+ It could also be incorporated into a computer game, thereby providing interacti
+vity and gameplay with a huge number of agents.
+\end_layout
+
+\begin_layout Standard
+The subsequent chapters investigate how the assumptions mentioned above
+ have been translated into a working application and what decisions influenced
+ the course of the experiment.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:program
+\end_layout
+
+\end_inset
+
+ shows a running instance of the program.
+\end_layout
+
+\end_body
+\end_document

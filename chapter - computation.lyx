@@ -1,0 +1,5534 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass classicthesis
+\use_default_options true
+\maintain_unincluded_children false
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Computing the Navigation Data
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Computing the Navigation Data"
+
+\end_inset
+
+To lead the agents towards their goal the method in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Treuille06continuumcrowds"
+
+\end_inset
+
+ is used.
+ It does not explicitly compute and maintain paths consisting of nodes and
+ edges like A
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+*
+\end_layout
+
+\end_inset
+
+ related methods do.
+ Instead, each agent implicitly derives the shortest path from its current
+ position towards the goal location by moving in the direction of vectors
+ inside a gradient field.
+ The way in which this navigation information is derived has several advantages
+ over A
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+*
+\end_layout
+
+\end_inset
+
+ like methods because
+\end_layout
+
+\begin_layout Itemize
+the complexity of the computation primarily depends on the size of the domain
+ and the resolution of the cell grid,
+\end_layout
+
+\begin_layout Itemize
+it equally supports small and large numbers of agents,
+\end_layout
+
+\begin_layout Itemize
+dynamic obstacles can be easily integrated and
+\end_layout
+
+\begin_layout Itemize
+when mapped to work-items it contains less interdependence
+\end_layout
+
+\begin_layout Standard
+which makes it suitable for applications on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ This suggests that agent numbers higher than those feasible with A
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+*
+\end_layout
+
+\end_inset
+
+ like approaches can be used.
+ But it does also highlight the domain size and resolution as the limiting
+ factor.
+\end_layout
+
+\begin_layout Standard
+The introductory section about flow-fields (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+sub:flow-fields
+\end_layout
+
+\end_inset
+
+) already gives an overview of how the method works.
+ The program uses environmental information and the influence of the agents
+ to derive a cost function over the domain.
+ Based on the cost a potential field can then be computed.
+ The gradients on that field will later serve as indicators to the agent
+ headings.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:navigationOverview
+\end_layout
+
+\end_inset
+
+ shows which components in the program developed for this thesis are involved
+ in the computation of the gradient field.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/navigation_overview.pdf
+	lyxscale 50
+	scale 55
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:navigationOverview"
+
+\end_inset
+
+Overview of the navigation pipeline.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Each outer shape corresponds to a C++ class that applies 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ kernels or 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ shader programs to the data buffers.
+ The orange rectangles are 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ buffer objects and the teal rounded boxes are images.
+ The data type inside the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ containers and their usage is given in the figure.
+ The black rectangles are 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ textures.
+ The dotted lines indicate data passing between components and buffers.
+ The following sections go into further detail by describing how the program
+ operates and what each component does step-by-step.
+\end_layout
+
+\begin_layout Section
+Initialization
+\end_layout
+
+\begin_layout Standard
+First the program reads several configuration parameters from a text file.
+ This includes options like the number of agents to simulate, the minimum
+ and maximum agent radius, an optional random seed, the location of reentry
+ areas, the work-group size to use, and the names of image files used as
+ the discomfort and exit (goal) maps.
+ The discomfort file contains the walls of the map, areas with increased
+ discomfort, and also provides the size of the cell grid to the simulation.
+ Valid sizes are limited to square images with a side length that is a power
+ of two.
+ The red color channel is used as discomfort and any red intensity greater
+ than or equal to 
+\begin_inset Formula $0.99$
+\end_inset
+
+ is later transformed to a wall with infinite discomfort.
+ The exit map defines where the agents are heading to, by storing zeros
+ at destination cells.
+ All distance and size units used in the implementation relate to the cell
+ spacing.
+ If an agent has a radius of one, then it is two cell spacings wide.
+ Thereby the user can choose a relation between the spacing and the simulated
+ domain.
+ This allows to experiment with different resolutions by readjusting the
+ agent size.
+\end_layout
+
+\begin_layout Standard
+Next a data buffer is created that contains the information stored for each
+ agent.
+ Like all other buffers it is placed into 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VRAM
+\end_layout
+
+\end_inset
+
+.
+ Starting position and radius are randomized and each agent is assigned
+ to one of four agent groups.
+ This is because of a limitation of the flow-field method.
+ A single gradient field only provides the paths to a single collection
+ of destination cells.
+ If different agents should move to completely different goal destinations
+ then multiple gradient fields need to be computed.
+ Similar to March of the Froblins 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Froblins"
+
+\end_inset
+
+ four such gradient fields are computed concurrently.
+ This is accomplished by utilizing the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ILP
+\end_layout
+
+\end_inset
+
+ provided in the four 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ by issuing operations on the float4 data type.
+ Thus, four sets of goal cells can be processed simultaneously and all agents
+ inside one of the four groups will head for the goal cells assigned to
+ their group.
+\end_layout
+
+\begin_layout Standard
+The initialization phase additionally creates the contexts required for
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+.
+ Some suitable computation and the visualization is performed through 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+.
+ There is also a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+ system involved that provides some interactivity with the simulation and
+ opportunity for experimentation.
+\end_layout
+
+\begin_layout Section
+Density and Velocity
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:splatting"
+
+\end_inset
+
+The so called 
+\emph on
+Splatterer
+\emph default
+ exclusively uses 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ shader programs because they are especially suited to all its operations
+ based on rendering.
+ First it prepares two destination buffers, the 
+\emph on
+Mixed Buffer
+\emph default
+ and the 
+\emph on
+Splat Areas
+\emph default
+.
+ Three of the Mixed Buffer's components are cleared to zero, and the y-component
+ is initialized with the base discomfort provided by the image file inside
+ 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+ (inclusive).
+ Here the cells surpassing the wall threshold (
+\begin_inset Formula $0.99$
+\end_inset
+
+) are converted to infinite discomfort (wall).
+ The Splat Areas buffer is initialized to all zero (transparent black).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+'s blending is then enabled and the blend equation is set to additive blending.
+ The equation becomes 
+\begin_inset Formula 
+\[
+Color_{i,j}=1\cdot Source_{i,j}+1\cdot Destination_{i,j},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $Source_{i,j}$
+\end_inset
+
+ is the color of the rendered fragment, 
+\begin_inset Formula $Destination_{i,j}$
+\end_inset
+
+ is the color of the current fragment in the buffer, and 
+\begin_inset Formula $Color_{i,j}$
+\end_inset
+
+ is the new color in the buffer at the cell with coordinates 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+.
+ In the equation above the ones are explicitly listed to indicate the parameters
+ to the corresponding 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ function, as shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+lis:Additive-blending
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset listings
+lstparams "float,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:Additive-blending"
+
+\end_inset
+
+Additive blending with 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+glEnable(GL_BLEND);
+\end_layout
+
+\begin_layout Plain Layout
+
+glBlendFunc(GL_ONE, GL_ONE);
+\end_layout
+
+\begin_layout Plain Layout
+
+glBlendEquation(GL_FUNC_ADD);
+\end_layout
+
+\end_inset
+
+The Mixed Buffer and the Splat Areas are set as destination buffers in a
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+MRT
+\end_layout
+
+\end_inset
+
+ configuration.
+ This will cause all subsequently rendered data to add up inside these buffers.
+\end_layout
+
+\begin_layout Standard
+Then the Splatterer draws a single 
+\emph on
+quad
+\emph default
+ to render the 
+\emph on
+Discomfort Brush
+\emph default
+ into the Mixed Buffer's y-component.
+ The quad consists of two aligned triangles that form a rectangle.
+ The Discomfort Brush is a user placed obstacle and its position can be
+ selected with the middle mouse button.
+ The amount of discomfort and the radius of the brush are configurable through
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+ elements.
+ The Splatterer uses a geometry shader to create a quad centered at the
+ location of the brush and uses its diameter as the side length for the
+ quad.
+ When the brush is rendered the given discomfort is multiplied with a texture
+ that causes the discomfort to fall off radially from its full intensity
+ towards zero.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/agent.png
+	lyxscale 50
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-cone-texture."
+
+\end_inset
+
+The cone texture.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace smallskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/bilinear.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:bilinear"
+
+\end_inset
+
+Bilinear interpolation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/radius.pdf
+	lyxscale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:densityRadius"
+
+\end_inset
+
+The agent density cone.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:The-cone-texture.
+\end_layout
+
+\end_inset
+
+ shows the texture.
+ It can be imagined as a cone.
+ In the center, on the peak, the highest discomfort is rendered, here the
+ texture corresponds to one.
+ It then falls off linearly towards the base where it is zero.
+ During movement the agents will try to circumvent this area of additional
+ discomfort where the brush has been placed.
+ This allows to test how the agents evade dynamic obstacles that contribute
+ discomfort.
+\end_layout
+
+\begin_layout Standard
+Finally, the per-agent information is rendered into the buffers.
+ For each agent position and radius the Splatterer again uses a geometry
+ shader to render a cone-textured quad.
+ This time the texture directly represents the density for the agent which
+ lies in 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+ (inclusive).
+ The agent is rendered with its radius doubled.
+ The minimal allowed agent radius is 
+\begin_inset Formula $0.4$
+\end_inset
+
+, because for smaller quads the information is poorly mapped to the buffer.
+ The doubling of the radius causes the density to be 
+\begin_inset Formula $0.5$
+\end_inset
+
+ at the agent's actual radius as illustrated in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:densityRadius
+\end_layout
+
+\end_inset
+
+.
+ The rationale behind this is given at the end of 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+sec:speed
+\end_layout
+
+\end_inset
+
+.
+ The density is written into the x-component of the buffer.
+ The agent's velocity is weighted by the density and written into the z
+ and w components.
+ Concurrently each written fragment is colored in the group color and added
+ to the Splat Areas which are used to visualize the agent contributions
+ to the fragments (cells).
+ The agent's group is encoded in its 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ID
+\end_layout
+
+\end_inset
+
+, as described in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:AgentMovement
+\end_layout
+
+\end_inset
+
+.
+ Further information about this visualization is given in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:Visualization
+\end_layout
+
+\end_inset
+
+.
+ In order to take up less space in the figure, the Agents buffer in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:navigationOverview
+\end_layout
+
+\end_inset
+
+ actually stands for several 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ buffers that store all the agent properties as indicated in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:The-agent-movement
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+After all agents of all groups have been processed the Mixed Buffer contains
+ the sum of all density contributions, the sum of discomforts, and a weighted
+ sum of the agent velocities.
+ This gives a summed discomfort at cell 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+ of 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+DiscomfortSum_{i,j}={\displaystyle \begin{cases}
+\infty & \textrm{if\,}D_{Map_{i,j}}\geq0.99\\
+D_{Map_{i,j}}+Cone_{i,j}\cdot Intensity & \textrm{else}
+\end{cases},}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $D_{Map_{i,j}}$
+\end_inset
+
+ is the density contributed to the cell 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+ by the map file, 
+\begin_inset Formula $Cone_{i,j}$
+\end_inset
+
+ is the factor enforced by the cone texture, and 
+\begin_inset Formula $Intensity$
+\end_inset
+
+ is the discomfort brush intensity set in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+.
+ The density at cell 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+ is summed over all agents as 
+\begin_inset Formula 
+\begin{equation}
+DensitySum_{i,j}=\sum_{a\epsilon Agents}Density{}_{a_{i,j}},\label{eq:DensitySum}
+\end{equation}
+
+\end_inset
+
+and the weighted velocity sum is given as 
+\begin_inset Formula 
+\begin{equation}
+WeightedVelocitySum_{i,j}=\sum_{a\epsilon Agents}Density_{a_{i,j}}\cdot Velocity_{a},\label{eq:WeightedVelocitySum}
+\end{equation}
+
+\end_inset
+
+ where 
+\begin_inset Formula $a$
+\end_inset
+
+ is an agent in the set of agents, 
+\begin_inset Formula $Density_{a_{i,j}}$
+\end_inset
+
+ is the density contributed by the agent to cell 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+ taken directly from the cone texture, and 
+\begin_inset Formula $Velocity_{a}$
+\end_inset
+
+ is the current velocity of the agent.
+ Thus each agent's velocity contribution is weighted by its density and
+ its influence fades out towards the doubled radius.
+ The closer an agent moves toward another agent, the stronger the influence
+ of that other agent becomes.
+\end_layout
+
+\begin_layout Standard
+Whenever an arbitrarily positioned, scaled, and textured quad is rendered
+ the texture elements (
+\emph on
+texel
+\emph default
+s) hardly ever align directly with the centers of the fragment grid (the
+ cells).
+ Therefore the value contributing to the cell 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+ is computed with bilinear interpolation of the values of the four closest
+ texels in order to approximate the value at the intermediate position.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The name bilinear interpolation (also bilinear filtering) is misleading.
+ The procedure is not a linear function in the strict mathematical sense.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:bilinear
+\end_layout
+
+\end_inset
+
+ illustrates how this works.
+ If 
+\begin_inset Formula $V_{A}$
+\end_inset
+
+, 
+\begin_inset Formula $V_{B}$
+\end_inset
+
+, 
+\begin_inset Formula $V_{C}$
+\end_inset
+
+, and 
+\begin_inset Formula $V_{D}$
+\end_inset
+
+ are the values at the four contributing texels 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $B$
+\end_inset
+
+, 
+\begin_inset Formula $C$
+\end_inset
+
+, and 
+\begin_inset Formula $D$
+\end_inset
+
+, and the fragment, with normalized texture coordinates 
+\begin_inset Formula $\left(u,v\right)$
+\end_inset
+
+, lies at the coordinates 
+\begin_inset Formula $\left(u',v'\right)=\left(u\cdot TextureWidth,v\cdot TextureHeight\right)$
+\end_inset
+
+.
+ Then by using the floor function the fractional parts of the texture coordinate
+s become 
+\begin_inset Formula $\left(x,y\right)=\left(u',v'\right)-\left\lfloor \left(u',v'\right)\right\rfloor $
+\end_inset
+
+.
+ The value 
+\begin_inset Formula $V_{ABDC}$
+\end_inset
+
+ at the sample location 
+\begin_inset Formula $ABDC$
+\end_inset
+
+ for the fragment can now be computed with the two intermediate values 
+\begin_inset Formula $V_{AB}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{DC}$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\begin{align}
+V_{AB} & =xV_{B}+(1-x)V_{A},\label{eq:AB}\\
+V_{DC} & =xV_{C}+(1-x)V_{D},\label{eq:DC}\\
+V_{ABDC} & =yV_{DC}+(1-y)V_{AB}\nonumber \\
+ & =(1-x)(1-y)V_{A}+x(1-y)V_{B}+(1-x)yV_{D}+xyV_{C}\label{eq:bilinear}\\
+ & \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\textrm{by}\;\eqref{eq:AB}\eqref{eq:DC}.\nonumber 
+\end{align}
+
+\end_inset
+
+ For vector values component-wise multiplication and addition is used.
+\end_layout
+
+\begin_layout Section
+Average Velocity
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+Average Velocity Calculator
+\emph default
+ bridges between those components that use 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ shader programs and those that use 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ kernels.
+ The data in the Mixed Buffer is shared between both 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+API
+\end_layout
+
+\end_inset
+
+.
+ Buffers that have been created in the context of 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ need to be acquired by 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ before they can be used in a kernel.
+ After the processing they need to be released so that the control is returned
+ to 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+1D
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ is used for the kernel invocation.
+ The kernel divides the 
+\begin_inset Formula $WeightedVelocitySum_{i,j}$
+\end_inset
+
+ by the 
+\begin_inset Formula $DensitySum_{i,j}$
+\end_inset
+
+, resulting in 
+\begin_inset Formula 
+\begin{align*}
+WeightedAverageVelocity_{i,j} & =\frac{WeightedVelocitySum_{i,j}}{DensitySum_{i,j}}\\
+ & =\frac{{\displaystyle \sum_{a\epsilon Agents}}Density_{a_{i,j}}\cdot Velocity_{a}}{{\displaystyle \sum_{a\epsilon Agents}}Density{}_{a_{i,j}}}\;\textrm{by}\;\eqref{eq:DensitySum}\eqref{eq:WeightedVelocitySum}
+\end{align*}
+
+\end_inset
+
+ as the weighted mean agent velocity at each grid cell.
+ Extra care is taken, not to divide by zero in cells where no density has
+ been contributed by any agent.
+ The result is then written back into the Mixed Buffer.
+\end_layout
+
+\begin_layout Section
+Speed
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:speed"
+
+\end_inset
+
+The 
+\emph on
+Speed Calculator
+\emph default
+ computes an anisotropic speed field that stores four values at each cell.
+ The values stand for the speed an agent can achieve when moving in one
+ of the four directions, north, east, south, or west.
+ This is based on the idea that it is easier for an agent to move in the
+ same direction as the agents surrounding it, instead of moving against
+ the crowd flow.
+ Again, a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+1D
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ is used to process all cells as work-items, and the kernel derives a speed
+ for each direction based on the 
+\begin_inset Formula $WeightedAverageVelocity_{i,j}$
+\end_inset
+
+ and 
+\begin_inset Formula $DensitySum_{i,j}$
+\end_inset
+
+ computed in the previous steps.
+\end_layout
+
+\begin_layout Standard
+First the 
+\begin_inset Formula $FlowSpeed_{i,j_{d}}$
+\end_inset
+
+ is computed per direction 
+\begin_inset Formula $d\epsilon\left\{ N,E,S,W\right\} $
+\end_inset
+
+, corresponding to up, right, down, and left in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ coordinate system of the program.
+ This is just the dot product of the direction and the 
+\begin_inset Formula $WeightedAverageVelocity_{i',j'}$
+\end_inset
+
+ in the neighboring cell 
+\begin_inset Formula $\left(i',j'\right)$
+\end_inset
+
+ in that direction.
+ For instance, for the direction north it would be 
+\begin_inset Formula 
+\[
+FlowSpeed_{i,j_{N}}=\left(0,1\right)\cdot WeightedAverageVelocity_{i,j+1},
+\]
+
+\end_inset
+
+ with 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $FlowSpeed_{i,j_{N}}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang american
+ being the flow speed at cell 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+ in the up direction (north), and 
+\begin_inset Formula $WeightedAverageVelocity_{i,j+1}$
+\end_inset
+
+ is the weighted mean of the velocity in cell 
+\begin_inset Formula $\left(i,j+1\right)$
+\end_inset
+
+, which is the cell above cell 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+.
+ If the neighboring cell lies outside of the grid, the velocity is assumed
+ to be the zero vector.
+ But the resulting four dot products just extract a single component of
+ each velocity and therefore it is easier to just compute them as 
+\begin_inset Formula 
+\begin{align*}
+FlowSpeed_{i,j_{N}} & =\quad WeightedAverageVelocity_{i,j+1}^{y},\\
+FlowSpeed_{i,j_{E}} & =\quad WeightedAverageVelocity_{i+1,j}^{x},\\
+FlowSpeed_{i,j_{S}} & =\,-WeightedAverageVelocity_{i,j-1}^{y},\\
+FlowSpeed_{i,j_{W}} & =\,-WeightedAverageVelocity_{i-1,j}^{x},\\
+ & \textrm{with}\; FlowSpeed_{i,j_{d}}\geq0.001,
+\end{align*}
+
+\end_inset
+
+ with the superscript providing the 
+\begin_inset Formula $x$
+\end_inset
+
+ or 
+\begin_inset Formula $y$
+\end_inset
+
+ component of the velocity vector.
+ From here on the kernel uses operations on the 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float4
+\end_layout
+
+\end_inset
+
+
+\emph default
+ vector data type to process all four directions simultaneously.
+ A minimal speed of at least 
+\begin_inset Formula $0.001$
+\end_inset
+
+ is enforced in order to prevent unwanted infinite values from occurring
+ during later computations.
+\end_layout
+
+\begin_layout Standard
+In open areas agents should move freely at the maximum speed possible.
+ As indicated in Continuum Crowds, the maximum speed allowed could depend
+ on the topography of the terrain.
+ As an example, agents could slow down when moving up a slope.
+ In the implementation accompanying this thesis no height information is
+ used and the maps are all flat.
+ Still, such a height map could be easily incorporated into the speed calculatio
+n, and the maximum speed can be set in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+.
+ In congested zones the agents should slow down, therefore density constraints
+ are applied.
+ Based on the density at the grid cell and user-provided minimum and maximum
+ densities, an interpolated 
+\begin_inset Formula $MediumSpeed_{i,j_{d}}$
+\end_inset
+
+ is computed that provides a slow-down for agents experiencing increased
+ crowd density.
+ This speed is given as 
+\begin_inset Formula 
+\[
+MediumSpeed_{i,j_{d}}={\scriptstyle Speed_{max}-}{\textstyle \frac{DensitySum_{i',j'}-Density_{min}}{\hspace{1em}Density_{max}-Density_{min}}}{\scriptstyle \cdot(Speed_{max}-FlowSpeed_{i,j_{d}})},
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $Speed_{max}$
+\end_inset
+
+, 
+\begin_inset Formula $Density_{min}$
+\end_inset
+
+, 
+\begin_inset Formula $Density_{max}$
+\end_inset
+
+ being the maximum speed, minimum density, and maximum density set in the
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+.
+ The maximum speed is restricted to values greater than zero.
+ 
+\begin_inset Formula $FlowSpeed_{i,j_{d}}$
+\end_inset
+
+ is the flow speed for the direction as extracted above and 
+\begin_inset Formula $DensitySum_{i',j'}$
+\end_inset
+
+ is the density sum in the neighboring cell 
+\begin_inset Formula $\left(i',j'\right)$
+\end_inset
+
+ in the relevant direction.
+ Again, if 
+\begin_inset Formula $\left(i',j'\right)$
+\end_inset
+
+ lies outside of the grid, the sum is assumed to be positive infinity.
+ The density term with the fraction bar gives the percentage of how far
+ the density sum reaches into the range between the minimum and maximum
+ density.
+ The term to the right of the multiplication provides the variability in
+ terms of speed.
+ By subtracting it from the maximum speed the medium speed increases inversely
+ proportional to the density.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Speed-calculation.
+\end_layout
+
+\end_inset
+
+ illustrates the behavior.
+ In the example 
+\begin_inset Formula $Density_{min}$
+\end_inset
+
+ is 
+\begin_inset Formula $0.5$
+\end_inset
+
+, 
+\begin_inset Formula $Density_{max}$
+\end_inset
+
+ is 
+\begin_inset Formula $0.8$
+\end_inset
+
+, and 
+\begin_inset Formula $Speed_{max}$
+\end_inset
+
+ is set to twelve.
+ The maximum speed is illustrated with the coarsely dotted orange line,
+ 
+\begin_inset Formula $FlowSpeed_{i,j_{d}}$
+\end_inset
+
+ with the cyan dashes, and 
+\begin_inset Formula $MediumSpeed_{i,j_{d}}$
+\end_inset
+
+ is given by the fine gray dotted curve.
+ The flow speed is assumed to be five.
+ 
+\end_layout
+
+\begin_layout Standard
+Finally, the achievable speed for a direction is computed as 
+\begin_inset Formula 
+\begin{multline*}
+Speed_{i,j_{d}}=\begin{cases}
+{\scriptstyle FlowSpeed_{i,j_{d}}} & \textrm{if\,}{\scriptstyle DensitySum_{i',j'}\geq Density_{max}}\\
+\begin{cases}
+{\scriptstyle MediumSpeed_{i,j_{d}}} & \textrm{if\,}{\scriptstyle DensitySum_{i',j'}>Density_{min}}\\
+{\scriptstyle Speed_{max}} & \textrm{else}
+\end{cases} & \textrm{else}
+\end{cases}\\
+\textrm{with}\; Speed_{i,j_{d}}\geq0.001,
+\end{multline*}
+
+\end_inset
+
+in two 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+select
+\end_layout
+
+\end_inset
+
+ statements.
+ This results in a speed that is limited by the speed of the crowd if the
+ density is high, linearly increases inside the minimum and maximum density
+ range, and reaches its maximum if the density in the neighboring cell 
+\begin_inset Formula $\left(i',j'\right)$
+\end_inset
+
+ is low.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/speedAnalysis.png
+	lyxscale 30
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Speed-calculation."
+
+\end_inset
+
+Speed calculation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The resulting black speed curve in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Speed-calculation.
+\end_layout
+
+\end_inset
+
+ is clamped to the extrema, and linearly interpolated inside the density
+ range.
+\end_layout
+
+\begin_layout Standard
+To ensure that an agent actually can achieve 
+\begin_inset Formula $Speed_{max}$
+\end_inset
+
+ at low density, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+ system prevents 
+\begin_inset Formula $Density_{min}$
+\end_inset
+
+ from being set to a value smaller than 
+\begin_inset Formula $0.5$
+\end_inset
+
+.
+ This is connected with the agent density at its radius, which is also 
+\begin_inset Formula $0.5$
+\end_inset
+
+ as explained in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+sec:splatting
+\end_layout
+
+\end_inset
+
+ and illustrated in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:densityRadius
+\end_layout
+
+\end_inset
+
+.
+ Later, when calculating its movement, each agent samples the speed field
+ at an offset from its center.
+ The magnitude of this offset vector is at least as large as the radius
+ of the agent.
+ Thus the movement will not be influenced by the agent's own density contributio
+n to the speed computation, except for the error introduced by the grid
+ discretization.
+ Due to all the restrictions the speed can never be zero.
+\end_layout
+
+\begin_layout Section
+Cost
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Cost"
+
+\end_inset
+
+The cost function defines the preferred path.
+ Usually it should be short, so the path
+\emph on
+ length
+\emph default
+ is of concern.
+ This is related to the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+PLE
+\end_layout
+
+\end_inset
+
+ as explained in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "PLEdestrians"
+
+\end_inset
+
+, because agents don't want to waste energy.
+ Additionally, agents typically don't like to spend a lot of 
+\emph on
+time
+\emph default
+ to get to a destination.
+ The time is a function of path length and 
+\emph on
+speed
+\emph default
+.
+ And agents try to move at the maximum comfortable speed.
+ Furthermore, agents might prefer certain areas over others.
+ For example, someone might want to avoid a dangerous neighborhood at night,
+ and an army has less difficulty crossing a river on a bridge than anywhere
+ else.
+ This notion of 
+\emph on
+discomfort
+\emph default
+ should also be reflected in the cost function and agents want to be exposed
+ to unusual discomfort for as short an amount of time as possible.
+\end_layout
+
+\begin_layout Standard
+All these path traits are combined in the continuous cost function with
+ three integrals over the path 
+\begin_inset Formula 
+\begin{align*}
+Cost_{P} & =W_{L}\int_{P}1\, ds+W{}_{T}\int_{P}1\, dt\hspace{2.25em}+W{}_{D}\int_{P}Discomfort\, dt\\
+ & =W_{L}\int_{P}1\, ds+W{}_{T}\int_{P}\frac{1}{Speed}\, ds+W{}_{D}\int_{P}\frac{Discomfort}{Speed}\, ds & {\scriptstyle {\textstyle \textrm{by}}\,{\scriptscriptstyle dt=}\frac{ds}{Speed}}\\
+ & =\int_{P}\frac{Speed\cdot W_{L}+W_{T}+W_{D}\cdot Discomfort}{Speed}\, ds,
+\end{align*}
+
+\end_inset
+
+ where the 
+\begin_inset Formula $W_{\{L,T,D\}}$
+\end_inset
+
+ are the length, time and discomfort weight respectively.
+ These weights can be set by the user in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset Formula $P$
+\end_inset
+
+ is the path, and 
+\begin_inset Formula $Discomfort$
+\end_inset
+
+ is the discomfort suffered on the path, while 
+\begin_inset Formula $Speed$
+\end_inset
+
+ is the speed greater than zero that the agent achieves along the path.
+ An integral with 
+\begin_inset Formula $ds$
+\end_inset
+
+ means that it is taken with respect to the path length, and 
+\begin_inset Formula $dt$
+\end_inset
+
+ indicates the same for the time spent on the path.
+ According to the requirements an agent will pick the path that minimizes
+ this function.
+\end_layout
+
+\begin_layout Standard
+As explained in the previous section, the speed is anisotropic and depends
+ on the flow direction of the crowd.
+ Therefore the 
+\emph on
+Cost Calculator
+\emph default
+ computes a cost value for each of the four directions in the discretized
+ domain.
+ The equation can then be rewritten for a single grid cell and direction
+ into 
+\begin_inset Formula 
+\begin{multline*}
+Cost_{i,j_{d}}=\frac{Speed_{i,j_{d}}\cdot W_{L}+W_{T}+W_{D}\cdot DiscomfortSum_{i',j'}}{Speed_{i,j_{d}}},\\
+\textrm{with}\; Cost_{i,j_{d}}>0,
+\end{multline*}
+
+\end_inset
+
+ where the meaning of the cost, speed, and weight terms is identical to
+ the ones above, and the 
+\begin_inset Formula $DiscomfortSum_{i',j'}$
+\end_inset
+
+ is the sum of discomfort in the neighboring cell 
+\begin_inset Formula $\left(i',j'\right)$
+\end_inset
+
+ in the relevant direction.
+ If the cell 
+\begin_inset Formula $\left(i',j'\right)$
+\end_inset
+
+ is outside of the grid then an infinite discomfort is assumed.
+ With the restrictions in the speed computation, the denominator can never
+ be zero.
+ The employed kernel is invoked on the elements of a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+1D
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ and performs the computation for all four directions simultaneously.
+ By moving across the grid the agent will later sum up the cost of multiple
+ grid cells along the path, implicitly performing the integration in a discretiz
+ed manner.
+\end_layout
+
+\begin_layout Standard
+The cost function given here is the same as in Continuum Crowds.
+ March of the Froblins uses a different cost function based on static terrain
+ cost, agent density and dynamic hazard.
+ This does not include a direction-dependent term and therefore lane formation,
+ where agents follow other agents heading in the same direction, is not
+ expressed in the cost function.
+\end_layout
+
+\begin_layout Section
+Potential
+\end_layout
+
+\begin_layout Standard
+Now that the cost for leaving each grid cell in a certain direction has
+ been computed, the 
+\emph on
+Potential Calculator
+\emph default
+ can deduce the potential field of each of the four agent groups.
+ The potential is set to zero at goal areas, based on the provided exit
+ map image file, and increases outwards.
+ The equation that the algorithm is based on is called 
+\emph on
+eikonal equation
+\emph default
+ and has the following form 
+\begin_inset Formula 
+\begin{equation}
+\left\Vert \nabla Potential\left(L\right)\right\Vert =Cost\left(L,D\right),\label{eq:eikonal}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $Potential\left(L\right)$
+\end_inset
+
+ is the potential at location 
+\begin_inset Formula $L$
+\end_inset
+
+, 
+\begin_inset Formula $\nabla$
+\end_inset
+
+ is the gradient operator, 
+\begin_inset Formula $\left\Vert \ldots\right\Vert $
+\end_inset
+
+ is the Euclidean norm, and 
+\begin_inset Formula $Cost\left(L,D\right)$
+\end_inset
+
+ is the direction-dependent cost at location 
+\begin_inset Formula $L$
+\end_inset
+
+ for direction 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ This partial differential equation says that the length of the gradient
+ vector at any location 
+\begin_inset Formula $L$
+\end_inset
+
+ inside the domain is the same as the cost at that location.
+ Which means, at areas with high cost the potential increases more than
+ at areas of low cost.
+ The potential can be seen as the 
+\emph on
+first arrival times
+\emph default
+ of a 
+\emph on
+wavefront
+\emph default
+ emanating from the goal area and flooding the rest of the domain.
+ At locations where the cost is high, the wave will take longer to propagate
+ and the first arrival time will increase.
+ Since the cost depends on the direction, the wavefront will expand faster
+ in certain directions than in others.
+ As the term first arrival time suggests, this is not a full representation
+ of wave behavior though, because waves can not be reflected off boundaries
+ and cause interference.
+ So optical caustics can not be simulated.
+ Another aspect is that the domain can be seen as a 
+\emph on
+level set
+\emph default
+.
+ The set contains groups of cells that have the same potential field value.
+ This concept is similar to the contour lines describing equal height in
+ a topographical map.
+ This makes it easy to understand how agents can move 
+\begin_inset Quotes eld
+\end_inset
+
+downhill
+\begin_inset Quotes erd
+\end_inset
+
+ against the gradient to reach their goal.
+\end_layout
+
+\begin_layout Subsection
+Discretization
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:SectionDiscretization"
+
+\end_inset
+
+Because the potential is needed for the subsequent gradient computation
+ the equation has to be solved.
+ For each grid cell a discretized approximation can be used.
+ As with other partial differential equations this is done by providing
+ a finite difference scheme of the continuous equation.
+ This can be transformed to extract the required variable.
+ There are many ways to find a discrete gradient representation for the
+ left side of 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+eq:eikonal
+\end_layout
+
+\end_inset
+
+.
+ They require multiple samples of the potential field, so that their difference
+ in the x- and y-direction can be computed, to derive the gradient vector.
+ These samples can be taken with different directions, distances, and weights.
+\end_layout
+
+\begin_layout Standard
+The discretization schemes that belong to the family of 
+\begin_inset Flex CT - acronym full plural
+status collapsed
+
+\begin_layout Plain Layout
+
+OUM
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "SethianOrderedUpwindMethods"
+
+\end_inset
+
+ proved especially useful for solving the eikonal equation.
+ 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+OUM
+\end_layout
+
+\end_inset
+
+ use a one-sided differential to discretize the gradient.
+ This means that a total of three samples are taken from the current cell,
+ a horizontal, and a vertical neighbor.
+ More specifically, the gradient is taken in the 
+\emph on
+upwind
+\emph default
+ direction.
+ Meaning that the neighboring cells used, lie in the direction of where
+ the wave is coming from.
+ This again reflects the path of the agent, which will move against the
+ wavefront's propagation direction.
+\end_layout
+
+\begin_layout Standard
+A difference scheme based on 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Underwater"
+
+\end_inset
+
+ turns out to be a working discretization technique.
+ The authors simulate the trajectory of underwater robots, including the
+ anisotropic influence of currents.
+ This thesis uses a modified variant that includes the cost in the decision
+ process, as mentioned in Continuum Crowds.
+ The difference scheme is 
+\begin_inset Formula 
+\begin{align}
+ & \left(P_{i,j}-P_{x}\right)^{2}+\left(P_{i,j}-P_{y}\right)^{2}=\left(C_{x}+C{}_{y}\right)^{2},\label{eq:differenceScheme}\\
+\nonumber \\
+\textrm{where\:} & P_{x}=P_{i-1,j}\:\textrm{and}\: C{}_{x}=C{}_{i,j_{W}}\:\:\textrm{if}\:\left(P_{i-1,j}+C{}_{i,j_{W}}\right)\leq\left(P_{i+1,j}+C{}_{i,j_{E}}\right),\nonumber \\
+\textrm{else\:} & P_{x}=P_{i+1,j}\:\textrm{and}\: C{}_{x}=C{}_{i,j_{E}},\nonumber \\
+\textrm{and\:} & P_{y}=P_{i,j-1}\:\,\textrm{and}\: C{}_{y}=C{}_{i,j_{S}}\:\:\,\textrm{if}\:\left(P_{i,j-1}+C{}_{i,j_{S}}\right)\leq\left(P_{i,j+1}+C{}_{i,j_{N}}\right),\nonumber \\
+\textrm{else\:} & P_{y}=P_{i,j+1}\:\,\textrm{and}\: C{}_{y}=C{}_{i,j_{N}}.\nonumber 
+\end{align}
+
+\end_inset
+
+
+\begin_inset Formula $P_{i,j}$
+\end_inset
+
+ is the potential in cell 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $C_{i,j_{d}}$
+\end_inset
+
+ is just shorthand for 
+\begin_inset Formula $Cost_{i,j_{d}}$
+\end_inset
+
+.
+ If a neighbor is outside of the grid, the potential is assumed to be infinite.
+ Hence, the potential in the current cell is connected to the two potentials
+ in the neighboring cells and the cost incurred under the chosen direction.
+ The selection of the x- and y-neighbors is based on which sum of neighboring
+ potential and cost, for the direction leading into the neighbor, is smaller,
+ just as in Continuum Crowds.
+ The squares in the scheme can be understood by looking at how the length
+ of a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ vector 
+\begin_inset Formula $\left(x,y\right)$
+\end_inset
+
+, with regard to the Euclidean norm, is computed as 
+\begin_inset Formula $\left\Vert \left(x,y\right)\right\Vert =\sqrt{x^{2}+y^{2}}$
+\end_inset
+
+.
+ By multiplying the length to the left and right side, to get rid of the
+ square root, and mirroring the equation it becomes 
+\begin_inset Formula $x^{2}+y^{2}=\left\Vert \left(x,y\right)\right\Vert ^{2}$
+\end_inset
+
+, which has the same shape as the difference scheme in 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+eq:differenceScheme
+\end_layout
+
+\end_inset
+
+.
+ The vector is the gradient and therefore the components are the differences
+ along both axes, with the grid spacing in x- and y-direction (
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta y$
+\end_inset
+
+) set to one.
+ The cost term includes the direction-dependent cost, similar to what 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Underwater"
+
+\end_inset
+
+ uses.
+ Thus, the resulting potential will reflect the headings of agents, allowing
+ an agent to follow other agents on their path.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/cellUpdate.pdf
+	lyxscale 200
+	scale 200
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Neighbor-selection"
+
+\end_inset
+
+Neighbor selection during cell update.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Neighbor-selection
+\end_layout
+
+\end_inset
+
+ shows an example of how a cell 
+\begin_inset Formula $\left(i,j\right)$
+\end_inset
+
+ chooses the neighbors based on the cell propagation direction.
+ Initially the potential in cells belonging to the set of goal cells is
+ zero, in all other cells it is infinite.
+ Cells in the dotted area have already been updated and their potential
+ is less than infinity.
+ The wavefront propagation direction determines which neighboring cells
+ contribute to the current cell's potential, and which directional costs
+ are used.
+ The north and west cells have a much lower potential than the east and
+ south cells, therefore they are used for the update, as highlighted by
+ the orange selection.
+\end_layout
+
+\begin_layout Standard
+To get the potential 
+\begin_inset Formula $P_{i,j}$
+\end_inset
+
+ at the current grid cell from the difference scheme in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+eq:differenceScheme
+\end_layout
+
+\end_inset
+
+, the quadratic equation must be solved.
+ It is of the same type as the equation 
+\begin_inset Formula $ax^{2}+bx+c=0$
+\end_inset
+
+ as can be seen by extracting the coefficients 
+\begin_inset Formula $a$
+\end_inset
+
+, 
+\begin_inset Formula $b$
+\end_inset
+
+, and 
+\begin_inset Formula $c$
+\end_inset
+
+ as in 
+\begin_inset Formula 
+\begin{align}
+{\scriptstyle \left(P_{i,j}-P_{x}\right)^{2}+\left(P_{i,j}-P_{y}\right)^{2}-\left(C_{x}+C{}_{y}\right)^{2}} & {\scriptstyle =P_{i,j}^{2}-2P_{i,j}P_{x}+P_{x}^{2}+P_{i,j}^{2}-2P_{i,j}P_{y}+P_{y}^{2}-\left(C_{x}+C{}_{y}\right)^{2}}\nonumber \\
+ & {\scriptstyle =2P_{i,j}^{2}-2P_{i,j}P_{x}-2P_{i,j}P_{y}+P_{x}^{2}+P_{y}^{2}-\left(C_{x}+C{}_{y}\right)^{2}}\nonumber \\
+ & {\scriptstyle =\underbrace{{\scriptstyle 2}}_{a}P_{i,j}^{2}\underbrace{{\scriptstyle -2\left(P_{x}+P_{y}\right)}}_{b}P_{i,j}+\underbrace{{\scriptstyle P_{x}^{2}+P_{y}^{2}-\left(C_{x}+C{}_{y}\right)^{2}}}_{c}}.\label{eq:abc}
+\end{align}
+
+\end_inset
+
+ By using the formula 
+\begin_inset Formula 
+\begin{equation}
+x_{1,2}=\frac{-b\pm\sqrt{b^{2}-4ac}}{2a}\label{eq:grosse}
+\end{equation}
+
+\end_inset
+
+ the two solutions of the quadratic equation can be calculated as 
+\begin_inset Formula 
+\begin{align*}
+{\scriptstyle P_{i,j_{1,2}}} & {\scriptstyle =\frac{-\left(-2\left(P_{x}+P_{y}\right)\right)\pm\sqrt{\left(-2\left(P_{x}+P_{y}\right)\right)^{2}-4\cdot2\left(P_{x}^{2}+P_{y}^{2}-\left(C_{x}+C{}_{y}\right)^{2}\right)}}{2\cdot2}}\:\:\:\:\:\textrm{by}\:\eqref{eq:abc}\eqref{eq:grosse}\\
+ & {\scriptstyle =\frac{2\left(P_{x}+P_{y}\right)\pm\sqrt{4\left(P_{x}+P_{y}\right)^{2}-4\cdot2\left(P_{x}^{2}+P_{y}^{2}-\left(C_{x}+C{}_{y}\right)^{2}\right)}}{2\cdot2}}\\
+ & {\scriptstyle =\frac{P_{x}+P_{y}\pm\sqrt{\left(P_{x}+P_{y}\right)^{2}-2\left(P_{x}^{2}+P_{y}^{2}-\left(C_{x}+C{}_{y}\right)^{2}\right)}}{2}}\\
+ & {\scriptstyle =\frac{P_{x}+P_{y}\pm\sqrt{P_{x}^{2}+P_{y}^{2}+2P_{x}P_{y}-2P_{x}^{2}-2P_{y}^{2}+2\left(C_{x}+C{}_{y}\right)^{2}}}{2}}\\
+ & {\scriptstyle =\frac{P_{x}+P_{y}\pm\sqrt{2P_{x}P_{y}-P_{x}^{2}-P_{y}^{2}+2\left(C_{x}+C{}_{y}\right)^{2}}}{2}}\\
+ & {\scriptstyle =\frac{P_{x}+P_{y}\pm\sqrt{2\left(C_{x}+C{}_{y}\right)^{2}-\left(P_{x}-P_{y}\right)^{2}}}{2}}
+\end{align*}
+
+\end_inset
+
+ by consistently choosing 
+\begin_inset Formula $+$
+\end_inset
+
+ or 
+\begin_inset Formula $-$
+\end_inset
+
+ for 
+\begin_inset Formula $\pm$
+\end_inset
+
+.
+ As long as the term under the square root 
+\emph on
+(discriminant)
+\emph default
+ is not zero (only one solution), or negative (no valid solution), the two
+ solutions to the equation 
+\begin_inset Formula $P_{i,j_{1}}$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{i,j_{2}}$
+\end_inset
+
+ will be found.
+ But if there is only a single solution to the equation then it will not
+ be greater than both neighboring potentials 
+\begin_inset Formula $P_{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $P_{y}$
+\end_inset
+
+ which is a requirement, because the arrival time of the wavefront (e.g.
+ the potential) has to increase.
+ And if the discriminant is negative the computation in 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ will result in a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NaN
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A similar problem of 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+NaN
+\end_layout
+
+\end_inset
+
+ appearing in the solution range could not be mitigated in the attempt to
+ directly implement the methods mentioned in Continuum Crowds 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Treuille06continuumcrowds"
+
+\end_inset
+
+ and March of the Froblins 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Froblins"
+
+\end_inset
+
+.
+ These invalid values made it impossible to derive optimal paths.
+ The problem could be partially corrected by keeping the old value until
+ a valid solution could be found, but this caused jumps in the potential
+ which resulted in visible straight edges in the gradient field (often emerging
+ near doorways at the corners of walls).
+ This caused agents to move in unnatural zigzag patterns and form up in
+ lines instead of taking the shortest route.
+ Furthermore, the example code provided in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Froblins"
+
+\end_inset
+
+ contains unused and uninitialized variables which is detrimental for understand
+ing the technique.
+ So far it is unclear whether all of this is a limitation of the discretization
+ schemes given in these works or if it was an error in the attempted implementat
+ion for this thesis.
+ The authors of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "GPUContinuumCrowds"
+
+\end_inset
+
+ also report problems with artifacts, although it is unclear whether they
+ are of the same nature.
+\end_layout
+
+\end_inset
+
+ The alternative and working solution for the potential 
+\begin_inset Formula 
+\begin{align}
+P_{i,j} & =\begin{cases}
+\frac{P_{x}+P_{y}+\sqrt{2\left(C_{x}+C{}_{y}\right)^{2}-\left(P_{x}-P_{y}\right)^{2}}}{2} & \textrm{if}\;\left(C_{x}+C{}_{y}\right)>\left|P_{x}-P_{y}\right|\\
+\min\left\{ P_{x},P_{y}\right\} +\left(C_{x}+C{}_{y}\right) & \textrm{else}
+\end{cases},\label{eq:conditionalPotential}\\
+ & \;\textrm{\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\ with}\; P_{i,j}>P_{x}\geq P_{y},\nonumber 
+\end{align}
+
+\end_inset
+
+ is similar to the one given by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Optimalalgorithm"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "FastSweeping"
+
+\end_inset
+
+.
+ It either computes the larger root of the quadratic equation, to guarantee
+ an increasing arrival time of the wavefront, or a backup solution if the
+ discriminant would be negative or zero.
+ To see that this is a working condition for a valid solution it is useful
+ to analyze the different cases.
+\end_layout
+
+\begin_layout Description
+\begin_inset Flex CT - Description Label
+status collapsed
+
+\begin_layout Plain Layout
+Larger root case with 
+\begin_inset Formula $P_{x}=P_{y}$
+\end_inset
+
+ --
+\end_layout
+
+\end_inset
+
+ Here the equation 
+\begin_inset Formula 
+\[
+\frac{P_{x}+P_{y}+\sqrt{2\left(C_{x}+C{}_{y}\right)^{2}-\left(P_{x}-P_{y}\right)^{2}}}{2}=P_{x}+\underbrace{\frac{\sqrt{2\left(C_{x}+C{}_{y}\right)^{2}-0}}{2}}_{m}
+\]
+
+\end_inset
+
+ holds and the term 
+\begin_inset Formula $m$
+\end_inset
+
+ must be greater than zero to find a valid potential.
+ Thus, 
+\begin_inset Formula $\frac{1}{2}\sqrt{2\left(C_{x}+C{}_{y}\right)^{2}}>0$
+\end_inset
+
+ which implies 
+\begin_inset Formula $\left(C_{x}+C{}_{y}\right)^{2}>0$
+\end_inset
+
+.
+ This is already the case by enforcing costs greater than zero during the
+ cost computation phase.
+\end_layout
+
+\begin_layout Description
+\begin_inset Flex CT - Description Label
+status collapsed
+
+\begin_layout Plain Layout
+Larger root case with 
+\begin_inset Formula $P_{x}\neq P_{y}$
+\end_inset
+
+ --
+\end_layout
+
+\end_inset
+
+ There are again two cases.
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+\begin_inset Flex CT - Description Label
+status collapsed
+
+\begin_layout Plain Layout
+Case 1: 
+\begin_inset Formula $2\left(C_{x}+C{}_{y}\right)^{2}=\left(P_{x}-P_{y}\right)^{2}$
+\end_inset
+
+ --
+\end_layout
+
+\end_inset
+
+ In this case the discriminant is zero and the quadratic equation has only
+ one solution.
+ The conditional in 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+eq:conditionalPotential
+\end_layout
+
+\end_inset
+
+ asserts that this case is never chosen, because it would not give a potential
+ greater than the neighboring potentials.
+ 
+\end_layout
+
+\begin_layout Description
+\begin_inset Flex CT - Description Label
+status collapsed
+
+\begin_layout Plain Layout
+Case 2: 
+\begin_inset Formula $2\left(C_{x}+C{}_{y}\right)^{2}<\left(P_{x}-P_{y}\right)^{2}$
+\end_inset
+
+ --
+\end_layout
+
+\end_inset
+
+ Here the discriminant is negative, but this case is also ruled out by the
+ conditional.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/intersection.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Circle-line-intersection."
+
+\end_inset
+
+Circle-line intersection.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+By looking at 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Circle-line-intersection.
+\end_layout
+
+\end_inset
+
+ it is easier to understand which solution is chosen and why only the larger
+ solution to the quadratic equation is accepted.
+ The equation of a circle centered at 
+\begin_inset Formula $\left(x_{0},y_{o}\right)$
+\end_inset
+
+ with radius 
+\begin_inset Formula $r$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\left(x-x_{0}\right)^{2}+\left(y-y_{0}\right)^{2}=r^{2}.
+\]
+
+\end_inset
+
+Hence, geometrically 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+eq:differenceScheme
+\end_layout
+
+\end_inset
+
+ can be seen as the intersection of the straight line 
+\begin_inset Formula $x=y$
+\end_inset
+
+ with the circle of radius 
+\begin_inset Formula $r=C_{x}+C{}_{y}$
+\end_inset
+
+ centered at 
+\begin_inset Formula $\left(P_{x},P_{y}\right)$
+\end_inset
+
+.
+ If the circle intersects with the line at two locations, then the larger
+ solution is used, as depicted on the left side.
+ The smaller solution would be less than the neighboring potentials and
+ therefore it can not be considered.
+ If there is only one intersection, as in the center image, then the potential
+ would also be too small.
+ The case to the right which would result in a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NaN
+\end_layout
+
+\end_inset
+
+ is also invalid.
+ The backup value is the greater solution to the intersection done in a
+ single dimension for the smaller of the two neighboring potentials, as
+ shown in the lower section of the figure for the 
+\begin_inset Formula $y$
+\end_inset
+
+ candidate.
+ The equation for the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+1D
+\end_layout
+
+\end_inset
+
+ sphere is 
+\begin_inset Formula 
+\begin{align*}
+\left(x-x_{0}\right)^{2} & =r^{2},\\
+\underbrace{1}_{a}x^{2}\underbrace{-2x_{0}}_{b}x+\underbrace{x_{0}^{2}-r^{2}}_{c} & =0.
+\end{align*}
+
+\end_inset
+
+ Using 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+eq:grosse
+\end_layout
+
+\end_inset
+
+ the solutions to the quadratic equation for the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+1D
+\end_layout
+
+\end_inset
+
+ sphere become 
+\begin_inset Formula 
+\[
+x_{1,2}=x_{0}\pm r,
+\]
+
+\end_inset
+
+ of which only the greater one is used.
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Optimalalgorithm,FastSweeping"
+
+\end_inset
+
+ the general procedure for deriving the solution in 
+\begin_inset Formula $n$
+\end_inset
+
+ dimensions is provided, but no clear explanation of why the backup solution
+ works is given.
+ Maybe it is based on the smaller neighbor potential because the alternative
+ would be an overestimation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When updating the 
+\begin_inset Formula $P_{i,j}$
+\end_inset
+
+ of a grid cell, the new solution 
+\begin_inset Formula $P{}_{i,j}^{k-1'}$
+\end_inset
+
+ is only used if it is less than the current one 
+\begin_inset Formula $P_{i,j}^{k-1}$
+\end_inset
+
+, as in 
+\begin_inset Formula $P_{i,j}^{k}={\scriptstyle \min\left\{ P_{i,j}^{k-1},P_{i,j}^{k-1'}\right\} }$
+\end_inset
+
+ for the update step 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ This is required, because the solution is always greater than the potentials
+ it is based on and reasonably good solutions must be preserved in the cells.
+ Else, all potentials would grow indefinitely based on the surrounding potential
+s.
+ Still, it allows cells to acquire a smaller potential after they have been
+ already updated.
+ Situations in which a small potential has to propagate over several steps
+ and cells to reach a previously updated cell are covered, as depicted in
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Subsequent-potential-update.
+\end_layout
+
+\end_inset
+
+.
+ In this simplified example the wavefront propagates in the general direction
+ from the lower left to the upper right, as indicated by the dotted arrow.
+ Cell 
+\begin_inset Formula $x$
+\end_inset
+
+ features an extraordinary high cost.
+ The potentials are illustrated in tones of orange with increasing brightness.
+ When cell 
+\begin_inset Formula $e$
+\end_inset
+
+ gets updated for the first time in two steps through the cells 
+\begin_inset Formula $\left\{ a,x\right\} $
+\end_inset
+
+ it is assigned a high potential (bright orange).
+ The value in 
+\begin_inset Formula $d$
+\end_inset
+
+ has not been determined yet.
+ As soon as the update through the cells 
+\begin_inset Formula $\left\{ a,b,c,d\right\} $
+\end_inset
+
+ reaches it, the unnecessary large potential can be replaced by a lower
+ one (darker orange).
+ Thus, the wavefront moves faster around the costly obstacle 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Agents will later circumvent it in the opposite direction.
+ Thicker teal arrows indicate faster wavefront propagation speed, due to
+ lower cost.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/detour.pdf
+	scale 200
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Subsequent-potential-update."
+
+\end_inset
+
+Subsequent potential update.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Cell Update Order
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:CellUpdateOrder"
+
+\end_inset
+
+Now that the difference scheme has been established, the cell update order
+ can be discussed.
+ Additional to working in an upwind manner, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OUM
+\end_layout
+
+\end_inset
+
+ is an ordered method because of how it updates individual cells in a specific
+ order.
+\end_layout
+
+\begin_layout Standard
+One variant, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+FMM
+\end_layout
+
+\end_inset
+
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "FastMarching"
+
+\end_inset
+
+ defines an update order that allows to approximate the solution to the
+ eikonal equation on a grid.
+ It works as follows
+\end_layout
+
+\begin_layout Enumerate
+Define 
+\emph on
+Alive
+\emph default
+ to be the set of goal cells and assign a potential of zero to them.
+ Define 
+\emph on
+NarrowBand
+\emph default
+ to be the set of the 4-connected neighbors of the cells in Alive, which
+ are not themselves in Alive.
+ Define 
+\emph on
+FarAway
+\emph default
+ to be the set of all other grid points and assign an infinite potential
+ to them.
+\end_layout
+
+\begin_layout Enumerate
+Update the potential in the cells of NarrowBand.
+\end_layout
+
+\begin_layout Enumerate
+Find the cell 
+\begin_inset Formula $c$
+\end_inset
+
+ in NarrowBand with the lowest potential.
+ Assign 
+\begin_inset Formula $c$
+\end_inset
+
+ to Alive.
+ Assign all its neighbors that are not in Alive into NarrowBand 
+\end_layout
+
+\begin_layout Enumerate
+Recompute the potential of all neighbors of 
+\begin_inset Formula $c$
+\end_inset
+
+ that are not in Alive.
+\end_layout
+
+\begin_layout Enumerate
+Repeat from step 2 until all cells are contained in Alive.
+\end_layout
+
+\begin_layout Standard
+Thus, starting from the goal cells with zero potential the narrow band will
+ march forward over the grid until all cells have been visited.
+ But to find the cell with the lowest potential, a search over the cells
+ in NarrowBand, or some ordered data structure is required.
+ Also only a single cell is updated at each step in a sequential fashion,
+ which makes this algorithm unsuitable for running on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+FIM
+\end_layout
+
+\end_inset
+
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "FastIterative"
+
+\end_inset
+
+ is a related algorithm that can use the parallelism provided by the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ architecture.
+ It combines the idea of 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+FMM
+\end_layout
+
+\end_inset
+
+ to selectively update a single cell at a time, with just updating all cells
+ of the grid until the potentials have converged to the solution as done
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Viscosity"
+
+\end_inset
+
+.
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+FIM
+\end_layout
+
+\end_inset
+
+'s GPU variant processes blocks (tiles) of cells at the same time.
+ The procedure is as follows
+\end_layout
+
+\begin_layout Enumerate
+Group neighboring cells into tiles (e.g.
+ square subregions on a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ domain).
+ Assign all tiles that contain cells inside goal areas into the active list
+ 
+\begin_inset Formula $L$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Update each tile 
+\begin_inset Formula $t$
+\end_inset
+
+ in 
+\begin_inset Formula $L$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Update all cells in 
+\begin_inset Formula $t$
+\end_inset
+
+ for 
+\begin_inset Formula $n$
+\end_inset
+
+ times (
+\emph on
+inner loop
+\emph default
+).
+ During the last update step compute the difference between the current
+ and the new potential.
+ If the difference is below some threshold 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+, mark the cell as converged.
+\end_layout
+
+\begin_layout Enumerate
+Perform a reduction over all cells in 
+\begin_inset Formula $t$
+\end_inset
+
+, determining whether 
+\begin_inset Formula $t$
+\end_inset
+
+ has converged.
+ If a single cell in 
+\begin_inset Formula $t$
+\end_inset
+
+ has not converged yet, then the whole tile is considered as not converged.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Check each tile 
+\begin_inset Formula $t$
+\end_inset
+
+ in 
+\begin_inset Formula $L$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $t$
+\end_inset
+
+ has converged, update all 4-connected neighbors of 
+\begin_inset Formula $t$
+\end_inset
+
+ as in step 2 with 
+\begin_inset Formula $n=1$
+\end_inset
+
+ (only one update), to find out if new information is available to the neighbors.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Set 
+\begin_inset Formula $L$
+\end_inset
+
+ to contain all non-converged tiles.
+ Repeat from step 2 for as long as 
+\begin_inset Formula $L$
+\end_inset
+
+ is not empty (
+\emph on
+outer loop
+\emph default
+).
+\end_layout
+
+\begin_layout Standard
+The list of active tiles 
+\begin_inset Formula $L$
+\end_inset
+
+ is similar to a narrow band of coarse granularity.
+ The number of inner loop iterations 
+\begin_inset Formula $n$
+\end_inset
+
+ must not be too small, else the information inside a tile might not spread
+ over the tile in a single outer step.
+ It must also not be too larger either, or the inner loop will unnecessarily
+ spend 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ cycles on a tile that is not changing anymore.
+ The structure of each tile also plays a role here.
+ If the tile features complicated walls, the potential might require many
+ steps to converge.
+ If it is just a plain map, less iterations are sufficient.
+ The threshold 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ must be similarly chosen to allow accurate solutions without wasting time
+ on computations that don't improve the result in a reasonable way.
+\end_layout
+
+\begin_layout Standard
+March of the Froblins 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Froblins"
+
+\end_inset
+
+ uses 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+HLSL
+\end_layout
+
+\end_inset
+
+ shader programs for their implementation, 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "FastEikonalParallel"
+
+\end_inset
+
+ applies 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ together with 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+Cg
+\end_layout
+
+\end_inset
+
+, in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "FastIterative"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "InteractiveVisualization"
+
+\end_inset
+
+ the authors use 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CUDA
+\end_layout
+
+\end_inset
+
+.
+ The originators of the algorithm report speedups around 
+\begin_inset Formula $100$
+\end_inset
+
+ for 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+-based 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+FIM
+\end_layout
+
+\end_inset
+
+ over 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+-based 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+FMM
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "InteractiveVisualization"
+
+\end_inset
+
+.
+ Detailed comparisons for different applications and with other similar
+ techniques are given in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "FastIterative"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+March of the Froblins does not perform the reductions and management of
+ an active tile list in order to safe computation.
+ Instead an estimation of the required number of updates is used, and all
+ tiles are updated until the solution has converged.
+ The implementation in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "InteractiveVisualization"
+
+\end_inset
+
+ uses the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ to manage the list of active tiles.
+ Although the authors mention that the amount of data transmitted from the
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ to the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ and back is only small, the whole process still requires synchronization
+ between the devices.
+ In an experiment a 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+clFinish
+\end_layout
+
+\end_inset
+
+ was introduced into the outer potential update step of the program developed
+ for this thesis.
+ The resulting synchronization between the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ and the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ caused the execution time for each whole simulation step to double from
+ 
+\begin_inset Formula $\unit[\sim30]{ms}$
+\end_inset
+
+ to 
+\begin_inset Formula $\unit[\sim60]{ms}$
+\end_inset
+
+ on a 
+\begin_inset Formula $256\times256$
+\end_inset
+
+ grid.
+ This overhead is of lower importance if larger grid sizes are used.
+ For applications in medicine that work on data provided by computer tomography
+ like 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "InteractiveVisualization"
+
+\end_inset
+
+, it is necessary to only terminate the computation after the best solution
+ has been found.
+ But if no exact solution is required and the number of update steps can
+ be estimated, a fixed number of outer steps can lead to shorter execution
+ times with reasonably good results.
+ Thus it has been decided not to use any 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ sided management for the list of active tiles in this thesis.
+ The required number of steps depends on the complexity and size of the
+ map.
+ Complicated wall structures and large maps require more iterations.
+ Open areas with no walls require fewer steps.
+\end_layout
+
+\begin_layout Standard
+As shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:navigationOverview
+\end_layout
+
+\end_inset
+
+, the Potential Calculator uses a preinitialized buffer called 
+\emph on
+Destinations
+\emph default
+ which contains a potential of zero in cells belonging to the set of goal
+ cells and infinity in all other cells.
+ This buffer is never changed.
+ Its content is copied to the working buffer 
+\emph on
+Potentials
+\emph default
+ before the potential computation starts for the current simulation step.
+ The class then invokes a kernel on Potentials for each iteration of the
+ outer loop.
+ It processes the grid based on a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+.
+ The cell tiles nicely maps to 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ work-groups and the potential data can be placed into local memory for
+ rapid updates in the inner loop.
+ Again, the four potential fields for the four agent groups (
+\emph on
+Group0
+\emph default
+, 
+\emph on
+Group1
+\emph default
+, 
+\emph on
+Group2
+\emph default
+, 
+\emph on
+Group3
+\emph default
+) are processed in parallel by using operations on the 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float4
+\end_layout
+
+\end_inset
+
+
+\emph default
+ data type as illustrated in the figure.
+ Two update methods have been implemented, 
+\emph on
+Update All
+\emph default
+ and 
+\emph on
+Selective Update
+\emph default
+, and the user can select in the GUI controls which update method is applied.
+\end_layout
+
+\begin_layout Subsubsection
+Update All
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Update-All"
+
+\end_inset
+
+Update All processes all tiles during every outer step, just like March
+ of the Froblins, in a brute force manner.
+ The number of outer and inner steps (
+\begin_inset Formula $n$
+\end_inset
+
+) can be specified in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the implementation of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "InteractiveVisualization"
+
+\end_inset
+
+ the potentials are arranged in an organized manner to allow coalesced access
+ to global memory.
+ In the program for this thesis all the 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float4
+\end_layout
+
+\end_inset
+
+
+\emph default
+s are laid out in a sequential fashion along the x-direction of the grid.
+ During the fetch to local memory, as explained below, each quarter-wavefront
+ of a 
+\begin_inset Formula $256$
+\end_inset
+
+ elements work-group loads 
+\begin_inset Formula $16\cdot4\cdot4=256$
+\end_inset
+
+ coalesced bytes of 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float4
+\end_layout
+
+\end_inset
+
+s.
+ This seems to be a large enough block of sequential data to support coalescing
+ and caching.
+ Hence, the specialized data layout in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "InteractiveVisualization"
+
+\end_inset
+
+ has not been tested.
+\end_layout
+
+\begin_layout Standard
+The kernel loads the potentials into local memory for subsequent processing
+ inside the inner loop.
+ Here the layout of the data is especially important because it will be
+ accessed many times.
+ Each work-item requires the potential of its cell and the four neighbor
+ cells.
+ If the work-group contains 
+\begin_inset Formula $16\times16=256$
+\end_inset
+
+ items, the 
+\begin_inset Formula $256$
+\end_inset
+
+ inner potentials plus the 
+\begin_inset Formula $4\cdot16$
+\end_inset
+
+ potentials along the northern, eastern, southern, and western border of
+ the tile must be loaded into local scratch memory as shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Potentials-in-local
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/local.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Potentials-in-local"
+
+\end_inset
+
+Potentials in local memory.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/unroll.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Loop-unrolling-and"
+
+\end_inset
+
+Loop unrolling and kernel execution times.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ This results in a total of 
+\begin_inset Formula $256+4\cdot16=320$
+\end_inset
+
+ 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float4
+\end_layout
+
+\end_inset
+
+
+\emph default
+ values or 
+\begin_inset Formula $5120$
+\end_inset
+
+ bytes of data.
+ Each work-item loads the values corresponding to its index in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+.
+ The work-items at the tile edges additionally load the border potentials.
+ The 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float4
+\end_layout
+
+\end_inset
+
+
+\emph default
+s 
+\begin_inset Formula 
+\[
+\left(P_{Group0_{i,j}},P_{Group1_{i,j}},P_{Group2_{i,j}},P_{Group3_{i,j}}\right)
+\]
+
+\end_inset
+
+ are stored as 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float2
+\end_layout
+
+\end_inset
+
+
+\emph default
+s inside the local memory, first all the potentials of Group0 and Group1
+ (components 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ of the 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float4
+\end_layout
+
+\end_inset
+
+s
+\emph default
+ paired as 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float2
+\end_layout
+
+\end_inset
+
+
+\emph default
+s), then those of Group2 and Group3 (components 
+\begin_inset Formula $z$
+\end_inset
+
+ and 
+\begin_inset Formula $w$
+\end_inset
+
+) as in 
+\begin_inset Formula 
+\begin{align*}
+\left(P_{Group0_{0,0}},P_{Group1_{0,0}}\right),\left(P_{Group0_{1,0}},P_{Group1_{1,0}}\right)\ldots\left(P_{Group0_{s,s}},P_{Group1_{s,s}}\right),\\
+\left(P_{Group2_{0,0}},P_{Group3_{0,0}}\right),\left(P_{Group2_{1,0}},P_{Group3_{1,0}}\right)\ldots\left(P_{Group2_{s,s}},P_{Group3_{s,s}}\right),
+\end{align*}
+
+\end_inset
+
+ where 
+\begin_inset Formula $s$
+\end_inset
+
+ is the side length of a tile.
+ The reason is that each Stream Core can load 
+\begin_inset Formula $32$
+\end_inset
+
+ consecutive 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float
+\end_layout
+
+\end_inset
+
+s
+\emph default
+ during a cycle, as mentioned in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+sub:RadeonMemory
+\end_layout
+
+\end_inset
+
+.
+ Thus, the 
+\begin_inset Formula $16$
+\end_inset
+
+ work-items of a quarter-wavefront can load 
+\begin_inset Formula $16$
+\end_inset
+
+ 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float2
+\end_layout
+
+\end_inset
+
+
+\emph default
+s in a single cycle without any channel conflicts.
+ In two consecutive instructions the 
+\begin_inset Formula $32$
+\end_inset
+
+ 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float2
+\end_layout
+
+\end_inset
+
+
+\emph default
+s, that store the potential of 
+\begin_inset Formula $16$
+\end_inset
+
+ cells, can be loaded.
+\end_layout
+
+\begin_layout Standard
+The kernel then updates the potentials of all the cells of the tile inside
+ the scratch memory for a user defined number of inner steps by the method
+ given in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+sub:SectionDiscretization
+\end_layout
+
+\end_inset
+
+.
+ The inner update loop that performs the computation is unrolled into two
+ steps.
+ Hence, it performs two updates per inner step.
+ Different unroll factors have been tested.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Loop-unrolling-and
+\end_layout
+
+\end_inset
+
+ shows the execution times for the potential kernel with different unroll
+ factors (measured for factors one, two, four, and eight).
+ Unrolling the loop to perform two updates per step provides a good performance
+ increase.
+ But the gain of higher values is only marginal.
+ Additionally, the value two still allows detailed inner choices for experimenta
+tion (e.g.
+ is a tile completely updated in 
+\begin_inset Formula $k$
+\end_inset
+
+ steps?).
+ This is the reason why two has been chosen as the factor in the implementation
+ related to this thesis.
+\end_layout
+
+\begin_layout Subsubsection
+Selective Update
+\end_layout
+
+\begin_layout Standard
+The Selective Update works similar to Update All in how it executes inner
+ loops, but it applies a more sophisticated algorithm during the outer loop
+ steps.
+ As indicated in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:navigationOverview
+\end_layout
+
+\end_inset
+
+ it uses two buffers that track the tile states 
+\emph on
+Tile States In
+\emph default
+ and 
+\emph on
+Tile States Out
+\emph default
+.
+ Both contain integers for each tile, storing the state of the tile.
+ There are three possible values for the integers, representing one of the
+ states
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Update,
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Sleep,
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+IsConverged.
+\end_layout
+
+\begin_layout Standard
+Update means that the tile must be updated in the next outer iteration.
+ Sleep says that it should sleep and no update is to be performed.
+ IsConverged indicates that it converged during the previous step.
+ This third case is required in order to notify neighboring tiles about
+ new information.
+ Without it there would be no way to consider the case where the convergence
+ happened during a single step.
+ For example, a tile is woken up from Sleep, updates and immediately converges
+ again.
+ Without this third state the transition would originate in Sleep and end
+ in Sleep.
+ Here, it ends in IsConverged, and a neighboring tile can wake up to process
+ the new information.
+\end_layout
+
+\begin_layout Standard
+The Crowd Calculator prepares the input buffer with initial tile states.
+ The entries in Tile States In are initialized to Update if there is a goal
+ cell inside the tile, and Sleep else.
+ This is determined by performing a reduction over the cells in the tile.
+ The implementation of the parallel reduction is based on 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDReduction"
+
+\end_inset
+
+ and uses local memory.
+\begin_inset listings
+lstparams "float,language=C,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:Reduction-kernel-for"
+
+\end_inset
+
+Reduction function for the logical AND operation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+int reduceAnd(local int* booleans,
+\end_layout
+
+\begin_layout Plain Layout
+
+              size_t     localId,
+\end_layout
+
+\begin_layout Plain Layout
+
+              size_t     localSize)
+\end_layout
+
+\begin_layout Plain Layout
+
+{     
+\end_layout
+
+\begin_layout Plain Layout
+
+	for (int offset = localSize / 2; offset > 0; offset >>= 1) 
+\end_layout
+
+\begin_layout Plain Layout
+
+	{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+		if (localId < offset) 
+\end_layout
+
+\begin_layout Plain Layout
+
+		{      
+\end_layout
+
+\begin_layout Plain Layout
+
+			int isTrueA = booleans[localId         ]; 
+\end_layout
+
+\begin_layout Plain Layout
+
+			int isTrueB = booleans[localId + offset];
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			booleans[localId] = isTrueA && isTrueB;
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\end_layout
+
+\begin_layout Plain Layout
+
+		barrier(CLK_LOCAL_MEM_FENCE); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	}    
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	return booleans[0];
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+lis:Reduction-kernel-for
+\end_layout
+
+\end_inset
+
+ provides the function used by the kernel for reducing operands to the logical
+ 
+\emph on
+AND
+\emph default
+ operation.
+ The code processes the boolean values stored inside the local array 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+booleans
+\end_layout
+
+\end_inset
+
+, the local 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ID
+\end_layout
+
+\end_inset
+
+ and the size of the array and work-group are also provided.
+ In the first iteration half of the participating work-items compute the
+ result of two operands each.
+ With each subsequent iteration less and less work-items participate in
+ the reduction step.
+ It is interesting to note, that all work-items, including the ones not
+ participating in the computation, execute the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+barrier
+\end_layout
+
+\end_inset
+
+ instruction.
+ This is necessary as explained earlier.
+ The 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+barrier
+\end_layout
+
+\end_inset
+
+ ensures that all items have written their results into the array before
+ the next iteration.
+ Finally, the result resides in the first array entry and can be returned.
+ The reduction requires 
+\begin_inset Formula $\log n$
+\end_inset
+
+ steps where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of entries in the array.
+ The program uses a similar function for the reduction of the logical 
+\emph on
+OR
+\emph default
+ operation.
+ To allow the parallel reduction operation to work, an operation must be
+ associative (to allow pairings) and commutative (to allow parallel computation
+ for the pairs), as mentioned in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDReduction"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/reduction.pdf
+	lyxscale 150
+	scale 150
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Work-item-participation-in"
+
+\end_inset
+
+Relation of array elements and work-items in the logical AND reduction.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Work-item-participation-in
+\end_layout
+
+\end_inset
+
+ illustrates how the work-items relate to array entries, and which items
+ participate in each step for an example with eight elements and items.
+ The result can be computed in three steps.
+ By limiting the computation to work-items with low local 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ID
+\end_layout
+
+\end_inset
+
+ the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ can skip the computation for whole wavefronts that don't participate.
+\end_layout
+
+\begin_layout Standard
+During each outer loop step the kernel then uses the states in Tile States
+ In to determine how it has to process each tile.
+ For this the first work-item in a work-group that processes a tile retrieves
+ the current state 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ into local memory.
+ The first item is identified by its local 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ID
+\end_layout
+
+\end_inset
+
+ equal to zero.
+ Each work-item in that work-group then continues to process its cell depending
+ on the state.
+ As mentioned earlier, if all 
+\begin_inset Formula $16$
+\end_inset
+
+ work-items in a quarter-wavefront access the same address the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LDS
+\end_layout
+
+\end_inset
+
+ can distribute the state value in a single cycle.
+ The tile transitions into the next state 
+\begin_inset Formula $\beta$
+\end_inset
+
+ and the first work-item in the group writes that state into Tile States
+ Out.
+ These state transitions are subsequently denoted as 
+\begin_inset Formula $\alpha\rightarrow\beta$
+\end_inset
+
+.
+ The first work-item in a group also performs the neighbor checks mentioned
+ below.
+ In the following description of state transitions, a 
+\emph on
+Large Step
+\emph default
+ means that multiple inner update steps are performed as explained for Update
+ All (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+sub:Update-All
+\end_layout
+
+\end_inset
+
+).
+ 
+\emph on
+Small Step
+\emph default
+ is similar but computes only a single inner update iteration.
+ 
+\begin_inset Formula $\Delta P_{i,j}=\left|P_{i,j}^{n}-P_{i,j}^{n-1}\right|$
+\end_inset
+
+ is the absolute difference in potential between the last and previous update
+ step in either a Large Step or a Small Step.
+ The neighboring tiles are 
+\begin_inset Formula $Tiles_{NESW}=\left\{ Tile_{N},Tile_{E},Tile_{S},Tile_{W}\right\} $
+\end_inset
+
+, where 
+\begin_inset Formula $Tile_{d}$
+\end_inset
+
+ is the neighbor of the current tile in direction 
+\begin_inset Formula $d$
+\end_inset
+
+.
+ For each outer iteration the algorithm retrieves the current state 
+\begin_inset Formula $\alpha$
+\end_inset
+
+, and performs actions and transitions depending on what state it represents
+\end_layout
+
+\begin_layout Description
+\begin_inset Flex CT - Description Label
+status collapsed
+
+\begin_layout Plain Layout
+Update --
+\end_layout
+
+\end_inset
+
+ Perform a Large Step.
+ Compute 
+\begin_inset Formula $\Delta P_{i,j}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\Delta P_{i,j}\leq\varepsilon$
+\end_inset
+
+ or 
+\begin_inset Formula $P_{i,j}^{n}=\infty$
+\end_inset
+
+, the cell has converged.
+ Determine the convergence of the tile by reducing the result of all work-items
+ in the work-group in local memory.
+ If all cells have converged then 
+\begin_inset Formula $Update\rightarrow IsConverged$
+\end_inset
+
+ else 
+\begin_inset Formula $Update\rightarrow Update$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+\begin_inset Flex CT - Description Label
+status collapsed
+
+\begin_layout Plain Layout
+Sleep --
+\end_layout
+
+\end_inset
+
+ If all tiles in 
+\begin_inset Formula $Tiles_{NESW}$
+\end_inset
+
+ are in Sleep then 
+\begin_inset Formula $Sleep\rightarrow Sleep$
+\end_inset
+
+, because nothing has changed since this tile was set to sleep.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Else, find out whether the tile really needs to be updated with the new
+ information in the neighboring tiles.
+ Perform a Small Step.
+ If 
+\begin_inset Formula $\Delta P_{i,j}\leq\varepsilon$
+\end_inset
+
+ then the data in the neighboring tile did not influence this tile and 
+\begin_inset Formula $Sleep\rightarrow Sleep$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Else, the information flowing in from a neighboring tile actually caused
+ a change.
+ Perform a Large Step.
+ If all cells converged then 
+\begin_inset Formula $Sleep\rightarrow IsConverged$
+\end_inset
+
+, else 
+\begin_inset Formula $Sleep\rightarrow Update$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+\begin_inset Flex CT - Description Label
+status collapsed
+
+\begin_layout Plain Layout
+IsConverged --
+\end_layout
+
+\end_inset
+
+ Same as for Sleep, but with 
+\begin_inset Formula $\alpha=IsConverged$
+\end_inset
+
+ in all state transitions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/statemachine.pdf
+	lyxscale 60
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Tile-state-diagram."
+
+\end_inset
+
+Tile state diagram.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+In this implementation 
+\begin_inset Formula $\varepsilon=0.001$
+\end_inset
+
+.
+ The work-groups have to write state changes without changing the current
+ input states for other work-groups.
+ While logically all tiles are processed in parallel, some are updated sequentia
+lly in praxis.
+ During an outer update step, a work-group must not change its input state
+ before related tiles have read it.
+ Hence, the tile state buffers are managed in a ping-pong scheme and swapped
+ after each outer iteration.
+ The work-groups can write their new states at will, without influencing
+ other work-groups.
+ Additionally, four potential fields are computed simultaneously (one for
+ each agent group) but only one tile state is managed for four overlapping
+ tiles.
+ During the checks, even if the situation of only one of the tiles diverts,
+ all four tiles are treated equally.
+ For instance, if the potential in one of the four potential fields has
+ not converged in a tile yet, then the potentials for all fields in that
+ tile are updated again in parallel utilizing the four 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ inside the Stream Cores.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Tile-state-diagram.
+\end_layout
+
+\end_inset
+
+ gives an overview of the states and the transitions involved in the algorithm.
+ Update and Sleep are the start states based on how the tile is initialized.
+ Sleep is the state that all tiles reside in after the potential field has
+ been computed, if the number of outer iterations has been sufficiently
+ defined by the user.
+ The colors make it easier to understand the actions and neighbor states.
+ The condition for most transitions is based on the state of neighboring
+ tiles.
+ Only the Update state has transitions, that don't depend on any neighbor
+ state, leading out of it.
+ Subsequent actions and their results are indented in the transition conditions
+ to indicate the decision process involved.
+ The 
+\emph on
+OR
+\emph default
+ means that one of the two possible conditions can lead to the transition.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Neighbors
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ represents the state of the neighboring tiles, 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+did change potential
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ indicates that the test changed the potential enough to warrant a transition,
+ 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+did converge
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ points out that all cells in the tile passed the convergence test.
+\end_layout
+
+\begin_layout Standard
+The algorithm calculates the potential field with the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+FIM
+\end_layout
+
+\end_inset
+
+ on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ without any synchronization with the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+.
+ With the exception of the first work-item deviating in some cases, and
+ the reductions, all work-items on a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ follow the same control flow.
+ In cases where the tile is not to be updated and all neighbors are sleeping
+ no additional computation is performed.
+ Thus, the hardware can schedule another tile to be processed on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+.
+ This is often the case because in the beginning many tiles contain only
+ infinite potentials and stay in Sleep, and later on many converged tiles
+ will remain in Sleep.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+sub:TileStates
+\end_layout
+
+\end_inset
+
+ explains how the tile state changes can be visualized.
+ This Selective Update scheme saves 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ cycles and leads to higher performance than the rather brute force Update
+ All method.
+ Experiments showed that larger map sizes like 
+\begin_inset Formula $1024\times1024$
+\end_inset
+
+ allow greater improvements than smaller maps with only 
+\begin_inset Formula $256\times256$
+\end_inset
+
+ cells, resulting in speedups of 
+\begin_inset Formula $\sim1.5$
+\end_inset
+
+ versus 
+\begin_inset Formula $\sim1.25$
+\end_inset
+
+.
+ Additionally, by managing the algorithm solely with the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ remains free to perform other tasks after filling the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ command-queue.
+\end_layout
+
+\begin_layout Section
+Gradient
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:gradient"
+
+\end_inset
+
+To store a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ gradient vector for each of the four agent groups, eight 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float
+\end_layout
+
+\end_inset
+
+
+\emph default
+ values are required.
+ The 
+\emph on
+Gradient Calculator
+\emph default
+ manages two 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ images, 
+\emph on
+Gradients01
+\emph default
+ and 
+\emph on
+Gradients23
+\emph default
+, to store two vectors for each entry, as shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:navigationOverview
+\end_layout
+
+\end_inset
+
+.
+ The reason is that 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ (and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+) supports at most four components per image (texture) element.
+ With 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ buffers 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float8
+\end_layout
+
+\end_inset
+
+
+\emph default
+s could be used.
+ The images are 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ textures used for the visualization of the gradient field and shared with
+ the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ context.
+ Another reason why images are used is that the gradients are sampled with
+ bilinear filtering (
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+eq:bilinear
+\end_layout
+
+\end_inset
+
+) during agent movement computations and visualization of the gradient field,
+ which is supported by the underlying hardware through 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ samplers for textures and images.
+ Because bilinear interpolation just computes a linear combination of the
+ values per component, the two 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ vectors inside a
+\emph on
+ 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float4
+\end_layout
+
+\end_inset
+
+
+\emph default
+ are correctly filtered even though the filtering is performed on the whole
+ 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float4
+\end_layout
+
+\end_inset
+
+
+\emph default
+ variables.
+\end_layout
+
+\begin_layout Standard
+The gradient needs to be computed in the upwind direction, in order to allow
+ the agents to move against the propagation direction of the wavefront.
+ The Gradient Calculator uses a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+1D
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ for its kernel invocation.
+ The kernel computes two gradient vectors concurrently.
+ First the potential of the current cell and the neighbors is retrieved.
+ Then three vectors are prepared with the potentials required for the gradients
+\begin_inset Formula 
+\begin{align}
+Positive_{i,j}^{01} & =\left(P_{i+1,j}^{0},P_{i,j+1}^{0},P_{i+1,j}^{1},P_{i,j+1}^{1}\right),\label{eq:Positive}\\
+Negative_{i,j}^{01} & =\left(P_{i-1,j}^{0},P_{i,j-1}^{0},P_{i-1,j}^{1},P_{i,j-1}^{1}\right),\label{eq:Negative}\\
+Center_{i,j}^{01} & =\left(P_{i,j}^{0},P_{i,j}^{0},P_{i,j}^{1},P_{i,j}^{1}\right),\label{eq:Center}
+\end{align}
+
+\end_inset
+
+ where the superscript indicates the relation to the agent groups.
+ The backward and forward difference quotients in the x- and y-direction
+ are computed in parallel for Group0 and Group1 as 
+\begin_inset Formula 
+\begin{align*}
+DifferenceQuotient_{i,j}^{01-} & =Center_{i,j}^{01}-Negative_{i,j}^{01}\\
+ & =\left(P_{i,j}^{0}-P_{i-1,j}^{0},P_{i,j}^{0}-P_{i,j-1}^{0},P_{i,j}^{1}-P_{i-1,j}^{1},P_{i,j}^{1}-P_{i,j-1}^{1}\right)\\
+ & \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\textrm{by}\;\eqref{eq:Center}\eqref{eq:Negative},\\
+DifferenceQuotient_{i,j}^{01+} & =Positive_{i,j}^{01}-Center_{i,j}^{01}\\
+ & =\left(P_{i+1,j}^{0}-P_{i,j}^{0},P_{i,j+1}^{0}-P_{i,j}^{0},P_{i+1,j}^{1}-P_{i,j}^{1},P_{i,j+1}^{1}-P_{i,j}^{1}\right)\\
+ & \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\textrm{by}\;\eqref{eq:Positive}\eqref{eq:Center},
+\end{align*}
+
+\end_inset
+
+ with component-wise operations.
+ Because the grid size is considered to be one, no division is required
+ to get to the difference quotients.
+ Now it needs to be determined which difference quotients are required for
+ the upwind direction.
+ There are two choices per x- and y-direction.
+ For a single dimension three classes of cases can be given.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - navigation data/gradient.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Three-classes-of"
+
+\end_inset
+
+Three classes of neighboring potential configurations in one dimension.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Three-classes-of
+\end_layout
+
+\end_inset
+
+ shows an illustration of these relations between neighboring potentials
+ in a single dimension.
+ The lines indicate relative differences in potential.
+\end_layout
+
+\begin_layout Standard
+In the 
+\emph on
+Common
+\emph default
+ class on the left are potentials where 
+\begin_inset Formula $P_{i,j}$
+\end_inset
+
+ is either equal to both neighboring potentials, to one potential, or in
+ the middle of both.
+ By checking which of the two neighboring potentials is smaller, the correct
+ difference quotient can be found.
+ It will always reside on the upwind (downhill) side.
+ If 
+\begin_inset Formula $P_{i,j}$
+\end_inset
+
+ is equal to the lower potential, as in the second case from the left, then
+ the difference quotient will be zero, which is correct.
+ In the case on the far left where both neighboring potentials are equal
+ it does not matter which side is chosen.
+ Both will result in a difference quotient of zero.
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+Maximum
+\emph default
+ case in the middle features a central potential that is larger than either
+ of the neighboring potentials.
+ This edge case where a potential peak or crest exists is also reasonably
+ covered by the selection performed in the Common case.
+ The crest appears where wavefronts coming from one or several goal areas
+ meet.
+ To be more accurate, it would be necessary to also check the cost in the
+ case on the right, because the cost also decides from which side the wavefront
+ reached the central grid cell.
+ But since this is an edge case and agents near potential crests appear
+ to choose one of the two directions randomly, no extra check is performed.
+ In the experiments the potential crests also moved around quite a bit in
+ each simulation step, therefore the implications of this compromise between
+ performance and accuracy are small.
+\end_layout
+
+\begin_layout Standard
+In the 
+\emph on
+Minimum
+\emph default
+ class on the right 
+\begin_inset Formula $P_{i,j}$
+\end_inset
+
+ is smaller than any of the two neighboring potentials.
+ Because the first arrival time (potential) of the wavefront increases with
+ distance to the goal areas, the central potential must be inside a destination
+ cell.
+ This edge case is also treated identical to the Common class, because goal
+ areas that are only one cell wide are problematic anyway due to how the
+ agent movement is performed below (the goal cell might not be hit by the
+ sampling, to detect that the agent is touching the goal area).
+ This class should not occur in a reasonably well designed map.
+\end_layout
+
+\begin_layout Standard
+All other potential configurations are isomorphic to the ones in these classes
+ and therefore they also fit into the explanation above.
+ The gradient is then computed as 
+\begin_inset Formula 
+\begin{align*}
+Gradient_{i,j_{s}}^{01} & =\begin{cases}
+DifferenceQuotient_{i,j_{s}}^{01-} & \textrm{if\,}Negative_{i,j_{s}}^{01}\leq Positive_{i,j_{s}}^{01}\\
+DifferenceQuotient_{i,j_{s}}^{01+} & \textrm{else}
+\end{cases},
+\end{align*}
+
+\end_inset
+
+ with the component based 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+select
+\end_layout
+
+\end_inset
+
+ statement, where the subscript 
+\begin_inset Formula $s$
+\end_inset
+
+ indicates one of the components 
+\begin_inset Formula $\left\{ x,y,z,w\right\} $
+\end_inset
+
+ of the four-element vector.
+ A final check determines if both neighboring potentials in a single dimension
+ are infinite.
+ In this case the component of the gradient for that direction is set to
+ zero, instead of the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NaN
+\end_layout
+
+\end_inset
+
+ resulting from the subtraction between infinite potentials.
+ The whole procedure is then repeated to compute the gradients of Group2
+ and Group3 (
+\begin_inset Formula $Gradient_{i,j}^{23}$
+\end_inset
+
+).
+\end_layout
+
+\end_body
+\end_document

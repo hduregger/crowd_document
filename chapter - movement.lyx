@@ -1,0 +1,4223 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass classicthesis
+\use_default_options true
+\maintain_unincluded_children false
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Agent Movement
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:AgentMovement"
+
+\end_inset
+
+After the navigation pipeline has successfully derived the gradient field
+ for all four agent groups, the agents can finally use that information
+ to plot their paths over the map.
+ The movement phase is separated into two steps, the update of agent position,
+ orientation, speed, and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ID
+\end_layout
+
+\end_inset
+
+, and the resolution of collisions occurring between agents.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/overview.pdf
+	lyxscale 50
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-agent-movement"
+
+\end_inset
+
+The agent movement phase.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/sample.pdf
+	scale 230
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Sample-positions-during"
+
+\end_inset
+
+Sample positions during agent movement update.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:The-agent-movement
+\end_layout
+
+\end_inset
+
+ shows the involved components.
+ The 
+\emph on
+Agent Mover
+\emph default
+ manages all the individual buffers storing the agent properties, that have
+ been depicted as a single buffer in the top right corner of 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:navigationOverview
+\end_layout
+
+\end_inset
+
+.
+ Additionally to the previously illustrated properties they also store the
+ 
+\emph on
+MaximumSpeeds
+\emph default
+ and 
+\emph on
+TurnRates
+\emph default
+ of each agent.
+ The agent 
+\emph on
+Positions
+\emph default
+ are randomized at application start to any location inside the domain,
+ that has a distance of at least five units to the borders of the map.
+ The seed for the random number generator can be set in the configuration
+ file.
+ If it is less than zero, the system time is used as seed.
+ Initially all agent 
+\emph on
+Directions
+\emph default
+ face to the east (
+\begin_inset Formula $\left(1,0\right)$
+\end_inset
+
+).
+ The MaximumSpeeds are randomized inside 
+\begin_inset Formula $\left[4,12\right]$
+\end_inset
+
+ (inclusive), and the current 
+\emph on
+Speeds
+\emph default
+ are initialized to the maximum speeds.
+ The minimum and maximum boundary for the randomly generated 
+\emph on
+Radii
+\emph default
+ can be specified in the configuration file.
+ Agents are evenly distributed between agent groups in the initialization
+ phase of the program, and the group assignment is stored in the two least
+ significant bits of the values in 
+\emph on
+IDs
+\emph default
+.
+ The idea is to save memory by allowing further properties to be stored
+ in the higher bits of an 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ID
+\end_layout
+
+\end_inset
+
+.
+ For instance, the agents could be further classified for different looks
+ during visualization, but this has not been implemented yet.
+ The TurnRates are currently set to 
+\begin_inset Formula $0.15$
+\end_inset
+
+.
+ This is not an angle but a length-related value because of how the agent's
+ direction update step works with offset vectors.
+\end_layout
+
+\begin_layout Section
+Meta Movement
+\end_layout
+
+\begin_layout Standard
+The meta movement scheme, which can be changed at any time in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+, allows agents to perform actions that extend beyond simply updating their
+ movement trajectories.
+ This allows the user to model situations where the agents constantly leave
+ the map area as is typical in evacuation scenarios (
+\emph on
+Park
+\emph default
+), re-plan after arriving at a goal and move to the new destination area
+ (
+\emph on
+Change Group
+\emph default
+), or teleport from the goal area to a location where they can reenter the
+ domain and continue to participate in the simulation (
+\emph on
+Respawn
+\emph default
+).
+ The currently selected method is illustrated as 
+\emph on
+ExitMode
+\emph default
+ in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:The-agent-movement
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Park 
+\end_layout
+
+\begin_layout Standard
+Each agent can be situated inside the domain and active, or parked outside
+ of the area, indicated by a negative position.
+ In the parking position they are invisible and disabled (their trajectories
+ are not updated).
+ The program features counters in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+ that list how many agents of each group are currently active and parked.
+ These counters are incremented or decremented with atomic operations to
+ reflect the current state of the agents.
+ If parking is enabled, the agents stream will continuously drain the map
+ of active agents.
+ This can be used to simulate evacuation scenarios to see how fast all agents
+ can leave the map through the given exit zones.
+ Additionally, agents may start inside a wall due to how the initial position
+ is selected randomly.
+ These agents and those that end up there erroneously are placed into the
+ parking position.
+ The situation is detected by sampling the potential at the agent's 
+\emph on
+
+\begin_inset Formula $GridPosition_{a}$
+\end_inset
+
+
+\emph default
+, as shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Sample-positions-during
+\end_layout
+
+\end_inset
+
+.
+ If the potential at the triangle marking the grid position is infinite,
+ the agent is inside a wall.
+ Extra care has been taken so that agents don't end up inside walls during
+ the simulation, as mentioned below, and so far no occasions have been witnessed.
+\end_layout
+
+\begin_layout Subsection
+Change Group 
+\end_layout
+
+\begin_layout Standard
+Similar to the Froblins in the demo of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Froblins"
+
+\end_inset
+
+, the agents can switch groups if this meta movement scheme is activated.
+ After arriving at their destination the agents continue into the new direction
+ to the goal area of their new group.
+ Currently the agent groups are changed in a circular fashion, but this
+ could be easily adapted to a random algorithm or other, more advanced logics.
+ This scheme provides a means to simulate situations where agents have to
+ visit predefined locations in a certain endless sequence, thereby continuously
+ moving across the map.
+\end_layout
+
+\begin_layout Subsection
+Respawn
+\end_layout
+
+\begin_layout Standard
+When the movement scheme is set to Respawn, agents that arrive at their
+ destination will first be parked by the kernel program.
+ In the next simulation step they respawn together with all the other parked
+ agents.
+ Hence, agents that have been parked because they were situated inside walls
+ will be revived.
+ The 
+\emph on
+Entries
+\emph default
+ (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:The-agent-movement
+\end_layout
+
+\end_inset
+
+) are a axis-aligned, rectangular areas, that can be defined per agent group
+ in the configuration file.
+ The agents spawn in a pseudo-random location inside that area based on
+ the global 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ID
+\end_layout
+
+\end_inset
+
+ of the work-item updating the agent, as in 
+\begin_inset Formula 
+\begin{align*}
+EntryWidth & =Entry_{x}^{\urcorner}-Entry_{x}^{\llcorner}+1,\\
+EntryHeight & =Entry_{y}^{\urcorner}-Entry_{y}^{\llcorner}+1,\\
+Index & =GlobalID\bmod\left(EntryWidth\cdot EntryHeight\right),\\
+SpawnPosition_{a} & =Entry^{\llcorner}+\left(Index\bmod EntryWidth,\frac{Index}{EntryWidth}\right),
+\end{align*}
+
+\end_inset
+
+ where 
+\begin_inset Formula $Entry_{x}^{\urcorner}$
+\end_inset
+
+ denotes the x-component of the entry's upper right corner, 
+\begin_inset Formula $Entry_{x}^{\llcorner}$
+\end_inset
+
+ is the same for the lower left corner, and similar for the y-direction.
+ This selects an 
+\begin_inset Formula $Index$
+\end_inset
+
+ into the whole number of available grid locations for this entry, 
+\begin_inset Formula $EntryWidth\cdot EntryHeight$
+\end_inset
+
+.
+ An agent will always spawn at the same location inside the spawn entry
+ area.
+\end_layout
+
+\begin_layout Section
+Moving the Agents
+\end_layout
+
+\begin_layout Standard
+The Agent Mover invokes a kernel based on a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+1D
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ to update all agents.
+ By retrieving the current agent position the kernel can decide which further
+ steps need to be taken.
+ If the position is negative, the agent is currently parked and can be respawned
+ as explained above.
+ On the other hand, when the position is positive, the agent is active and
+ must be further processed.
+\end_layout
+
+\begin_layout Standard
+First a 
+\begin_inset Formula $SamplePosition_{a}$
+\end_inset
+
+ is computed that is offset by the 
+\emph on
+
+\begin_inset Formula $SampleOffset_{a}$
+\end_inset
+
+
+\emph default
+ from the agents center in the direction it is facing, as indicated in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Sample-positions-during
+\end_layout
+
+\end_inset
+
+.
+ The distance is chosen to be the agent's radius.
+ Any smaller offset would result in a sample that is affected by the agent's
+ own density and velocity influence.
+ Then the potential at the 
+\begin_inset Formula $SampleGridPosition_{a}$
+\end_inset
+
+ is retrieved.
+ The grid position of any floating-point position is determined by the component
+-wise rounding to negative infinity and conversion to integer.
+ If the position lies outside of the grid, an infinite potential is retrieved.
+ If the potential at the grid location is zero, the sample is situated inside
+ the agent's goal area, and because the sample is taken at the agents boundary,
+ the agent is said to have reached its destination.
+ Based on this information the agent can be parked for deactivation or respawnin
+g, or be reassigned to a different agent group.
+ It will be updated again during the next simulation step.
+\end_layout
+
+\begin_layout Standard
+If the agent has not reached its goal yet, the kernel uses the gradient
+ at 
+\begin_inset Formula $SamplePosition_{a}$
+\end_inset
+
+ to compute a new agent position.
+ The gradient is stored in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ images and can be filtered with bilinear interpolation (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+eq:bilinear
+\end_layout
+
+\end_inset
+
+), to get directions of higher fidelity at locations situated between grid
+ node centers, as indicated in the figure.
+ If 
+\begin_inset Formula $SamplePosition_{a}$
+\end_inset
+
+ is outside of the domain, the null vector with both components equaling
+ zero is returned.
+\end_layout
+
+\begin_layout Standard
+The components of the filtered gradient vector can be 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NaN
+\end_layout
+
+\end_inset
+
+ because of subtractions between infinite values during the interpolation
+ process.
+ This can happen at wall edges and is sometimes visible in the interpolated
+ visualization of the gradient as mentioned in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:Visualization
+\end_layout
+
+\end_inset
+
+.
+ Therefore the gradient is checked for 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NaN
+\end_layout
+
+\end_inset
+
+ and infinite values that indicate that it was sampled inside a wall.
+ Furthermore, if both components of the gradient vector are zero, it was
+ sampled from a location even further in the center of walls.
+ These zeros have been set in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+sec:gradient
+\end_layout
+
+\end_inset
+
+ to make the inner cells of walls easier detectable.
+ In the case when the gradient is sampled outside of the domain this is
+ also treated like a wall.
+ Another case where both components are zero is inside goal areas, but this
+ situation has been handled above already.
+ Thus, if the gradient contains 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+NaN
+\end_layout
+
+\end_inset
+
+, infinite values, or all zeros, the agent must be steered away from a wall,
+ else, it would move into it and be parked automatically during the next
+ simulation step.
+ To prevent this the agent is forced to turn in place with zero speed.
+ The opposite of the current movement direction becomes the new target direction
+ and the turn rate is increased to lower the amount of time during which
+ agents are facing walls.
+ The condition for when the sample is inside a wall can be given as
+\begin_inset Formula 
+\begin{align*}
+IsWall_{a} & =\left(Gradient_{x}=\infty\right)\vee\left(Gradient_{y}=\infty\right)\\
+ & \vee\left(Gradient_{x}=NaN\right)\vee\left(Gradient_{y}=NaN\right)\\
+ & \vee\left(Gradient=\overrightarrow{0}\right),
+\end{align*}
+
+\end_inset
+
+ where 
+\begin_inset Formula $Gradient_{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $Gradient_{y}$
+\end_inset
+
+ are the x- and y-component of the interpolated gradient vector 
+\begin_inset Formula $Gradient$
+\end_inset
+
+, and 
+\begin_inset Formula $\overrightarrow{0}$
+\end_inset
+
+ is the null vector.
+ 
+\end_layout
+
+\begin_layout Standard
+If the agent is not confronted with a wall, the negative gradient is normalized
+ and becomes the new target heading.
+ The length of the gradient vector is of no interest.
+ Thus, it is not important how steep the potential field at that location
+ is, only the direction of the wavefront propagation is required.
+ The 
+\begin_inset Formula $TargetDirection_{a}$
+\end_inset
+
+ of agent 
+\begin_inset Formula $a$
+\end_inset
+
+ thus becomes
+\begin_inset Formula 
+\[
+TargetDirection_{a}=\begin{cases}
+-Direction_{a} & \textrm{if}\; IsWall_{a}\\
+-\frac{Gradient}{\left\Vert Gradient\right\Vert } & \textrm{else}
+\end{cases},
+\]
+
+\end_inset
+
+ based on the agent's current 
+\begin_inset Formula $Direction_{a}$
+\end_inset
+
+ and the 
+\begin_inset Formula $Gradient$
+\end_inset
+
+ sampled.
+ Next the dot product between the current and the intended direction is
+ computed as 
+\begin_inset Formula 
+\[
+Cosine_{a}=Direction_{a}\cdot TargetDirection_{a},
+\]
+
+\end_inset
+
+to get a measure of how far the agent intends to turn.
+ If it wants to turn far or if it is confronted with a wall, the turn rate
+ is increased by a factor of 
+\begin_inset Formula $4$
+\end_inset
+
+ as in 
+\begin_inset Formula 
+\begin{align*}
+TurnRate'_{a} & =\begin{cases}
+4\cdot TurnRate_{a} & \textrm{if}\; IsWall_{a}\;\textrm{OR}\; Cosine_{a}<0.6\\
+TurnRate_{a} & \textrm{else}
+\end{cases},
+\end{align*}
+
+\end_inset
+
+ where 
+\begin_inset Formula $TurnRate'_{a}$
+\end_inset
+
+ is a temporary agent turn rate.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:The-three-direction
+\end_layout
+
+\end_inset
+
+ shows how the direction vectors relate.
+ If the length of the difference vector 
+\begin_inset Formula 
+\[
+DirectionOffset_{a}=TargetDirection_{a}-Direction_{a}
+\]
+
+\end_inset
+
+ is less than or equal to the 
+\begin_inset Formula $TurnRate'_{a}$
+\end_inset
+
+, the 
+\begin_inset Formula $NewDirection_{a}$
+\end_inset
+
+ becomes the 
+\begin_inset Formula $TargetDirection_{a}$
+\end_inset
+
+, because the agent can turn towards it in a single simulation step, as
+ illustrated on the far left.
+ If that length is too large, as indicated by the red arrow in the center
+ of 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:The-three-direction
+\end_layout
+
+\end_inset
+
+, an intermediate direction 
+\begin_inset Formula 
+\begin{align*}
+Direction_{a}^{\measuredangle} & =Direction_{a}+TurnRate'_{a}\frac{DirectionOffset_{a}}{\left\Vert DirectionOffset_{a}\right\Vert }
+\end{align*}
+
+\end_inset
+
+ must be computed.
+ If the 
+\begin_inset Formula $TargetDirection_{a}$
+\end_inset
+
+ is close to the opposite of the current 
+\begin_inset Formula $Direction_{a}$
+\end_inset
+
+, the computation of 
+\begin_inset Formula $Direction_{a}^{\measuredangle}$
+\end_inset
+
+ might result in the null vector.
+ This case can be detected by checking the 
+\begin_inset Formula $Cosine_{a}$
+\end_inset
+
+.
+ If it is smaller than some negative threshold (e.g.
+ 
+\begin_inset Formula $-0.8$
+\end_inset
+
+), then an alternative direction computation resulting in 
+\begin_inset Formula $Direction_{a}^{\curvearrowleft}$
+\end_inset
+
+ is used.
+ Here, the agent's rotation is based on a vector orthogonal to the current
+ direction as in 
+\begin_inset Formula 
+\begin{align*}
+Direction_{a}^{\bot} & =\left(-Direction_{y},Direction_{x}\right),\\
+Direction_{a}^{\curvearrowleft} & =Direction_{a}+\frac{Direction_{a}^{\bot}-Direction}{\left\Vert Direction_{a}^{\bot}-Direction\right\Vert }TurnRate'_{a},
+\end{align*}
+
+\end_inset
+
+ as illustrated on the far right in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:The-three-direction
+\end_layout
+
+\end_inset
+
+.
+ Hence, all agents using this rotation scheme will turn towards the left.
+ Finally, the new agent direction computation can be summarized with 
+\begin_inset Formula 
+\[
+IsTooFar=\left\Vert TargetDirection_{a}-Direction_{a}\right\Vert >TurnRate'_{a}
+\]
+
+\end_inset
+
+as 
+\begin_inset Formula 
+\begin{align*}
+NewDirection_{a} & =\begin{cases}
+\frac{Direction{}_{a}^{\curvearrowleft}}{\left\Vert Direction{}_{a}^{\curvearrowleft}\right\Vert } & \textrm{if}\; Cosine_{a}<-0.8\\
+\begin{cases}
+\frac{Direction_{a}^{\measuredangle}}{\left\Vert Direction_{a}^{\measuredangle}\right\Vert } & \textrm{if}\; IsTooFar\\
+TargetDirection_{a} & \textrm{else}
+\end{cases} & \textrm{else}
+\end{cases}.
+\end{align*}
+
+\end_inset
+
+ In all cases it is assured that the vector is of unit length.
+ This turning scheme with offset vectors is used instead of rotations by
+ angles to prevent the computation of costly trigonometric functions.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/newDirection.pdf
+	scale 150
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-three-direction"
+
+\end_inset
+
+The three direction update cases.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $NewDirection_{a}$
+\end_inset
+
+ is written to back into the corresponding agent property buffer.
+\end_layout
+
+\begin_layout Standard
+Next the speed is computed.
+ As mentioned earlier, the speed becomes zero if the agent is facing a wall,
+ so that it can turn in place.
+ If the agent is free to move, the anisotropic speed field is sampled at
+ the 
+\begin_inset Formula $SampleGridPosition_{a}$
+\end_inset
+
+ as shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Sample-positions-during
+\end_layout
+
+\end_inset
+
+.
+ Again this is outside of the agent's own influence.
+ The 
+\begin_inset Formula $NewDirection_{a}$
+\end_inset
+
+ is then used to derive the speed.
+ The speed field provides only speeds for one of the four directions north,
+ east, south, and west, but 
+\begin_inset Formula $NewDirection_{a}$
+\end_inset
+
+ most likely does not directly point into one of these headings.
+ Therefore, the contribution of each direction to the actual speed must
+ be determined.
+ By checking if the sign of the x- and y-component of the direction vector
+ is positive or negative, the contributing speed along each axis can be
+ found.
+ This is 
+\begin_inset Formula $Speed_{i,j_{W}}$
+\end_inset
+
+ or 
+\begin_inset Formula $Speed_{i,j_{E}}$
+\end_inset
+
+ for the x-, and 
+\begin_inset Formula $Speed_{i,j_{N}}$
+\end_inset
+
+ or 
+\begin_inset Formula $Speed_{i,j_{S}}$
+\end_inset
+
+ for the y-direction.
+ 
+\begin_inset Formula $NewDirection_{a}$
+\end_inset
+
+ is a vector of length one and its components enclose a right triangle as
+ shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Anisotropic-speed-contribution
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/speed.pdf
+	lyxscale 200
+	scale 300
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Anisotropic-speed-contribution"
+
+\end_inset
+
+Anisotropic speed contribution to the agent speed.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ With the relation 
+\begin_inset Formula 
+\[
+NewDirection_{a_{x}}^{2}+NewDirection_{a_{y}}^{2}=1
+\]
+
+\end_inset
+
+ coming from the 
+\emph on
+Pythagorean theorem
+\emph default
+, the percentage of contribution of each component becomes known.
+ They correctly add up to 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ The unbounded agent speed thus is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Speed_{a}^{U}=\begin{cases}
+0 & \textrm{if}\; IsWall_{a}\\
+NewDirection_{a_{x}}^{2}Speed_{i,j{}_{x}}+NewDirection_{a_{y}}^{2}Speed_{i,j{}_{y}} & \textrm{else}
+\end{cases},
+\]
+
+\end_inset
+
+where 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $Speed_{i,j_{x}}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang american
+ and 
+\begin_inset Formula $Speed_{i,j_{y}}$
+\end_inset
+
+ are the anisotropic speeds related to the components of 
+\begin_inset Formula $NewDirection_{a}$
+\end_inset
+
+.
+ In the example in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Anisotropic-speed-contribution
+\end_layout
+
+\end_inset
+
+ these are 
+\begin_inset Formula $Speed_{i,j_{N}}$
+\end_inset
+
+ and 
+\begin_inset Formula $Speed_{i,j_{E}}$
+\end_inset
+
+.
+ The speed is then limited to the maximum speed for the agent 
+\begin_inset Formula $MaximumSpeed_{a}$
+\end_inset
+
+ and the bounded agent speed becomes 
+\begin_inset Formula 
+\[
+Speed_{a}^{B}=\min\left(Speed_{a}^{U},MaximumSpeed_{a}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now the temporary velocity 
+\begin_inset Formula 
+\[
+Velocity'_{a}=NewDirection_{a}Speed_{a}^{B}
+\]
+
+\end_inset
+
+ is computed and with the 
+\emph on
+Euler method
+\emph default
+ the position 
+\begin_inset Formula 
+\[
+Position'_{a}=Position_{a}+DeltaTime\cdot Velocity_{a}
+\]
+
+\end_inset
+
+ is found, based on the old position 
+\begin_inset Formula $Position_{a}$
+\end_inset
+
+, the velocity, and the time step.
+ This can be the time difference between the last two simulation steps,
+ or some fixed value, as used in the implementation for this thesis, where
+ 
+\begin_inset Formula $\unit[30]{ms}$
+\end_inset
+
+ has been chosen for the simulation of 
+\begin_inset Formula $33$
+\end_inset
+
+ steps per second.
+ With the risk of the agent ending up inside a wall, another check needs
+ to be performed.
+ The potential at the grid location related to 
+\begin_inset Formula $Position'_{a}$
+\end_inset
+
+ is retrieved.
+ If it is outside of the domain, infinity is returned.
+ The position is illustrated as 
+\begin_inset Formula $GridPosition'_{a}$
+\end_inset
+
+ in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Sample-positions-during
+\end_layout
+
+\end_inset
+
+.
+ In the case where the potential is infinite, the agent would again step
+ into a wall or outside of the domain.
+ Thus, if this is the case, the current agent position is kept and the speed
+ is set to zero.
+ Else, the new values can be used.
+ The boolean variable 
+\begin_inset Formula $IsNewWall_{a}$
+\end_inset
+
+ is set to true if the potential at 
+\begin_inset Formula $GridPosition'_{a}$
+\end_inset
+
+ is infinite.
+ Finally, the new agent speed and position are 
+\begin_inset Formula 
+\begin{align*}
+NewSpeed_{a} & =\begin{cases}
+0 & \textrm{if}\; IsNewWall_{a}\\
+Speed_{a}^{B} & \textrm{else}
+\end{cases},\\
+NewPosition_{a} & =\begin{cases}
+Position_{a} & \textrm{if}\; IsNewWall_{a}\\
+Position'_{a} & \textrm{else}
+\end{cases},
+\end{align*}
+
+\end_inset
+
+ and can be stored in the corresponding property buffers.
+\end_layout
+
+\begin_layout Standard
+This movement method approximates the agent trajectory with linear segments
+ computed by the Euler method.
+ If the time step is too large or the speed too high, the agent might move
+ through other agents or even a wall in a single simulation step.
+ With the given technique of 
+\emph on
+discrete
+\emph default
+ (
+\emph on
+a posteriori
+\emph default
+) collision detection, this can not be prevented.
+ A solution would require 
+\emph on
+continuous
+\emph default
+ (
+\emph on
+a priori
+\emph default
+) collision detection, as explained in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Continuous"
+
+\end_inset
+
+.
+ Hence, reasonable time steps and speeds must be used.
+ This is also the reason why the implementation features a fixed time step
+ of 
+\begin_inset Formula $\unit[30]{ms}$
+\end_inset
+
+, to get believable trajectories, even if the computation slows to a crawl
+ for examples with large domains and many agents.
+ In such cases, using the time difference between simulation steps in wall
+ clock time, might cause large agent offsets and the problems mentioned
+ above.
+\end_layout
+
+\begin_layout Section
+Collision Resolution
+\end_layout
+
+\begin_layout Standard
+During the agent position update by the Agent Mover extra care is taken
+ not to place any agents inside walls.
+ Additionally agents slow down in areas of high density in order to minimize
+ collisions.
+ Still, agents may end up intersecting with each other.
+ The visual artifacts can be easily identified by the human eye and the
+ absence of rigid boundaries between agents lowers the quality of the simulation
+ of agent trajectories.
+ Therefore, a separate discrete collision detection and resolution phase
+ is executed by the 
+\emph on
+Collision Resolver
+\emph default
+ depicted in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:The-agent-movement
+\end_layout
+
+\end_inset
+
+.
+ For the collision resolution only intersections that go beyond an infinitely
+ small touching point are of interest.
+ Collisions where agents merely touch each other, need not be handled, because
+ elastic collisions are not simulated, and inappropriate for many agent
+ types.
+ For experimentation purposes the collision resolution can be disabled in
+ the GUI options.
+ 
+\end_layout
+
+\begin_layout Subsection
+Collision Detection
+\end_layout
+
+\begin_layout Standard
+In order to know which agents violate the constraints of the simulation,
+ pairs of agents that overlap must be identified.
+ It is highly inefficient to check each agent against all other agents.
+ Even with the sharing of agent information in local memory, the implementation
+ of the brute force approach was about 
+\begin_inset Formula $100$
+\end_inset
+
+ times slower than other methods, with an execution time of 
+\begin_inset Formula $\unit[45]{s}$
+\end_inset
+
+ for 
+\begin_inset Formula $2^{20}=1048576$
+\end_inset
+
+ agents on a 
+\begin_inset Formula $1024\times1024$
+\end_inset
+
+ grid.
+ Hence, sophisticated broad-phase algorithms are usually applied that lower
+ the number of inter-agent checks that must be performed.
+ Not all are suitable for 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ architectures.
+ Complicated flow-control and memory accesses can limit the achieved performance.
+ Apart from the brute force method, for this thesis two algorithms have
+ been implemented and tested, 
+\emph on
+
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+SaP
+\end_layout
+
+\end_inset
+
+
+\emph default
+ and 
+\emph on
+Binning
+\emph default
+.
+\end_layout
+
+\begin_layout Subsubsection
+Sweep and Prune
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+SaP
+\end_layout
+
+\end_inset
+
+
+\emph default
+ (also called Sort and Sweep) has been previously implemented for 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+, for instance by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Real-timecollisionculling"
+
+\end_inset
+
+.
+ Its original sequential algorithm works by projecting the objects onto
+ an axis, this could be the x-axis for example, and afterwards checking
+ which images overlap.
+ The sequence for agents is as follows
+\end_layout
+
+\begin_layout Enumerate
+Project the extent of each agent 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ onto the chosen axis resulting in a set of intervals 
+\begin_inset Formula $I_{i}=\left[start_{i},end_{i}\right]$
+\end_inset
+
+ (inclusive).
+ Each 
+\begin_inset Formula $I_{i}$
+\end_inset
+
+ describes where along that axis the agent starts and ends.
+\end_layout
+
+\begin_layout Enumerate
+Sort all 
+\begin_inset Formula $start_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $end_{i}$
+\end_inset
+
+ into a common list 
+\begin_inset Formula $L$
+\end_inset
+
+ of start and end points.
+\end_layout
+
+\begin_layout Enumerate
+Define the active set of agents as 
+\begin_inset Formula $A=\textrm{Ø}$
+\end_inset
+
+.
+ Sweep 
+\begin_inset Formula $L$
+\end_inset
+
+ by stepping through the entries
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+If 
+\begin_inset Formula $start_{i}$
+\end_inset
+
+ is encountered, add 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ to 
+\begin_inset Formula $A$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Add all 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ in 
+\begin_inset Formula $A$
+\end_inset
+
+ to the set of potential pairs of colliders.
+\end_layout
+
+\begin_layout Enumerate
+If 
+\begin_inset Formula $end_{i}$
+\end_inset
+
+ is encountered, remove 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ from 
+\begin_inset Formula $A$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+This will find all potentially colliding pairs of agents that overlap when
+ projected onto the given axis.
+ In a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ space this must be done for two axes, for instance the x- and y-axis, to
+ determine if the agents really collide, as in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Projections-for-2D
+\end_layout
+
+\end_inset
+
+.
+ Then the results for both axes can be combined and the pairs of colliders
+ are defined.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/projection.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Projections-for-2D"
+
+\end_inset
+
+Projections for 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ Sweep and Prune.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ Only if the agents overlap on both axes, a pair of colliding agents has
+ been found.
+ In the example the orange and red agents in the top right corner intersect.
+\end_layout
+
+\begin_layout Standard
+For simple circular objects like the agents in this thesis, it is easier
+ to perform Sweep and Prune only along one axis, and check potential pairs
+ by comparing the radii and positions.
+ There is a collision if the inequality 
+\begin_inset Formula 
+\begin{align}
+\left\Vert PositionOffset_{a_{i},a_{j}}\right\Vert  & =\left\Vert Position_{a_{i}}-Position_{a_{j}}\right\Vert \nonumber \\
+ & <Radius_{a_{i}}+Radius_{a_{j}}\label{eq:positionRadius}
+\end{align}
+
+\end_inset
+
+ holds, which can be simplified to 
+\begin_inset Formula 
+\[
+\left(PositionOffset_{a_{i},a_{j}}^{x}\right)^{2}+\left(PositionOffset_{a_{i},a_{j}}^{y}\right)^{2}<\left(Radius_{a_{i}}+Radius_{a_{j}}\right)^{2},
+\]
+
+\end_inset
+
+ in order not to compute the square root.
+ The start and end entries are not necessarily the actual position values
+ along that axis, they could also be pointers referencing the agents.
+ If the agents don't move much, the relative position of the pointers in
+ the list remains the same.
+ Also limited reordering can be implemented efficiently with swapping.
+ Still, this algorithm is not suitable for parallel implementations on the
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ because of how the checks are performed in a sequential fashion and the
+ memory accesses due to swapping 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Real-timecollisionculling"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Fortunately it can be adapted to parallel architectures.
+ The authors of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Real-timecollisionculling"
+
+\end_inset
+
+ created the following algorithm
+\end_layout
+
+\begin_layout Enumerate
+Project each agent 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ onto the chosen axis resulting in a set of intervals as in the original
+ algorithm.
+\end_layout
+
+\begin_layout Enumerate
+Sort only the 
+\begin_inset Formula $start_{i}$
+\end_inset
+
+ into the list 
+\begin_inset Formula $L_{P}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For each 
+\begin_inset Formula $start_{i}$
+\end_inset
+
+ in parallel, beginning at 
+\begin_inset Formula $start_{i}$
+\end_inset
+
+, step through 
+\begin_inset Formula $L_{P}$
+\end_inset
+
+ and process each 
+\begin_inset Formula $start_{j}$
+\end_inset
+
+, until a 
+\begin_inset Formula $start_{j}$
+\end_inset
+
+ is encountered that is greater than 
+\begin_inset Formula $end_{i}$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:real-timealgo"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Check if 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+ really intersect with the radius and position test in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+eq:positionRadius
+\end_layout
+
+\end_inset
+
+.
+ If so, add them to the list of colliding pairs.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Hence, several work-items can concurrently scan a subset of the list for
+ colliders in parallel.
+ The work mentions 
+\emph on
+radix sorting
+\emph default
+ as the sort algorithm of choice because efficient parallel implementations
+ are available.
+\end_layout
+
+\begin_layout Standard
+For this thesis the algorithm is further changed.
+ Instead of the starts of the agent extents, the agent position itself is
+ sorted.
+ The decision to manage one 32-bit value per agent during the sorting process,
+ makes it impossible to use a single precision floating-point variable for
+ the position.
+ This decision was partially made on the assumption that radix sort only
+ works with integers, although variants for floating-point values do exist
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "RadixFloat"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The position of each agent is converted to an integer value, with rounding
+ to negative infinity, that is used as the input to the radix sort implementatio
+n for integers.
+ This is called the 
+\emph on
+key
+\emph default
+.
+ The integer maps the agent to an interval on the axis.
+ The choice of how wide the interval is affects the search for collisions
+ as explained below.
+ If the agent's position is negative, the resulting integer value will look
+ like a large positive integer to the radix sort algorithm.
+ Later, during the actual collision resolution, the floating-point position
+ of the agent is retrieved, and agents with negative positions are ignored.
+ Each 
+\emph on
+entry pair
+\emph default
+ in the list also has to provide the 
+\emph on
+index
+\emph default
+ to the buffers containing all the agent positions and radii, for the subsequent
+ offset test.
+ Hence, the 32-bit integer value used, stores the key and the index, as
+ in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:key
+\end_layout
+
+\end_inset
+
+.
+ The index uses the 
+\begin_inset Formula $20$
+\end_inset
+
+ lower bits to support up to 
+\begin_inset Formula $2^{20}=1048576$
+\end_inset
+
+ agents.
+ The most significant 
+\begin_inset Formula $12$
+\end_inset
+
+ bits containing the key allow up to 
+\begin_inset Formula $2^{12}=4096$
+\end_inset
+
+ integer positions along the axis, designed for a maximum grid size of 
+\begin_inset Formula $4096\times4096$
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/keys.pdf
+	scale 110
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:key"
+
+\end_inset
+
+Entry pair with agent key and index for radix sort.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Parallel radix sort works by counting the occurrence of each bit 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ equal to zero in the keys of all agents 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:radixSort"
+
+\end_inset
+
+.
+ This requires as many passes as there are bits, 
+\begin_inset Formula $12$
+\end_inset
+
+ kernel invocations for the 12-bit key.
+ This is another reason why no 32-bit floating-point type has been used.
+ The first pass starts with the least-significant key bit, 
+\begin_inset Formula $b_{20}$
+\end_inset
+
+ in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:key
+\end_layout
+
+\end_inset
+
+.
+ The kernel counts how many keys have 
+\begin_inset Formula $b_{20}=0$
+\end_inset
+
+.
+ Then all the keys containing a one are moved before those containing the
+ zeros.
+ Otherwise the order does not change.
+ In this regard, radix sort is a stable sort, as it does not reorder values
+ of the same size.
+ Then the algorithm continues with the next bit 
+\begin_inset Formula $i+1$
+\end_inset
+
+ until all bits have been processed.
+ In the implementation a bit mask is provided to the kernel, which marks
+ the relevant bit for the current pass.
+ Over time, bits 
+\begin_inset Formula $20$
+\end_inset
+
+ to 
+\begin_inset Formula $31$
+\end_inset
+
+ in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:key
+\end_layout
+
+\end_inset
+
+ are processed.
+\end_layout
+
+\begin_layout Standard
+For counting the bits the parallel 
+\emph on
+exclusive scan
+\emph default
+ primitive is used 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:radixSort,Scanprimitives"
+
+\end_inset
+
+.
+ By choosing addition as the associative operation, with zero as the identity
+ element, scan computes the 
+\emph on
+prefix sum
+\emph default
+ over an input array.
+ Each subsequent entry of the result contains the sum of all previous entries
+ of the input, excluding the input with the same index as the result.
+ For instance, the prefix sums of 
+\begin_inset Formula $\left\{ 3,2,6,4\right\} $
+\end_inset
+
+ are 
+\begin_inset Formula $\left\{ 0,3,5,11\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+split
+\emph default
+ primitive 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Scanprimitives"
+
+\end_inset
+
+ extends scan and rearranges the array elements as needed for the radix
+ sort.
+ An example sort with the numbers 
+\begin_inset Formula $\left\{ 3,6,4,1\right\} $
+\end_inset
+
+ is depicted in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Radix-sort.
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/splitsvg.pdf
+	scale 110
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Radix-sort."
+
+\end_inset
+
+Radix sort passes for three-digit keys.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ The sort is performed in three steps.
+ In each step split separates the elements where the relevant bit is zero
+ from those where it is one.
+ The line 
+\begin_inset Formula $j$
+\end_inset
+
+ shows the current index of the element in the array.
+ 
+\begin_inset Formula $Key_{10}$
+\end_inset
+
+ is the key in the decimal number system and 
+\begin_inset Formula $Key_{2}$
+\end_inset
+
+ is its binary representation.
+ First the bit 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ is extracted and its negation 
+\begin_inset Formula $\neg b_{i}$
+\end_inset
+
+ computed.
+ For each pass, the elements that have 
+\begin_inset Formula $b_{i}=1$
+\end_inset
+
+ are illustrated in orange, and those with 
+\begin_inset Formula $\neg b_{i}=1$
+\end_inset
+
+ in teal.
+ Then a prefix sum is performed over the negated bits with scan, resulting
+ in what will become the new array indexes (
+\begin_inset Formula $j_{0}$
+\end_inset
+
+) of elements with the bit equaling zero.
+ The total number of counted zeros (
+\begin_inset Formula $\#zeros$
+\end_inset
+
+) can be found by adding the prefix sum for the last entry with the value
+ of its inverted bit.
+ The index of entries with a one bit is then calculated as 
+\begin_inset Formula $j_{1}=j-j_{0}+\#zeros$
+\end_inset
+
+.
+ Finally, the actual new index 
+\begin_inset Formula $j'$
+\end_inset
+
+ of each element is selected by checking the bit 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+.
+ It serves as the destination for the scatter operation.
+ If 
+\begin_inset Formula $b_{i}=1$
+\end_inset
+
+, then 
+\begin_inset Formula $j'=j_{1}$
+\end_inset
+
+, else 
+\begin_inset Formula $j'=j_{0}$
+\end_inset
+
+.
+ The whole procedure is repeated twice and the reordered list 
+\begin_inset Formula $\left\{ 1,3,4,6\right\} $
+\end_inset
+
+ emerges out of this radix sort.
+\end_layout
+
+\begin_layout Standard
+A single sort pass is performed on the elements of a work-group.
+ To sort more keys than fit into a single group, each group must know the
+ 
+\begin_inset Formula $\#zeros$
+\end_inset
+
+' of all the previous groups.
+ The solution to this is given in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:radixSort"
+
+\end_inset
+
+.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:RadixGroup
+\end_layout
+
+\end_inset
+
+ shows an example for two work-groups and the second pass (
+\begin_inset Formula $b_{i}=b_{1}$
+\end_inset
+
+).
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/splitMulti.pdf
+	scale 110
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RadixGroup"
+
+\end_inset
+
+Radix sort for two work-groups.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ The 
+\begin_inset Formula $\#zeros$
+\end_inset
+
+ in each work-group is written to a separate global buffer by the prefix
+ sum kernel so that another kernel invocation can compute the prefix sum
+ over these 
+\begin_inset Formula $\#zeros$
+\end_inset
+
+'.
+ These are the two-element arrays in the figure.
+ The second one contains the number of zero elements before each group 
+\begin_inset Formula $\#zeros_{GRP}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Then the 
+\begin_inset Formula $\#zeros_{GRP}$
+\end_inset
+
+s are added to the original prefix sums computed locally inside each group,
+ the 
+\begin_inset Formula $j_{o}$
+\end_inset
+
+ entries.
+ This results in the global prefix sums 
+\begin_inset Formula $j_{o_{G}}$
+\end_inset
+
+ of the whole array, which again is the number of elements with 
+\begin_inset Formula $\neg b_{i}=1$
+\end_inset
+
+ before the current element for each of the entries.
+ Next, the global number of zero bits 
+\begin_inset Formula $\#zeros_{G}$
+\end_inset
+
+ for the current pass is found by adding the negated bit state of the very
+ last element with its prefix sum.
+ Now the 
+\begin_inset Formula $j_{1_{G}}$
+\end_inset
+
+s can be derived as given in the image and the computation of the new indexes
+ and the scattering can be performed.
+ Things are more complicated if the 
+\begin_inset Formula $\#zeros_{GRP}$
+\end_inset
+
+s don't fit into a single work-group, then the prefix sum computation for
+ 
+\begin_inset Formula $\#zeros_{GRP}$
+\end_inset
+
+ has to be separated into several work-groups and the kernels must be invoked
+ in a recursive fashion.
+ In the work 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:radixSort"
+
+\end_inset
+
+ an alternative variant is mentioned.
+ Therein, the radix sort is performed efficiently in local memory for a
+ work-group over all bits.
+ The locally sorted keys of all groups are afterwards merged into the complete
+ array by another sort algorithm.
+ With this method no separate kernel instantiations must be performed per
+ bit, because it is all done inside a loop in local memory.
+ Because it requires the implementation of another sort algorithm, this
+ has not been compared with the previously mentioned variant that performs
+ the radix sort in a global manner.
+\end_layout
+
+\begin_layout Standard
+With complex algorithms like these, it is often beneficial to add helper
+ functions during development that allow to inspect the values by copying
+ the buffer contents to the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ for logging to a console.
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+'s implementation also supports the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ extension that allows to print messages from a kernel running on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+.
+ Kernels can even be debugged with the debugging program gdb when executed
+ on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+.
+ All this methods can help to find errors inside the program.
+\end_layout
+
+\begin_layout Standard
+The actual parallel sum scan kernel is based on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CUDA
+\end_layout
+
+\end_inset
+
+ C code given in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:radixSort"
+
+\end_inset
+
+.
+ It executes two passes, 
+\emph on
+Up-Sweep
+\emph default
+ and 
+\emph on
+Down-Sweep
+\emph default
+, as shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Parallel-sum-scan.
+\end_layout
+
+\end_inset
+
+.
+ The teal numbers are indexes in the array.
+ The Up-Sweep is a reduction that sums up all elements, and keeps the partial
+ sums.
+ In the Down-Sweep the last entry is initialized to zero, the total sum
+ is not needed.
+ In each subsequent step the values are then summed up and copied in a special
+ pattern.
+ The orange zeros are actual values (sums).
+ Finally, the exclusive prefix sums are stored in the original array.
+ The computation is done per work-group in local memory for optimal speed.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/sumscan.pdf
+	scale 110
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Parallel-sum-scan."
+
+\end_inset
+
+Parallel sum scan.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After all agent entry pairs that contain the keys have been sorted, collisions
+ can be searched.
+ This is done by searching through the agents inside the integer intervals
+ they have been assigned to.
+ With the conversion of the agent's position to an integer information has
+ been lost.
+ Based on the entry pair each agent is only known to be situated inside
+ the interval of the projection axis that is related to the integer.
+ For instance, if the agent's position is 
+\begin_inset Formula $\left(3.65,5.74\right)$
+\end_inset
+
+, the projection to the x-axis and conversion to the integer 
+\begin_inset Formula $3$
+\end_inset
+
+ will only tell that the agent is somewhere inside 
+\begin_inset Formula $\left[3,4\right)$
+\end_inset
+
+ (left inclusive, right exclusive), if the interval spacing is 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ If the interval spacing is wider, in order to cover a larger range of position
+ values and a larger domain, the information becomes less accurate, and
+ more agents need to be checked per interval.
+ For instance, if the spacing was 
+\begin_inset Formula $4$
+\end_inset
+
+, the example agent would be somewhere inside the interval 
+\begin_inset Formula $\left[3,7\right)$
+\end_inset
+
+ along the x-axis, and all other agents in that interval need to be checked.
+\end_layout
+
+\begin_layout Standard
+By defining a maximum agent radius, it becomes possible to describe a search
+ pattern that will reveal overlapping agents.
+ For each entry in the sorted list of entry pairs, a work-item linearly
+ searches the neighboring entries to the left and right in the array, as
+ shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Sorted-agent-intervals
+\end_layout
+
+\end_inset
+
+, until the sampled entry pair mentions a key that is situated in an interval
+ outside of the reasonable distance resulting from the maximum radius defined
+ over all agents.
+ This kind of abort condition is required, because the algorithm can not
+ stop based on the position of other agents, as done in Step 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:real-timealgo"
+
+\end_inset
+
+ of the algorithm of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Real-timecollisionculling"
+
+\end_inset
+
+ listed 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "enu:real-timealgo"
+
+\end_inset
+
+.
+ In 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Real-timecollisionculling"
+
+\end_inset
+
+ the extents are sorted based on their floating-point position which provides
+ the correct order of entries up to floating-point precision.
+ In the implementation for this thesis, the integer radix sort causes several
+ agents to reside inside an interval, because of the reduced integer precision.
+ The actual order of these agents is not provided by the sort.
+ If the algorithm would abort on the first agent that falls outside of the
+ rule, another agent afterwards in the list and same interval, but actually,
+ before the aforementioned agent, in floating-point precision, might be
+ missed.
+ For instance, the interval 
+\begin_inset Formula $3$
+\end_inset
+
+ might contain four agents at the x-positions 
+\begin_inset Formula $\left\{ 3.65,3.21,3.8,3.01\right\} $
+\end_inset
+
+, in that order.
+ If the algorithm is searching through the entries of that interval, it
+ can not abort at the agent with x-position 
+\begin_inset Formula $3.65$
+\end_inset
+
+ if it is outside the reasonable distance, because the agents with 
+\begin_inset Formula $3.01$
+\end_inset
+
+ and 
+\begin_inset Formula $3.21$
+\end_inset
+
+ might still be in reach.
+ Only on the integer and therefore interval level can this decision be made.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement !t
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/intervals.pdf
+	scale 110
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Sorted-agent-intervals"
+
+\end_inset
+
+Intervals represented by the sorted entry pairs and search directions.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "b"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/intervalsOverlap.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:diameterSpacings"
+
+\end_inset
+
+Relation between maximum agent diameter and interval spacings.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+In addition to its own interval, the work-item must check the intervals
+ below and above the current one.
+ The exact number of intervals can be found by analyzing the situation for
+ different examples as in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:diameterSpacings
+\end_layout
+
+\end_inset
+
+.
+ The horizontal lines indicate the interval boundaries.
+ The Orange arrows show the agent extents projected onto the single axis.
+ The extents are of identical size because only 
+\begin_inset Formula $Diameter_{max}$
+\end_inset
+
+ is considered.
+ The gray arrows indicate how the agent 
+\begin_inset Formula $start_{i}$
+\end_inset
+
+s are mapped to the integer interval boundaries.
+ The analysis is the same for the agent positions mapped for the algorithm
+ instead of the starts.
+ The mapping to the interval boundaries can be done with rounding to negative
+ infinity, as long as the diameter and spacing have the same unit, and if
+ the spacing is one.
+ This is the case in the implementation for this thesis, where the interval
+ spacing corresponds to the grid spacing of one.
+ 
+\end_layout
+
+\begin_layout Standard
+In the first example the interval spacing is twice the diameter.
+ For agents lying in the first interval, all agents in the next interval
+ need to be also considered, because they could stretch across the interval
+ border.
+ Any agent that is actually situated just short of the edge of the first
+ interval, might extend into the next interval.
+ This also holds for the previous interval, and one extra interval needs
+ to be checked in both directions.
+ Let 
+\begin_inset Formula $k$
+\end_inset
+
+ be the number of extra intervals, then 
+\begin_inset Formula $k=1$
+\end_inset
+
+.
+ In the second example, the ratio is one and still one additional interval
+ needs to be checked in each directions, thus, 
+\begin_inset Formula $k$
+\end_inset
+
+ is again one.
+ In the third example, the ratio is two, and each agent can extend into
+ the interval two steps further than the current interval, hence, 
+\begin_inset Formula $k=2$
+\end_inset
+
+.
+ This behavior continues in the fourth example, and reveals the pattern
+ 
+\begin_inset Formula 
+\begin{equation}
+k=\left\lceil Diameter_{max}/IntervalSpacing\right\rceil .\label{eq:additional}
+\end{equation}
+
+\end_inset
+
+ 
+\begin_inset Formula $\left\lceil \ldots\right\rceil $
+\end_inset
+
+ is the ceiling function.
+ Therefore, the total number of intervals that need to be checked per work-item
+ is 
+\begin_inset Formula $2k+1$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $Diameter_{max}$
+\end_inset
+
+ is large in relation to the interval spacing, many intervals must be searched,
+ and vice versa.
+ All agents inside the range of interesting intervals are further considered
+ with the detailed position and radius check to see if an overlap occurred.
+ The algorithm works as follows
+\end_layout
+
+\begin_layout Enumerate
+For each entry pair 
+\begin_inset Formula $E{}_{i}$
+\end_inset
+
+, representing an agent in the interval 
+\begin_inset Formula $I_{i}$
+\end_inset
+
+, in the sorted list of entry pairs 
+\begin_inset Formula $L_{E}$
+\end_inset
+
+, in parallel
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Step through 
+\begin_inset Formula $L_{E}$
+\end_inset
+
+ to the left by decrementing the index 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Check each entry pair 
+\begin_inset Formula $E{}_{j}$
+\end_inset
+
+ until its key describes an interval less than 
+\begin_inset Formula $I_{i}-k$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:Perform-a-detailed"
+
+\end_inset
+
+Perform a detailed position and radius check on the agent described by 
+\begin_inset Formula $E{}_{j}$
+\end_inset
+
+.
+ If the agents intersect, add them to the list of intersecting agent pairs.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Step through 
+\begin_inset Formula $L_{E}$
+\end_inset
+
+ to the right by incrementing the index 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Check each entry pair 
+\begin_inset Formula $E{}_{j}$
+\end_inset
+
+ until its key describes an interval greater than 
+\begin_inset Formula $I_{i}+k$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Perform a detailed check as in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+enu:Perform-a-detailed
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+Experiments revealed that the radix sort is reasonably fast with an execution
+ time of 
+\begin_inset Formula $\unit[10]{ms}$
+\end_inset
+
+, with 
+\begin_inset Formula $1048576$
+\end_inset
+
+ agents randomly spread over a 
+\begin_inset Formula $1024\times1024$
+\end_inset
+
+ domain.
+ But the collision search step performs poorly with an execution time of
+ 
+\begin_inset Formula $\unit[2.8]{s}$
+\end_inset
+
+ in the same example.
+ This can be partially explained by looking at how the agents in that example
+ are projected onto the x-axis and mapped into the intervals.
+ Because more than a million agents are arranged all over the domain with
+ 
+\begin_inset Formula $1024$
+\end_inset
+
+ intervals along the axis, about 
+\begin_inset Formula $1000$
+\end_inset
+
+ agents will be mapped to each interval.
+ With the maximum agent radius causing the agents to extend over multiple
+ intervals, the number of agents that need to be checked per work-item,
+ can be estimated as a multiple of 
+\begin_inset Formula $1000$
+\end_inset
+
+.
+ With several random memory accesses per work-item this is too much.
+ The authors of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Real-timecollisionculling"
+
+\end_inset
+
+ employ multiple optimization techniques.
+ One of them is choosing a different projection axis, that is not the x-
+ or y-axis.
+ They compute an axis based on how the objects are arranged in the domain.
+ The optimal axis causes less false positives with potential collider reports.
+ For the algorithm using integer intervals, it also causes a smaller number
+ of agents to be projected into each interval.
+ For instance, if the agents are spread out in an elongated cloud of agents,
+ the axis of choice would be the principal axis leading through that cloud.
+ But because the agents are uniformly distributed, at least at the start,
+ a different choice of axis does not generally improve the situation in
+ the application for real-time crowd simulation.
+ Using two projections on two orthogonal axes, like the x- and y-axis, does
+ not help either.
+ This would require twice the amount of work for searches without any improvemen
+t, because the sweep over one axis can not be sped up with information from
+ the other axis.
+ Even with additional spatial subdivision and workload balancing the performance
+ achieved in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Real-timecollisionculling"
+
+\end_inset
+
+ is insufficient.
+ Apparently, Sweep and Prune is not a suitable broad-phase optimization
+ technique for collision detection on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ As a consequence, the Sweep and Prune implementation has been removed and
+ is not available in the application.
+ Another algorithm using binning provides far superior performance.
+\end_layout
+
+\begin_layout Subsubsection
+Binning
+\end_layout
+
+\begin_layout Standard
+Binning techniques have been previously implemented for applications on
+ the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+, for instance, with shader programs 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:rigid,Froblins"
+
+\end_inset
+
+, and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CUDA
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:broad-phase"
+
+\end_inset
+
+.
+ Binning works by subdividing the domain into a regular arrangement of bins,
+ sometimes also called 
+\emph on
+buckets
+\emph default
+.
+ This results in a grid structure similar to the cell grid used for the
+ navigation data computation in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+chap:Computing the Navigation Data
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Binning
+\end_layout
+
+\end_inset
+
+ shows how a domain can be subdivided into buckets and how the agent position
+ relates to their assignment to a bucket.
+ The two orange agents are assigned to the bucket of the same color.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/binning.pdf
+	lyxscale 200
+	scale 200
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Binning"
+
+\end_inset
+
+Agents assigned to buckets with binning.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/fitting.pdf
+	lyxscale 200
+	scale 300
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Fitting"
+
+\end_inset
+
+Fitting four agents with smallest radius into a bucket.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ The buckets can contain several agents.
+ The extent of each bucket is known from the subdivision of the domain.
+ Hence, broad-phase collision culling can be performed similar to the interval
+ searches in the custom Sweep and Prune method.
+ Actually, the intervals correspond to 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+1D
+\end_layout
+
+\end_inset
+
+ buckets.
+ But now the agent's interval information is defined for both dimensions
+ in a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ environment.
+ Thus, there are far less agents per bucket than there were agents per interval.
+\end_layout
+
+\begin_layout Standard
+For this thesis a straight forward 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ implementation was developed.
+ The bucket size is defined to be one, which is the same as the cell width
+ for the navigation computation.
+ The Collision Resolver in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:The-agent-movement
+\end_layout
+
+\end_inset
+
+ maintains two buffers.
+ 
+\emph on
+Buckets
+\emph default
+ contains one 
+\emph on
+bucket entry
+\emph default
+ per agent inside the bucket.
+ There is a limit of four entries per bucket, as indicated in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Binning
+\end_layout
+
+\end_inset
+
+ for a single bucket on the right.
+ Hence, there can never be more than four agents assigned to a bucket.
+ Each entry is an unsigned integer providing the agent's index to the property
+ buffers.
+ The second buffer 
+\emph on
+Counts
+\emph default
+ manages the number of used bucket entries per bucket.
+ For instance, if there are three agents in the bucket, Counts will say
+ that three of the four entries in Buckets are currently in use.
+ The relation between agent radius and the size of the bucket area is chosen
+ to make it unlikely that more than four agents reside inside a bucket at
+ any time.
+ Still, if there are more agents, the additional agents will be ignored
+ during collision detection.
+ This effect is reduced over time, because agents will get separated and
+ the density should decrease.
+ Therefore, the number of agents inside a bucket will decrease, in highly
+ congested areas, as long as there is room for the separation step to displace
+ agents.
+ As mentioned previously, the minimal allowed agent radius is 
+\begin_inset Formula $0.4$
+\end_inset
+
+, which allows about four agents to fit into the area of a bucket without
+ intersection, as shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Fitting
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In each simulation step, the Collision Resolver first clears the count of
+ used buckets to zero with a kernel.
+ Then the agents are assigned to the buckets by another kernel with a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+1D
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+.
+ Each work item-processes an agent.
+ First the agent's position is retrieved.
+ If it contains negative components, the agent is parked and no additional
+ computation is performed.
+ Else, the conversion to the bucket index is done by first rounding each
+ component of the position vector to negative infinity.
+ Then the index into the bucket entry buffer is computed as 
+\begin_inset Formula 
+\begin{align*}
+Bucket & =Position_{a_{x}}^{-\infty}+Position_{a_{y}}^{-\infty}\cdot SideLength_{BG},\\
+BucketEntry & =4Bucket,
+\end{align*}
+
+\end_inset
+
+ where 
+\begin_inset Formula $Position_{a_{x}}^{-\infty}$
+\end_inset
+
+ and 
+\begin_inset Formula $Position_{a_{y}}^{-\infty}$
+\end_inset
+
+ are the rounded position components, 
+\begin_inset Formula $SideLength_{BG}$
+\end_inset
+
+ is the number of buckets along the side of the bucket grid, 
+\begin_inset Formula $Bucket$
+\end_inset
+
+ identifies the bucket being accessed, and the factor four originates from
+ the four possible entries per bucket.
+ Incrementing this index by one, steps over four consecutive bucket entries.
+\end_layout
+
+\begin_layout Standard
+The actual entry is found by atomically increasing the current count for
+ the bucket.
+ This also returns the previous count 
+\begin_inset Formula $count_{old}$
+\end_inset
+
+.
+ The kernel then checks if 
+\begin_inset Formula $count_{old}<4$
+\end_inset
+
+.
+ If this is the case, it writes the agent's index into the buffer, and thus,
+ the bucket.
+ This procedure gives valid indexes into the buffer, because the count written
+ previously by any work-item while the bucket is not full, correctly provides
+ the index for the next entry.
+ For instance, if the current count is three, it will be incremented to
+ four, and the work-item writes to the bucket entry with sub index three,
+ inside the list of entries for the bucket, as shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Binning
+\end_layout
+
+\end_inset
+
+.
+ The next work-item accessing the count will increment it to five, and because
+ it was four previously, the work-item will not write to the buffer.
+\end_layout
+
+\begin_layout Standard
+After the binning phase is complete, the Collision Resolver searches for
+ potential colliders inside the buckets.
+ This search is performed similarly to the one for Sweep and Prune where
+ intervals have been inspected.
+ The same logic applies and the number of additional buckets that have to
+ be checked in each direction is given by 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+eq:additional
+\end_layout
+
+\end_inset
+
+, with the 
+\begin_inset Formula $IntervalSpacing$
+\end_inset
+
+ replaced by the bucket's side length.
+ As the bucket size has been chosen to be one for this implementation the
+ equation changes to 
+\begin_inset Formula 
+\[
+k_{B}=\left\lceil Diameter_{max}/1\right\rceil =\left\lceil Diameter_{max}\right\rceil .
+\]
+
+\end_inset
+
+ Now the number of directions is four, which creates a square of buckets
+ that must be searched for agents colliding with the current agent.
+ This square covers 
+\begin_inset Formula $\left(2k_{B}+1\right)^{2}$
+\end_inset
+
+ buckets.
+ Because of the domain boundaries the square is truncated if it extends
+ beyond the simulated environment.
+ The range of buckets in the x-direction can thus be given as 
+\begin_inset Formula $\left[LowerBound_{x},UpperBound_{x}\right]$
+\end_inset
+
+ (inclusive), where 
+\begin_inset Formula 
+\begin{align*}
+LowerBound_{x} & =\max\left\{ Bucket_{x}-k_{B},0\right\} ,\\
+UpperBound_{x} & =\min\left\{ Bucket_{x}+k_{B},SideLength_{BG}-1\right\} ,
+\end{align*}
+
+\end_inset
+
+ 
+\begin_inset Formula $Bucket_{x}$
+\end_inset
+
+ is the column of the agent's bucket in the grid of buckets.
+ For the y-direction the interval is defined in a similar way.
+\end_layout
+
+\begin_layout Standard
+Again a kernel is invoked with a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+1D
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+.
+ Each work-item processes an agent 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ and retrieves its position 
+\begin_inset Formula $Position_{a_{i}}$
+\end_inset
+
+.
+ If the position hints that the agent has been parked, no further computation
+ is performed.
+ Else, the kernel recomputes the agent's bucket, which, together with 
+\begin_inset Formula $k_{B}$
+\end_inset
+
+ and the cutoffs at the boundary, provides the intervals above, defining
+ the rectangular selection of buckets that must be searched.
+ In two nested loops the work-item iterates over the buckets and one-by-one
+ inspects the four entries.
+ If the stored index is not the same as the index of the current agent,
+ the entry stems from a different entity 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+.
+ The kernel can now retrieve its position 
+\begin_inset Formula $Position_{a_{j}}$
+\end_inset
+
+ and compute the difference 
+\begin_inset Formula 
+\[
+Offset_{a_{i},a_{j}}=Position_{a_{i}}-Position_{a_{j}}
+\]
+
+\end_inset
+
+ between the potential colliders.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/separation.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Agent_intersection-a"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/separation4.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Agent_intersection-d"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/separation2.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Agent_intersection-b"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - movement/separation3.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Agent_intersection-c"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Agent-intersection"
+
+\end_inset
+
+
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Agent intersection and separation.
+\end_layout
+
+\end_inset
+
+Agent intersection and separation.
+ (a) Separation by distance and direction.
+ (b) Separation by angle.
+ (c) Failed local displacement because of intersection with wall.
+ (d) Failed global displacement due to wall.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula $Offset_{a_{i},a_{j}}=\overrightarrow{0}$
+\end_inset
+
+, the two agents are in the same spot.
+ This situation is handled in a special way during the separation step below.
+ If the offset is not the null vector, the squared distance between the
+ two agents 
+\begin_inset Formula 
+\[
+Distance_{a_{i},a_{j}}^{2}=\left(Offset_{a_{i},a_{j}}^{x}\right)^{2}+\left(Offset_{a_{i},a_{j}}^{y}\right)^{2},
+\]
+
+\end_inset
+
+ is calculated with the x- and y-component of the distance vector.
+ If 
+\begin_inset Formula 
+\[
+Distance_{a_{i},a_{j}}^{2}<Diameter_{max}^{2}
+\]
+
+\end_inset
+
+ an intersection is possible.
+ This situation is illustrated in 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+fig:Agent_intersection-a
+\end_layout
+
+\end_inset
+
+.
+ Only after this has been ascertained, the actual radius 
+\begin_inset Formula $Radius_{a_{j}}$
+\end_inset
+
+ of the other agent is retrieved from global memory.
+ This saves memory accesses and improves the performance.
+ In addition, no distance and square root has been computed yet.
+ The comparison of the squared distance with the squared sum of both radii
+ reveals if the agents intersect, even if they are of different size.
+ This condition can be given as 
+\begin_inset Formula 
+\[
+Distance_{a_{i},a_{j}}^{2}<\left(Radius_{a_{i}}+Radius_{a_{j}}\right)^{2}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Agent Separation
+\end_layout
+
+\begin_layout Standard
+Two kinds of intersecting agents can be found during the previous search,
+ those that intersect only partially and those that are exactly in the same
+ location.
+ These cases must be handled separately because of how the agent displacement
+ is performed, but never is an explicit list of colliding agent pairs maintained.
+ Instead, the same kernel that searches for colliding agents does also perform
+ the separation step in one go, by managing a displacement sum 
+\begin_inset Formula $Displacement_{a_{i}}^{\sum}$
+\end_inset
+
+.
+ This vector is initialized to the null vector.
+ For each intersecting agent, the required displacement is computed and
+ added to the sum.
+ Thus, for a pair of overlapping agents, each agent mutually performs half
+ of the collision resolution offset.
+\end_layout
+
+\begin_layout Standard
+If the agents are not in the same location, the kernel computes the actual
+ distance between the two agents by taking the square root of the previously
+ computed squared distance
+\begin_inset Formula 
+\[
+Distance_{a_{i},a_{j}}=\sqrt{Distance_{a_{i},a_{j}}^{2}}.
+\]
+
+\end_inset
+
+ It is required to compute the necessary displacement of the agent.
+ With the distance the unit direction vector 
+\begin_inset Formula 
+\[
+Direction_{a_{i},a_{j}}=\frac{Offset_{a_{i},a_{j}}}{Distance_{a_{i},a_{j}}}
+\]
+
+\end_inset
+
+ can be given.
+ Each agent then contributes 
+\begin_inset Formula 
+\[
+Displacement_{a_{i},a_{j}}=\frac{Radius_{a_{i}}+Radius_{a_{j}}-Distance_{a_{i},a_{j}}}{2}
+\]
+
+\end_inset
+
+ to the resolution.
+ But the corresponding offset vector 
+\begin_inset Formula 
+\[
+Displacement_{a_{i},a_{j}}^{\rightarrow}=Displacement_{a_{i},a_{j}}Direction_{a_{i},a_{j}}
+\]
+
+\end_inset
+
+can only be added to the vector sum 
+\begin_inset Formula $Displacement_{a_{i}}^{\sum}$
+\end_inset
+
+, if it does not push the agent into a wall.
+ Hence, the potential field is sampled in the displacement direction at
+ what would be the edge of the agent if it were at the new position, as
+ in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Agent_intersection-b
+\end_layout
+
+\end_inset
+
+.
+ This sample position is the grid position corresponding to 
+\begin_inset Formula 
+\[
+Sample_{L}=Position_{a_{i}}+Displacement_{a_{i},a_{j}}^{\rightarrow}+Radius_{a_{i}}Direction_{a_{i},a_{j}}.
+\]
+
+\end_inset
+
+ If the potential is infinite, a wall has been hit.
+ In the figure both agents have been moved to the theoretical positions
+ 
+\begin_inset Formula $a_{i}'$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{j}'$
+\end_inset
+
+.
+ The current positions are indicated by the dotted circles.
+ This would resolve the collision, but 
+\begin_inset Formula $a_{i}'$
+\end_inset
+
+ is intersecting with a wall, as detected by sampling at the red dot.
+ As a consequence, the agent is not moved.
+ 
+\begin_inset Formula $a_{j}$
+\end_inset
+
+ might still be able to move to 
+\begin_inset Formula $a_{j}'$
+\end_inset
+
+, so the intersection will be partially resolved.
+ If the agents are additionally being separated from other agents, and if
+ they are moving, the situation will be fully resolved eventually.
+ 
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ can be moved, another check is performed to ensure that the sum of displacement
+s will not push the agent into a wall either.
+ After all, the separation from other agents could influence the position
+ to cause an intersection with a wall, but it might also allow the movement
+ 
+\begin_inset Formula $Displacement_{a_{i},a_{j}}^{\rightarrow}$
+\end_inset
+
+, even though the single offset test above would prohibit it.
+ This test primarily assures that the center of an agent does not end up
+ inside a wall, because of the collision resolution.
+ This would cause the agent to be parked and suddenly disappear, which must
+ be prevented.
+ Hence, the potential at the grid location corresponding to 
+\begin_inset Formula 
+\[
+Sample_{G}=Position_{a_{i}}+Displacement_{a_{i},a_{j}}^{\rightarrow}+Displacement_{a_{i}}^{\sum}
+\]
+
+\end_inset
+
+ is sampled.
+ If a wall is found, as in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Agent_intersection-c
+\end_layout
+
+\end_inset
+
+, the local displacement will not contribute to the sum, otherwise 
+\begin_inset Formula $Displacement_{a_{i},a_{j}}^{\rightarrow}$
+\end_inset
+
+ is permanently added to 
+\begin_inset Formula $Displacement_{a_{i}}^{\sum}$
+\end_inset
+
+.
+ This technique gives good collision resolution.
+ Only if many agents intersect with 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+ the summed offset might be large and cause an irrational offset.
+ In the experiments this case only appeared when the situation was artificially
+ designed for it, in normal circumstances the algorithm performs reasonably.
+ If this is of concern, the displacement vector could be limited to a maximum
+ length.
+\end_layout
+
+\begin_layout Standard
+The second case revolves around agents that have identical positions, where
+ 
+\begin_inset Formula $Position_{a_{i}}=Position_{a_{j}}$
+\end_inset
+
+.
+ Here, the offset vector 
+\begin_inset Formula $Offset_{a_{i},a_{j}}$
+\end_inset
+
+ would be the null vector, and the division by its length would lead to
+ infinity.
+ Hence, a different approach to separate the agents must be taken.
+ As before, each work-item changes only one of the two involved agents.
+ In order to make sure that the agents don't get moved into the same direction,
+ some kind of convention has to be used.
+ The system designed for this thesis uses the index of the agent to choose
+ a direction for the displacement based on the angle 
+\begin_inset Formula 
+\[
+\alpha{}_{a_{i}}=\frac{i}{AgentCount}2\pi,
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $AgentCount$
+\end_inset
+
+ is the total number of agents.
+ If the number of agents is high, it is unlikely that two agents have similar
+ angels when they are separated.
+ In the case where the agent count is low, there are less possible angles,
+ and therefore they differ more.
+ Consequently, this should provide good separation directions, as in the
+ example in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Agent_intersection-d
+\end_layout
+
+\end_inset
+
+.
+ The direction is then given as
+\begin_inset Formula 
+\[
+Direction_{a_{i},a_{j}}^{0}=\left(\cos\alpha,\sin\alpha\right),
+\]
+
+\end_inset
+
+ and radially points away from the agents current position.
+ The local displacement is then 
+\begin_inset Formula 
+\[
+Displacement_{a_{i},a_{j}}^{\rightarrow0}=Radius_{max}Direction_{a_{i},a_{j}}^{0},
+\]
+
+\end_inset
+
+ to move the agent as far as reasonable.
+ Because all the 
+\begin_inset Formula $Direction_{a_{i},a_{j}}^{0}$
+\end_inset
+
+ are identical, the displacement replaces 
+\begin_inset Formula $Displacement_{a_{i}}^{\sum}$
+\end_inset
+
+ instead of being added to it.
+ The reason is, if other agents would also be in the exact same position,
+ all the identical offsets would add up and move the agent over a large
+ distance.
+ Again, this offset could be clamped to some maximum.
+ But this case of agents ending up in the exact same spot is very rare.
+ Furthermore, the computation of the trigonometric functions can be skipped
+ by many wavefronts, because hardly any work-item will take that branch
+ of the conditional.
+\end_layout
+
+\begin_layout Standard
+After all work-items have processed their agents, most intersections have
+ been resolved.
+ If the congestion is high and very limited space is available, the collision
+ resolution algorithm is unable to resolve all collisions.
+ With each simulation step agents will then be displaced back and forth
+ between positions, that cause intersections, resulting in oscillating agents
+ and an overall turbulent crowd behavior.
+ This usually happens when suddenly many agents are spawned into a tight
+ area.
+ In the common case, agents don't move up too close because of the speed
+ constraint caused by agent density, and such extreme situations don't occur.
+\end_layout
+
+\end_body
+\end_document

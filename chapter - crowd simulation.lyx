@@ -1,0 +1,3286 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass classicthesis
+\use_default_options true
+\maintain_unincluded_children false
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Crowd Simulation
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:CrowdSimulation"
+
+\end_inset
+
+This chapter deals with three fundamental topics that were of interest during
+ the development of the application described in this thesis, navigation,
+ collision detection and resolution, and visualization.
+ The examples and techniques mentioned herein are far from complete, but
+ should lead to a basic understanding of crowd simulation related algorithms
+ and approaches.
+\end_layout
+
+\begin_layout Section
+Navigation
+\end_layout
+
+\begin_layout Standard
+Applications of multi-agent navigation can have several requirements.
+ For cases where a detailed visualization of the simulated agents is given,
+ they generally should
+\end_layout
+
+\begin_layout Itemize
+reach their destination in reasonable time along a reasonable path,
+\end_layout
+
+\begin_layout Itemize
+avoid colliding or even intersecting with other agents or obstacles,
+\end_layout
+
+\begin_layout Itemize
+exhibit a reasonable movement scheme.
+\end_layout
+
+\begin_layout Standard
+Whether the quality of the resulting simulation is acceptable and what is
+ determined reasonable depends on the type of agent and application.
+ Backwards moving agents in a pedestrian simulation could give reason for
+ concern while the same movement scheme might be totally acceptable for
+ alien lifeforms in a computer game.
+ Likewise a policeman hunting a thief should not wander off in a random
+ trajectory, instead it should follow the thief, anticipate its movement
+ and take shortcuts.
+ Such notions of predictive planning or even learning are beyond the scope
+ of this thesis and lie in artificial intelligence research areas.
+\end_layout
+
+\begin_layout Standard
+A number of concepts such as
+\end_layout
+
+\begin_layout Itemize
+global path planning,
+\end_layout
+
+\begin_layout Itemize
+local obstacle avoidance,
+\end_layout
+
+\begin_layout Itemize
+steering,
+\end_layout
+
+\begin_layout Itemize
+flow-fields
+\end_layout
+
+\begin_layout Standard
+can be found in the topic of agent navigation.
+ Their responsibilities overlap.
+ For instance, the problem of circumventing a dynamic obstacle is solved
+ with global planning or with local obstacle avoidance.
+ The following sections explain these concepts in more detail.
+\end_layout
+
+\begin_layout Subsection
+Global Path Planning
+\end_layout
+
+\begin_layout Standard
+Pathfinding allows an agent to plot the path from its current position towards
+ its goal location.
+ When done as a global planning step, it can incorporate the motivation
+ an agent has when selecting its path to a destination and model the decision
+ process that weighs the pros and cons of path traits.
+ In general an agent will try to minimize the distance it has to move and
+ lower its effort in order to conserve energy 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Treuille06continuumcrowds,PLEdestrians"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To find a shortest path in a weighted graph 
+\emph on
+Dijkstra's
+\emph default
+ search algorithm 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Dijkstra59anote"
+
+\end_inset
+
+ is applicable.
+ The weight (cost)
+\begin_inset CommandInset label
+LatexCommand label
+name "PathFindingCostDijkstra"
+
+\end_inset
+
+ on an edge may be given as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+EdgeCost_{e}=Distance_{e}+TerrainCost_{e}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $EdgeCost_{e}$
+\end_inset
+
+ is the cost assigned to edge 
+\begin_inset Formula $e$
+\end_inset
+
+, 
+\begin_inset Formula $Distance_{e}$
+\end_inset
+
+ may be the Euclidean distance between the two nodes of 
+\begin_inset Formula $e$
+\end_inset
+
+, and 
+\begin_inset Formula $TerrainCost_{e}$
+\end_inset
+
+ reflects the property of the terrain.
+ The lower the distance and the lower the cost caused by the terrain, the
+ lower the cost along the edge.
+ As a result, it is possible to express terrain properties like inclines
+ and surface qualities like pavement or grass in the navigation data.
+ A downside of Dijkstra's algorithm is that apart from the edge cost it
+ has no information about how the nodes are laid out.
+ Therefore, when deciding between outgoing edges, it treats those with the
+ same cost equally.
+ This causes it to inspect nodes in a circular fashion around the start
+ node.
+ Which includes nodes that need not be visited.
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+A
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+
+\lang english
+*
+\end_layout
+
+\end_inset
+
+
+\emph default
+ algorithm 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "hart_68_formal"
+
+\end_inset
+
+ is a generalization of Dijkstra's algorithm.
+ While the latter only sums the edge costs leading up to the current node
+ 
+\begin_inset Formula $n$
+\end_inset
+
+, the former also adds a heuristic value that has been assigned to 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ This heuristic is an estimation of the remaining path cost leading to the
+ goal and can be useful for biasing the search algorithm into the direction
+ of the goal nodes.
+ If the Euclidean distance to the goal location is used as a heuristic,
+ the total cost assigned to the path leading up to the current node may
+ be given as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+CurrentPathCost_{n}=\sum_{e\in E}EdgeCost_{e}+DistanceToGoal_{n}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $e$
+\end_inset
+
+ is an edge in the set of edges 
+\begin_inset Formula $E$
+\end_inset
+
+ included in the path, and 
+\begin_inset Formula $DistanceToGoal_{n}$
+\end_inset
+
+ is the heuristic assigned to the current node.
+ The algorithm will then inspect those nodes that lie closer to the goal
+ node first.
+ In order to find the optimal path the heuristic should be admissible, which
+ means that it does not overestimate the remaining cost.
+ If the developer wants to save processing time by replacing the Euclidean
+ distance computation with the computationally simpler Manhattan distance,
+ A
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+
+\lang english
+*
+\end_layout
+
+\end_inset
+
+ might not find the optimal path to the goal any longer.
+ But it will still find a path and in many cases it is sufficient.
+ A discussion on the optimization of A
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+
+\lang english
+*
+\end_layout
+
+\end_inset
+
+ implementations is given in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AStarOptimizations"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+There are different ways for discretization of a continuous environment
+ into a set of 
+\emph on
+waypoint
+\emph default
+ nodes that can be analyzed by path finding algorithms.
+ One way is to use a regular grid of nodes where the position of the nodes
+ are stored implicitly in the position, shape and spacing of the grid (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Implicit-node-positions
+\end_layout
+
+\end_inset
+
+).
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/grid_spaced.pdf
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Implicit-node-positions"
+
+\end_inset
+
+Implicit node positions through grid location, shape and spacing.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/grid_free.pdf
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Explicit-node-positions"
+
+\end_inset
+
+Explicit node positions.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Different grid node storage schemes.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ As a consequence it is not required to explicitly store the position of
+ all nodes, because it can be derived from the grid information.
+ A downside is that areas which can never be reached by agents will still
+ contain unnecessary nodes that are marked as inactive and not reachable
+ over any edges.
+ Another waypoint technique stores the position of all nodes explicitly,
+ thereby creating free-form grids and saving memory where no nodes should
+ be located (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Explicit-node-positions
+\end_layout
+
+\end_inset
+
+).
+ This improvement has to be weighed against the increased memory requirement
+ per node.
+ An example of the free-form waypoint grid used in the computer game Alien
+ Swarm is given in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "aigamedevwaypoints:2011:Online"
+
+\end_inset
+
+.
+ Both types of waypoint grids (sometimes called roadmaps) are usually interprete
+d as only allowing paths leading along edges.
+ 
+\end_layout
+
+\begin_layout Standard
+Next there is the differentiation of what a node represents.
+ Some methods just see it as an infinitesimal point that represents only
+ a location.
+ One way to support agents of variable dimension is to use different grids
+ for each supported agent size (or range of sizes) (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:size_small
+\end_layout
+
+\end_inset
+
+).
+ As an alternative, a radius stored per node can define the width of agents
+ allowed to traverse over the node (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:size_radius_node
+\end_layout
+
+\end_inset
+
+).
+ This radius can also be stored per edge instead (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:size_radius_edge
+\end_layout
+
+\end_inset
+
+).
+ Again the developer has to weigh off the storage requirements of additional
+ grids with the memory and computational time needed for storing and processing
+ (ranges of) radii.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/size_grid.pdf
+	scale 70
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/size_grid_large.pdf
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:size_small"
+
+\end_inset
+
+Separate grids.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/size_grid_radius_node.pdf
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:size_radius_node"
+
+\end_inset
+
+Radius per node.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/size_grid_radius_edge.pdf
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:size_radius_edge"
+
+\end_inset
+
+Radius per edge.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Different ways to define the allowed agent size on the grid.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The area around a node can be further interpreted.
+ A node may cover its surrounding area with shapes such as circles (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:mesh_circles
+\end_layout
+
+\end_inset
+
+), rectangles (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:mesh_rectangles
+\end_layout
+
+\end_inset
+
+) or polygons (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:mesh_polygons
+\end_layout
+
+\end_inset
+
+) that closely approximate the environment.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/mesh_circles.pdf
+	scale 65
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mesh_circles"
+
+\end_inset
+
+Circles.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/mesh_rectangles.pdf
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mesh_rectangles"
+
+\end_inset
+
+Axis-aligned rectangles.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/mesh_polygons.pdf
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mesh_polygons"
+
+\end_inset
+
+Convex polygons.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:environmentDiscretization"
+
+\end_inset
+
+Several methods of environment discretization.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+An agent is then allowed to move freely inside these areas.
+ A sample path is indicated by the dotted black line, terminated with diamonds.
+ Any path inside the shape is valid.
+ These 
+\emph on
+navigation meshes
+\emph default
+ allow to cover environment areas with a lower number of nodes by allowing
+ nodes to take up space.
+ As a downside it requires a more complex path construction algorithm, but
+ it can lead to smoother paths and additionally save memory by requiring
+ a lower number of nodes.
+ A manually constructed navigation mesh system is being described by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "valvenavmesh:2011:Online,valvenavmeshbooth:2011:Online,valvenavmeshaigamedev:2011:Online"
+
+\end_inset
+
+.
+ It is implemented in the Source game engine middle-ware and uses rectangles
+ for its shapes.
+ The game Fallout 3 uses another system with polygons 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "falloutnavmesh:2011:Online"
+
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "recast:2011:Online,digesting:2011:Online"
+
+\end_inset
+
+ developed a system to automatically generate polygonal navigation meshes
+ from environment geometry.
+\end_layout
+
+\begin_layout Standard
+There are many ways of how to define edges in waypoint grids.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:edgesConnectivity
+\end_layout
+
+\end_inset
+
+ shows a path through grids of different connectivity and the result of
+ path smoothing.
+ A basic idea is to connect each node to all other nodes that are reachable
+ in a straight line (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:connectivity_total
+\end_layout
+
+\end_inset
+
+).
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/connection_total.pdf
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:connectivity_total"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/connection_partial.pdf
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:connectivity_partial"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/connection_partial_smoothed.pdf
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:connectivity_smoothed"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:edgesConnectivity"
+
+\end_inset
+
+
+\lang english
+
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Variable grid connectivity and path smoothing.
+\end_layout
+
+\end_inset
+
+
+\lang american
+(a, b) Variable grid connectivity.
+ (c) Path smoothing.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ This results in many edges to store and process in the search.
+ A compromise is to store only edges between neighboring nodes in a specific
+ distance.
+ This lowers the fidelity of the navigation information and agents sometimes
+ have to take a diversion although it would be valid to move in a straight
+ line (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:connectivity_partial
+\end_layout
+
+\end_inset
+
+).
+ The effect can be limited by first computing the path along the edges stored
+ in the navigation data and then smoothing it by performing ray-obstacle
+ intersection tests (
+\emph on
+ray-casting
+\emph default
+) between nodes in the path to probe for valid shortcuts through the environment.
+ In 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:connectivity_smoothed
+\end_layout
+
+\end_inset
+
+ the dotted blue line indicates the derived shortcut.
+ Problems arise when the ray casting scheme does not respect the shape of
+ the agent, potential collisions are missed and the resulting path leads
+ the agent through an obstacle.
+ To lower the likelihood of that problem simple shapes that correspond to
+ the form of the agent, like spheres, capsules or rectangular boxes can
+ be swept through the environment and tested for intersection with obstacles.
+\end_layout
+
+\begin_layout Standard
+The complexity of the path search algorithm is proportional to the number
+ of nodes and edges, therefore it is beneficial to lower the node count.
+ In order to preserve the resolution when using grids 
+\emph on
+hierarchical
+\emph default
+ approaches are helpful 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "sturtevant:memory-efficient,Botea04nearoptimal"
+
+\end_inset
+
+.
+ As an example, when two grids of different resolution are utilized, the
+ high resolution grid is only used near the entry and exit points to the
+ navigation grids.
+ The remaining path segments are derived from the low resolution grid.
+ Thus, the search algorithm does not need to inspect as many nodes and edges,
+ and it saves computational time by performing larger hops.
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/hierarchical.pdf
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:hierarchical"
+
+\end_inset
+
+
+\lang american
+
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Hierarchical path-finding with two grids.
+\end_layout
+
+\end_inset
+
+Hierarchical path-finding with high resolution grid on the left, and low
+ resolution grid on the right.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:hierarchical
+\end_layout
+
+\end_inset
+
+ shows an example.
+ At special transition nodes, the search algorithm can switch between the
+ grids, as indicated by the dotted blue lines.
+ Again, the start and end points of the path are indicated by diamonds.
+\end_layout
+
+\begin_layout Standard
+A big challenge are dynamic obstacles.
+ If an obstacle suddenly blocks an edge it must be invalidated, else agents
+ might collide with the object.
+ Sometimes the environment might still provide enough space to circumvent
+ and therefore the system should still allow agents to reach their goal.
+ If there is no other valid path, that leads around the obstacle, represented
+ in the navigation data, then it must be updated by introducing new nodes
+ and edges.
+ This can be done for waypoint nodes 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "adaptiveroadmaps07"
+
+\end_inset
+
+ and also for navigation meshes 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "digestingobstacle:2011:Online"
+
+\end_inset
+
+.
+ The developers of Uncharted combined a static navigation mesh, that covers
+ the whole environment, with a dynamic grid that is constructed in limited
+ range around the agent by rasterization of the static mesh 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "UnchartedRasterization"
+
+\end_inset
+
+.
+ During the rasterization process they can take dynamic obstacles into account.
+\end_layout
+
+\begin_layout Standard
+These techniques require additional computations and algorithmic finesse.
+ Therefore some navigation systems fall back to cheaper local obstacle avoidance
+ methods that are less reliable than global planning approaches.
+\end_layout
+
+\begin_layout Subsection
+Local Obstacle Avoidance
+\end_layout
+
+\begin_layout Standard
+In local obstacle avoidance schemes agents commonly only sense those objects
+ situated in a local environment around them.
+ Consequently the information they have available is very limited and they
+ need to react quickly when other objects come into the range of their sensors
+ to prevent collisions.
+ Agents still need a global heading as input into the local decision cycle.
+ Therefore global planning methods often feed their desired direction of
+ motion into them.
+ If the movement of an agent is largely based on local obstacle avoidance
+ then it may get stuck at obstacles that are of 
+\emph on
+U-shape
+\emph default
+ (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:U-shaped-obstacles
+\end_layout
+
+\end_inset
+
+), because it is difficult to find a detour with only local information.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/u-shape.pdf
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:U-shaped-obstacles"
+
+\end_inset
+
+
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+U-shaped obstacles.
+\end_layout
+
+\end_inset
+
+U-shaped obstacles.
+ Static
+\lang english
+ 
+\lang american
+obstacle on the left and dynamic obstacle on the right.
+ The arrow indicates
+\lang english
+ 
+\lang american
+the general heading.
+ The circle covers the limited sensor range.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ Nonetheless local obstacle avoidance can constitute a useful addition to
+ global planning methods.
+ In the resulting hybrid schemes it is possible to derive valid paths that
+ avoid collisions, without the need to update the navigation information
+ and search for a new path as soon as dynamic obstacles are encountered.
+\end_layout
+
+\begin_layout Standard
+A method often applied in a local scope is the 
+\emph on
+
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VO
+\end_layout
+
+\end_inset
+
+
+\emph default
+ algorithm 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Fiorini98motionplanning"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/VO_ab.pdf
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:VO_ab"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/VO_ab_sized.pdf
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:VO_ab_sized"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/VO_collision_cone.pdf
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:VO_collision_cone"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/VO_velocity_obstacle.pdf
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:VO_velocity_obstacle"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Velocity-obstacle-construction"
+
+\end_inset
+
+
+\lang american
+
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Velocity Obstacle construction.
+\end_layout
+
+\end_inset
+
+Velocity Obstacle construction.
+ (a) Agent A and obstacle B with velocities.
+ (b) A reduced to a point and B enlarged by radius of A.
+ (c) Relative velocity and Collision Cone.
+ (d) Velocity Obstacle.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Velocity-obstacle-construction
+\end_layout
+
+\end_inset
+
+ shows how 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+VO
+\end_layout
+
+\end_inset
+
+ are constructed.
+ First, the size and velocity of agent 
+\begin_inset Formula $A$
+\end_inset
+
+ and obstacle 
+\begin_inset Formula $B$
+\end_inset
+
+ are known (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:VO_ab
+\end_layout
+
+\end_inset
+
+).
+ Then object 
+\begin_inset Formula $A$
+\end_inset
+
+ is reduced to a point, while 
+\begin_inset Formula $B$
+\end_inset
+
+ is enlarged by the radius of 
+\begin_inset Formula $A$
+\end_inset
+
+ (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:VO_ab_sized
+\end_layout
+
+\end_inset
+
+).
+ Next, two tangents are constructed that enclose the 
+\emph on
+Collision Cone
+\emph default
+.
+ Any relative velocity 
+\begin_inset Formula $v_{a}-v_{b}$
+\end_inset
+
+ that lies inside the cone will lead to a collision (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:VO_collision_cone
+\end_layout
+
+\end_inset
+
+).
+ Shifting the Collision Cone by 
+\begin_inset Formula $v_{b}$
+\end_inset
+
+ results in the 
+\emph on
+
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VO
+\end_layout
+
+\end_inset
+
+
+\emph default
+ (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:VO_velocity_obstacle
+\end_layout
+
+\end_inset
+
+).
+ To prevent a collision, 
+\begin_inset Formula $A$
+\end_inset
+
+ must choose a velocity that lies outside of the 
+\emph on
+
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VO
+\end_layout
+
+\end_inset
+
+
+\emph default
+.
+ Multiple obstacles can be included in the decision process by combining
+ the 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+VO
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The technique is commonly used in computer games and closely tied to robotics
+ research.
+ In systems where each robot works independent of a central planning authority,
+ such algorithms are a means of preventing collisions between agents.
+ Unfortunately it can suffer from oscillations, where agents repeatedly
+ attempt to evade each other.
+ Extensions such as the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+RVO
+\end_layout
+
+\end_inset
+
+ technique 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Berg08reciprocalvelocity"
+
+\end_inset
+
+ can help to address this problem.
+ Parallel implementations are available 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Clearpath"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+More complex approaches allow to express sophisticated behavior like interaction
+s between and inside groups of agents while trying to maintain formation
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "situation-agents,ko_vrst2010"
+
+\end_inset
+
+, or prioritizing individual agents 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Yeh:2008:CA:1632592.1632599"
+
+\end_inset
+
+ and groups of agents 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "situation-agents"
+
+\end_inset
+
+ at choke points.
+\end_layout
+
+\begin_layout Subsection
+Steering
+\end_layout
+
+\begin_layout Standard
+Basically, steering describes how agents turn and move when transforming
+ the global and local movement decisions into actual motion.
+ This incorporates agent traits like minimum and maximum values for speed,
+ turn rate, acceleration and deceleration, whether the agent can move backwards
+ or sideways, and how it is oriented in space.
+\end_layout
+
+\begin_layout Standard
+Sometimes Velocity Obstacle methods are named steering methods.
+ Particle-based approaches like the one by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Reynolds87flocks"
+
+\end_inset
+
+ are also being referred to as steering methods.
+ Here the agents, named 
+\emph on
+boids
+\emph default
+, are controlled by 
+\emph on
+steering forces
+\emph default
+ to derive a final velocity.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/boid_separation.pdf
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:boids_separation"
+
+\end_inset
+
+Separation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/boid_alignment.pdf
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:boids_alignment"
+
+\end_inset
+
+Alignment.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - crowd simulation/boid_cohesion.pdf
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:boids_cohesion"
+
+\end_inset
+
+Cohesion.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:boids"
+
+\end_inset
+
+Different boid steering forces.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Each agent only takes other agents inside a certain radius into consideration.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:boids
+\end_layout
+
+\end_inset
+
+ shows some resulting force vectors as red arrows and their cause in blue.
+ The use of multiple forces allows to express 
+\emph on
+separation
+\emph default
+ where agents avoid other agents (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:boids_separation
+\end_layout
+
+\end_inset
+
+), motion 
+\emph on
+alignment
+\emph default
+ with agents moving into the same general direction (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:boids_alignment
+\end_layout
+
+\end_inset
+
+), and 
+\emph on
+cohesion
+\emph default
+ for keeping groups of agents together (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:boids_cohesion
+\end_layout
+
+\end_inset
+
+).
+ Leader-follower relationships are also possible.
+ A force can additionally guide an agent along a path that has been planned
+ in a previous global step.
+ However, the weights and priorities of steering forces are difficult to
+ control.
+\end_layout
+
+\begin_layout Standard
+As an emergent phenomenon, groups of agents simulated under these simple
+ rules can exhibit complex behavior.
+ This allows to approximate animal herd, school and swarm motion, like the
+ impressive aerobatics displayed by starlings, which were also modeled in
+ more detail in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "hildenbrandt-2009"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Flow-Fields
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:flow-fields"
+
+\end_inset
+
+The path-finding systems mentioned so far work by searching for a valid
+ path for each individual agent.
+ While this allows to incorporate per-agent decision processes into the
+ simulation, the process becomes too expensive as the number of agents increases
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Tractable"
+
+\end_inset
+
+.
+ When circumventing dynamic objects local avoidance schemes can be used
+ as a work-around, instead of constantly updating the navigation data.
+ But these methods have problems with limited perception and may cause agents
+ to get stuck at U-shaped obstacles.
+ Fortunately there is a different approach that can help dealing with these
+ limitations.
+\end_layout
+
+\begin_layout Standard
+The process of deriving paths can also be expressed similar to finding the
+ solution to problems in 
+\emph on
+wave propagation
+\emph default
+ or 
+\emph on
+fluid dynamics
+\emph default
+.
+ In these models the environment and agents are represented as continuous
+ entities.
+ Individual agents don't have point-like or circular representations with
+ strict boundaries, instead their influence fades out with increasing distance
+ to their center.
+ The environment itself also remains continuous and is not explicitly modeled
+ as a grid.
+ Domain
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Throughout this document a domain is considered to be a connected open set
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Domain1,Domain2"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ properties are then defined as scalar or vector fields.
+ For instance, the agent density is a scalar that may be retrieved for every
+ location in the domain, while the average agent velocity is an example
+ of a vector field.
+\end_layout
+
+\begin_layout Standard
+Still, on a computer the algorithms for solving these problems require a
+ discretization of the continuous representation.
+ In theory it is possible to compute very accurate solutions with highly
+ detailed discretization schemes, in reality the available processing power
+ often becomes a limiting factor.
+ The computational complexity now stems from solving the problem on a reasonably
+ accurate discretization, and the environment and agent discretization replace
+ the agent count as the dominant quantity controlling the complexity.
+\end_layout
+
+\begin_layout Standard
+A prominent example is 
+\emph on
+Continuum Crowds
+\emph default
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Treuille06continuumcrowds"
+
+\end_inset
+
+.
+ What follows is an overview of the technique, a more detailed explanation
+ and an example implementation is given in 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+chap:Computing the Navigation Data
+\end_layout
+
+\end_inset
+
+.
+ The domain is discretized into a rectangular grid of cells.
+ The underlying continuous model can be seen as featuring an endless amount
+ of infinitely small cells.
+ The smaller the cell size, the more accurate the solution will be.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This is not necessarily true for all algorithms based on discretization
+ schemes.
+ Some will not give better solutions with increased resolution.
+\end_layout
+
+\end_inset
+
+ Each cell of the grid is considered to be 4-connected.
+ Thus, it has four neighbors and does not know about the cells in the diagonal
+ direction.
+\end_layout
+
+\begin_layout Standard
+A cost value is then mapped to each of the four sides (north, east, south,
+ west) of a grid cell.
+ This defines a direction-dependent (
+\emph on
+anisotropic
+\emph default
+), scalar field.
+ It describes how costly it is to traverse from the current cell into the
+ neighboring cell in one of the four directions.
+ This is similar to the cost assigned to edges in Dijkstra's algorithm mentioned
+ in 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+PathFindingCostDijkstra
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The costs are derived from environmental properties (
+\emph on
+discomfort
+\emph default
+) and from the agents themselves (
+\emph on
+density
+\emph default
+, 
+\emph on
+velocity
+\emph default
+), by mapping (
+\emph on
+splatting
+\emph default
+) agent information onto the cell grid.
+ For instance, it is cheaper for an agent to move into the same direction
+ as neighboring agents.
+ And it is also cheaper to avoid areas of high agent density or discomfort.
+\end_layout
+
+\begin_layout Standard
+Each cell is then either assigned to the set of cells belonging to a goal
+ area or to the set of remaining cells.
+ The goal cells are assigned a 
+\emph on
+potential
+\emph default
+ of zero.
+ The authors then apply an 
+\emph on
+
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OUM
+\end_layout
+
+\end_inset
+
+
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "SethianOrderedUpwindMethods"
+
+\end_inset
+
+ to compute the solution.
+ A comparison between Dijkstra's algorithm and 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+OUM
+\end_layout
+
+\end_inset
+
+ is given in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Tsitsiklis95efficientalgorithms,SethianOrderedUpwindMethods"
+
+\end_inset
+
+.
+ In each successive step the algorithm expands the goal area outwards, thereby
+ computing the paths from all cells to the goal cells in reverse.
+ This expanding wave-like front also increments the potential of visited
+ cells through a function depending on the cost and potential of neighboring
+ cells.
+ Thus the scalar potential field is zero at goal areas and increases towards
+ those cells that are further away.
+ Finally, the algorithm computes the 
+\emph on
+gradient 
+\emph default
+field base on this potential field.
+ This gives the steepest ascents.
+ The agents can then sample this vector field locally and move 
+\begin_inset Quotes eld
+\end_inset
+
+downhill
+\begin_inset Quotes erd
+\end_inset
+
+ in the direction of the negative gradients towards the goal.
+ This can be imagined as a mountainous area where agents will later wander
+ downhill towards the goal.
+\end_layout
+
+\begin_layout Standard
+As an advantage of this technique it becomes quite simple to incorporate
+ dynamic obstacles into the global path planning step.
+ The objects can be splatted just like agents.
+ If they contribute a very high or even infinite cost, then the agents will
+ avoid the affected areas automatically.
+ The method constantly updates the gradient field, thus agents will also
+ find their way around congested areas.
+ For all agents in the field there is a path starting at their locations,
+ which makes supporting large numbers of agents feasible.
+ Unfortunately, the cell size has to be small to reflect the shape of dynamic
+ obstacles.
+ In order to fit such a simulation into tight real-time constraints, a compromis
+e between the fidelity of the cell grid and the size of the covered environment
+ has to be made.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+March of the Froblins
+\emph default
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Froblins"
+
+\end_inset
+
+ is an implementation that runs shader programs on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ It combines the technique with Velocity Obstacles.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "GPUContinuumCrowds"
+
+\end_inset
+
+ presents another GPU-based implementation.
+ Similar techniques are being used in games like StarCraft 2, Supreme Commander
+ 2 and Heavy Rain 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "FlowFieldAndHeavyRainSPU"
+
+\end_inset
+
+.
+ Heavy Rain features an implementation optimized for the 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+SPE
+\end_layout
+
+\end_inset
+
+ of the
+\emph on
+ 
+\emph default
+
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+Cell
+\end_layout
+
+\end_inset
+
+ microprocessor.
+ Another continuum-based approach that performs no path-finding but allows
+ to limit the agent density and thereby helps to prevent collisions is given
+ in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AggregateDynamics"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Collision Detection and Resolution
+\end_layout
+
+\begin_layout Standard
+Navigation systems can hardly ever prevent collisions completely.
+ Even more so if a high number of agents are operating in limited space.
+ Artifacts caused by intersecting agents can have a negative impact on simulatio
+n results, and are often obvious to the human eye.
+ Collision detection and resolution methods help to prevent agents from
+ intersecting with other agents, obstacles or the environment.
+\end_layout
+
+\begin_layout Subsection
+Broad- and Narrow-phase
+\end_layout
+
+\begin_layout Standard
+In order to detect intersections the spatial overlap between the involved
+ parties needs to be determined.
+ If the positions of all agents, static, and dynamic obstacles in the environmen
+t are known 
+\emph on
+pair-wise checks
+\emph default
+ will reveal collisions.
+ In physics engines this search is commonly separated into a 
+\emph on
+broad-
+\emph default
+ and a 
+\emph on
+narrow-phase
+\emph default
+.
+ In the broad-phase a subset of potential colliders is filtered out of all
+ participating objects.
+ This is also called collision 
+\emph on
+culling
+\emph default
+.
+ During the narrow-phase the actual pair-wise comparisons are performed.
+ A number of algorithms is suitable for application on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+, for instance 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:rigid"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:broad-phase"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+During the broad-phase step space partitioning methods help to control the
+ computational complexity by lowering the number of objects that must be
+ checked per agent.
+ Examples are 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+BSP
+\end_layout
+
+\end_inset
+
+, 
+\emph on
+quadtrees
+\emph default
+, 
+\emph on
+octrees
+\emph default
+, and 
+\emph on
+binning
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Computer game engines commonly further simplify the process by using simple
+ geometric shapes like spheres, capsules, or cubes as aliases for the actual
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+3D
+\end_layout
+
+\end_inset
+
+ models, which typically consist of triangle meshes.
+ The reduced precision is often not noticed by players.
+ Some game developers even choose to disable inter-agent collisions altogether.
+ In StarCraft this is done for the sake of predictability and in Left 4
+ Dead it permits smooth motion for large numbers of agents 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "disablingCollisionsAI"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Resolution
+\end_layout
+
+\begin_layout Standard
+Finally, when an overlap was found the colliders can be separated.
+ Sometimes it is not possible to find a perfect resolution.
+ A simple pair-wise separation might cause the potentially resolved agents
+ to intersect with other agents or environment structures.
+ In very crowded scenes with many agents this can lead to oscillations.
+\end_layout
+
+\begin_layout Section
+Visualization
+\end_layout
+
+\begin_layout Standard
+The visual representation of crowd members can have high requirements in
+ terms of quality.
+ The film industry relies on lively depictions of crowd scenes and therefore
+ generously invests into the final rendering process with dedicated server
+ hardware, ray-tracing and post-processing techniques to mimic realistic
+ appearance or skillfully create artistic look, all for the immersion of
+ the audience.
+\end_layout
+
+\begin_layout Standard
+In computer games impressive graphics effects have long been part of the
+ 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+USP
+\end_layout
+
+\end_inset
+
+, which subsequently lead to an arms race between the creators of computer
+ games, and also between the developers of game engine middle-ware.
+ A large amount of research and development is spent on producing new visual
+ rendering processes.
+ The advent of shader programs introduced the programmability of 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ and developers began to expose the visual effects supported by their graphics
+ engines through tools, so that artists can tweak the appearance of agents
+ and environments to achieve better visual quality and performance.
+\end_layout
+
+\begin_layout Standard
+Researchers often utilize more abstract visualizations, for instance cylinders
+ as aliases for agents, or curves plotting their trajectory in space.
+ Where applicable, the results are only visualized in spreadsheets, graphs
+ and colored fields.
+\end_layout
+
+\begin_layout Subsection
+Rendering
+\end_layout
+
+\begin_layout Standard
+Today's consumer-level graphics cards can render large numbers of detailed
+ agents to the screen in real time 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gas:2010:Online,StarCraft2Zerg:2010:Online,heavyRain,gta4realityIV"
+
+\end_inset
+
+.
+ The dedicated design of 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ to stream and raster large numbers of triangles makes this possible.
+ While the computational power of 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ has grown rapidly throughout the last few years, the increase in memory
+ bandwidth could not keep up.
+ Therefore modern graphics cards feature dedicated memory located close
+ to and also inside the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ The programs then run on a client-server architecture, where the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ serves the client program that is being executed on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+.
+ In order to keep the latency down and bandwidth up, it is beneficial to
+ place as much information as possible directly inside the memory on the
+ graphics card.
+ This is supported in todays programming standards like the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ and 
+\emph on
+Direct3D
+\emph default
+ which expose that memory to the developer in the form of special data buffers.
+ The client program can then instruct the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ to retrieve vertex, primitive and texture data from the graphics card's
+ memory.
+ If the amount of data surpasses the amount of dedicated video memory, the
+ graphics driver will automatically copy data back and forth between the
+ usually larger client 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+RAM
+\end_layout
+
+\end_inset
+
+ and the video memory.
+\end_layout
+
+\begin_layout Standard
+Crowd simulations often visualize many instances of very similar agents.
+ This can be achieved by placing the information required to draw each instance
+ into a large buffer on the graphics card and then order the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ to render with this data.
+ Alternatively the programmer can exchange memory for 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ cycles.
+ Modern graphics cards support 
+\emph on
+geometry instancing
+\emph default
+ where the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ can be instructed to render several copies of the same model.
+ Each replication may have different location, orientation or appearance.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "gpugems3:animation"
+
+\end_inset
+
+ presents a method that also supports animations.
+ Vertex and geometry shader programs provide additional flexibility and
+ the programmer can customize the geometry manipulation to specific needs.
+\end_layout
+
+\begin_layout Subsection
+Animation
+\end_layout
+
+\begin_layout Standard
+For simulating living beings like humans or animals, simply visualizing
+ the agents trajectory is often not enough.
+ The movement of individual body parts can be as important.
+ Example techniques for improving the visual quality are 
+\emph on
+forward
+\emph default
+ and 
+\emph on
+
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+IK
+\end_layout
+
+\end_inset
+
+
+\emph default
+, 
+\emph on
+motion capturing
+\emph default
+ and 
+\emph on
+animation planning
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Forward kinematics allow to simulate smooth motion by providing snapshots
+ (
+\emph on
+key-frames
+\emph default
+) of the position and orientation of body parts in predefined intervals
+ and then interpolating them during program execution.
+ A collection of related key-frames is often called 
+\emph on
+animation clip
+\emph default
+.
+ With motion capturing these clips are being generated by recording the
+ movement of actors in a studio which makes it easier to recreate natural
+ motion.
+ The advanced facial motion capturing techniques applied in L.A.
+ Noire 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "LANoire"
+
+\end_inset
+
+ have recently gained recognition in the game development community.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+IK
+\end_layout
+
+\end_inset
+
+
+\emph default
+ techniques allow to model processes like a person reaching out to a drinking
+ glass, without the need to provide a separate animation clip for every
+ possible start state
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The relation between agent and glass with respect to location and orientation
+ in space.
+\end_layout
+
+\end_inset
+
+.
+ It works by respecting constraints on the joints of the body and computes
+ valid configurations that lead the hand to the glass.
+ The technology is rooted in the robotics industry where grippers need to
+ dynamically reach out to arbitrarily placed objects, but it is also applied
+ for hand and foot planting in computer games and simulations 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "unityIKBlending:youtube,assassinsCreed:youtube,animatedSpider:youtube"
+
+\end_inset
+
+.
+ With basic forward animation, the animation clips of all possible start
+ states would be required.
+ Yet, by blending several animation clips together it is sometimes possible
+ to derive satisfying forward animations.
+ 
+\emph on
+Animation blending
+\emph default
+ computes the weighted average of several input clips.
+\end_layout
+
+\begin_layout Standard
+Even further goes animation planning as presented by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Kovar02motiongraphs"
+
+\end_inset
+
+ where the trajectory of the agent depends on a collection of animation
+ clips.
+ Here each animation clip contains information about what trajectory the
+ object experiences during the playback of the clip.
+ If the data originates from motion capturing, the collection will contain
+ very accurate information about possible trajectories.
+ Based on this data a 
+\emph on
+motion graph
+\emph default
+ of different movement speeds and arcs is constructed.
+ Then transitions between clips with similar key-frames are inserted.
+ Based on this information an animation that results in a trajectory very
+ close to the desired one can be derived, while strictly sticking to the
+ allowed motion constraints.
+ This can help to prevent 
+\emph on
+foot-skating
+\emph default
+ artifacts, where the agent's feet slide over the ground during movement,
+ which are prevalent in pure forward kinematics based approaches.
+ Similar works of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Treuille07near-optimalcharacter"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "LeeMotionFields"
+
+\end_inset
+
+ promise real-time performance and improved quality.
+\end_layout
+
+\end_body
+\end_document

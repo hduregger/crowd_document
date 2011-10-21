@@ -1,0 +1,2214 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass classicthesis
+\use_default_options true
+\maintain_unincluded_children false
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Visualization
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Visualization"
+
+\end_inset
+
+After the computation steps have completed everything is displayed to the
+ user.
+ The visualization given by the application provides immediate insight into
+ the result of the simulation, and thus, the behavior of the agents.
+ Simultaneously, it can be used to inspect the separate computation steps
+ for study, experimentation and debugging.
+ Additionally, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+ system, as shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:program
+\end_layout
+
+\end_inset
+
+, allows to enter properties to the simulation, and shows internal values
+ to the user.
+ Most elements feature tool tips that explain the functionality and list
+ the keyboard or mouse shortcut if available.
+\end_layout
+
+\begin_layout Standard
+A view area shows the actual scene and agent movement.
+ It can be panned by holding the right mouse button and zoomed with the
+ mouse wheel.
+ In addition, a number of different views can be displayed or partially
+ overlaid.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/map_legend.png
+	lyxscale 50
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Map,-agents,-and"
+
+\end_inset
+
+Map image, agents, and legends.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/discomfort.png
+	lyxscale 50
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-scalar-field."
+
+\end_inset
+
+
+\begin_inset Formula $DiscomfortSum_{i,j}$
+\end_inset
+
+ scalar field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/density.png
+	lyxscale 50
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-scalar-field.-1"
+
+\end_inset
+
+
+\begin_inset Formula $DensitySum_{i,j}$
+\end_inset
+
+ scalar field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/velocity.png
+	lyxscale 50
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-direction-vectorvelocity"
+
+\end_inset
+
+
+\begin_inset Formula $WeightedAverageVelocity_{i,j}$
+\end_inset
+
+ direction vector field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/speedN.png
+	lyxscale 50
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-scalar-field.speed"
+
+\end_inset
+
+
+\begin_inset Formula $Speed_{i,j_{N}}$
+\end_inset
+
+ scalar field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/costN.png
+	lyxscale 50
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-scalar-field.cost"
+
+\end_inset
+
+
+\begin_inset Formula $Cost_{i,j_{N}}$
+\end_inset
+
+ scalar field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/potential.png
+	lyxscale 50
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Potential-scalar-field."
+
+\end_inset
+
+Potential scalar field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/gradient.png
+	lyxscale 50
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-direction-vectorgradient"
+
+\end_inset
+
+
+\begin_inset Formula $Gradient_{i,j}^{0}$
+\end_inset
+
+ direction vector field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Different-views."
+
+\end_inset
+
+Different overviews of a scene.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+The 
+\emph on
+toolbar
+\emph default
+ at the top of 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:program
+\end_layout
+
+\end_inset
+
+ provides options for pausing the simulation, running and single stepping
+ it, as well as, buttons replicating the zoom functionality of the mouse
+ wheel.
+ On the left a large 
+\emph on
+control panel
+\emph default
+ contains all the options and input fields grouped into two sections, 
+\emph on
+display
+\emph default
+ and 
+\emph on
+computation
+\emph default
+.
+ At the bottom 
+\emph on
+text windows
+\emph default
+ show the application log, profiling information, and memory usage data.
+\end_layout
+
+\begin_layout Section
+Fields
+\end_layout
+
+\begin_layout Standard
+The control panel provides options to visualize the content of the buffers
+ listed in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:navigationOverview
+\end_layout
+
+\end_inset
+
+.
+ By sharing the information between 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+, the application can easily render the data as a textured quad to the view
+ area.
+ For the inspection of anisotropic fields, the user can select one of the
+ four directions.
+ If buffers contain information per agent group, the required group can
+ be select.
+ For easier understanding, a legend automatically updates whenever the selection
+ changes between a scalar or a vector field.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Map,-agents,-and
+\end_layout
+
+\end_inset
+
+ shows the legends in the upper right corner.
+ For scalars a color scale shows how the values are visualized according
+ to minimum and maximum values that can be picked from the view, as explained
+ in the tool tips, or entered in a text field.
+ Any value smaller than the minimum boundary is colored in red, any larger
+ than the maximum one, is colored in blue.
+ The boundary values are displayed in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+, as in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:program
+\end_layout
+
+\end_inset
+
+.
+ In between that, values are interpolated between, red, yellow, green, cyan,
+ and blue, providing a distinguishable range of colors.
+ Infinity is indicated by white and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NaN
+\end_layout
+
+\end_inset
+
+ by purple areas, in order to stick out of the regular colors.
+ Whenever the boundary values change, the coloring in the view area updates
+ dynamically.
+ In 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Different-views.
+\end_layout
+
+\end_inset
+
+ the scalar fields are all displayed with different minimum and maximum
+ legend boundaries.
+ Vector fields are similarly colored.
+ The choice of colors influences how easy it is to visually distinguish
+ values and spot jumps.
+ Furthermore the color scheme should allow to identify agents, even if drawn
+ on a colorful background field.
+ Hence, the appropriate selection of a color scale and group color for agents
+ is a difficult task.
+\end_layout
+
+\begin_layout Subsection
+Navigation Data
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Different-views.
+\end_layout
+
+\end_inset
+
+ shows several example views of the same abstract scene.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Map,-agents,-and
+\end_layout
+
+\end_inset
+
+ contains the map, which can be overlaid with variable opacity over the
+ other field views.
+ At this zoom level, the agents appear as a gray mass.
+ In fact they are colored by their group color, in a yellow tone (Group0),
+ cyan (Group1), purple (Group2), and gray (Group3).
+ The map shows their goal areas in the top left corner colored in the individual
+ group colors.
+ The legends have been added to the screenshot with an image manipulation
+ program.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:-scalar-field.
+\end_layout
+
+\end_inset
+
+ shows the variable discomfort defined by the exit file.
+ No additional discomfort from the discomfort brush is contained.
+ The white areas are of infinite discomfort and therefore considered as
+ walls.
+ The blue line could represent a river, and is segmented by bridges.
+ The colorful area in the lower right corresponds to the hills in the map
+ image.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:-scalar-field.-1
+\end_layout
+
+\end_inset
+
+ shows that the density at choke points is increased (blue).
+ In 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:-direction-vectorvelocity
+\end_layout
+
+\end_inset
+
+ the agents in the open area in the north are heading to the west as indicated
+ by the green color.
+ Agents that want to move north are confronted with areas of low speed near
+ congested regions, as shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:-scalar-field.speed
+\end_layout
+
+\end_inset
+
+.
+ Open cells, where no agents are situated, allow the maximum speed.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:-scalar-field.cost
+\end_layout
+
+\end_inset
+
+ depicts the cost contribution of the agents, walls, river, and the hilly
+ region.
+ As with the previous figure, the directional penalty for moving north is
+ not clearly visible at this zoom level.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Potential-scalar-field.
+\end_layout
+
+\end_inset
+
+ gives the potential for Group0 as computed for this scene.
+ The exit area lies in the triangular region on the top, just where the
+ yellow bar is shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Map,-agents,-and
+\end_layout
+
+\end_inset
+
+.
+ Finally, 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:-direction-vectorgradient
+\end_layout
+
+\end_inset
+
+ displays the corresponding gradient direction vectors.
+\end_layout
+
+\begin_layout Standard
+The previous views showed an overview of a scene and how the various fields
+ appear at a global scope.
+ This hides some of the details as mentioned for the speed and cost fields.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Different-views.-1
+\end_layout
+
+\end_inset
+
+ shows a different scene, with larger agents, and a higher zoom step.
+ Hence, various details become visible.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:-scalar-field.-2
+\end_layout
+
+\end_inset
+
+ illustrates the discomfort.
+ On the right a wall separates the agents, on the left many gray and purple
+ (Group2 and Group3) agents are streaming towards the south.
+ To the right of the wall the agents are also heading downwards.
+ Between the wall and the large flow on the left, a few yellow and cyan
+ agents (Group0 and Group1) move towards the north.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:-scalar-field.-1-1
+\end_layout
+
+\end_inset
+
+ indicates that the density inside the flows is higher than in the cells
+ where no agents are.
+ In this view the discretization size of the cells is visible.
+ In this scene it is one unit and the same as the agent radius.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:-direction-vectorvelocity-1
+\end_layout
+
+\end_inset
+
+ reveals the average velocities inside the crowd, indicated by color and
+ small arrows.
+ In this view it becomes apparent how the views show the results of the
+ current navigation computation, while the displayed agents have already
+ turned based on this information.
+ The yellow agent in the black region on the lower left, is heading to the
+ north-west.
+ The direction indicated in the field by green color and the arrows shows
+ a slightly different previous heading, leading more towards the north.
+ The visualization in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:-scalar-field.speed-1
+\end_layout
+
+\end_inset
+
+ communicates how the average direction influences the anisotropic speed
+ field.
+ The image shows the field for heading to the north.
+ The red areas mostly contain agents heading south.
+ Consequently, agents moving against them are affected by low speed.
+ The small number of yellow and cyan agents heading north next to the wall
+ in the upper area of the view, experience higher speeds, as indicated in
+ green.
+ The two leaders on the top see even higher speeds (blue), because no other
+ agents influence their movement, by contributing density and velocity.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:-scalar-field.cost-1
+\end_layout
+
+\end_inset
+
+ shows how the discomfort at the wall and the different speeds result in
+ the cost for heading north.
+ Moving against the flow of agents streaming towards the south is costly
+ (blue), the small group of agents heading north uses the area of lower
+ cost (orange).
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Potential-scalar-field.2
+\end_layout
+
+\end_inset
+
+ provides the potential of Group0 (the yellow agents).
+ They will follow the potentials that decrease slowly, with small changes
+ of potential in the color scale legend.
+ This is visible in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:-direction-vectorgradient2
+\end_layout
+
+\end_inset
+
+, where the arrows point in the opposite direction of where the agents are
+ heading.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/zoom_discomfort.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-scalar-field.-2"
+
+\end_inset
+
+
+\begin_inset Formula $DiscomfortSum_{i,j}$
+\end_inset
+
+ scalar field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/zoom_density.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-scalar-field.-1-1"
+
+\end_inset
+
+
+\begin_inset Formula $DensitySum_{i,j}$
+\end_inset
+
+ scalar field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/zoom_velocity.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-direction-vectorvelocity-1"
+
+\end_inset
+
+
+\begin_inset Formula $WeightedAverageVelocity_{i,j}$
+\end_inset
+
+ direction vector field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/zoom_speedN.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-scalar-field.speed-1"
+
+\end_inset
+
+
+\begin_inset Formula $Speed_{i,j_{N}}$
+\end_inset
+
+ scalar field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/zoom_costN.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-scalar-field.cost-1"
+
+\end_inset
+
+
+\begin_inset Formula $Cost_{i,j_{N}}$
+\end_inset
+
+ scalar field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/zoom_potential.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Potential-scalar-field.2"
+
+\end_inset
+
+Potential scalar field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/zoom_gradient.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:-direction-vectorgradient2"
+
+\end_inset
+
+
+\begin_inset Formula $Gradient_{i,j}^{0}$
+\end_inset
+
+ direction vector field.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Different-views.-1"
+
+\end_inset
+
+Zoomed-in views of a scene.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Selective Update Tile States
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:TileStates"
+
+\end_inset
+
+If the selective tile update mode is active, the option to show the 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Selective update tile states
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ overlay is available.
+ By enabling the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+ option 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Break after each solver step
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ the tile update order can be visualized, if the single step button is used.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:selectivetilestatesview
+\end_layout
+
+\end_inset
+
+ shows how the tiles relate to the cell grid, the work-groups during potential
+ computation, and the update state.
+ In 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:states_tiles
+\end_layout
+
+\end_inset
+
+ the chosen opacity of the work-group overlay still allows the map and agents
+ to be visible.
+ Each square in the checkerboard pattern corresponds to a work-group (tile)
+ during the potential computation, as illustrated in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:states_potential
+\end_layout
+
+\end_inset
+
+.
+ The granularity of the potential update algorithm only covers tile sized
+ cell areas.
+ Only whole tiles can be updated by a work-group.
+ In 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:states_states
+\end_layout
+
+\end_inset
+
+ the current tile states are visible.
+ Tiles in state Sleep are red, those in Update are green, and the tiles
+ that just converged (IsConverged) are shown in blue color.
+ The block of green tiles will expand towards the bottom right, as shown
+ in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Tile-update-sequence.
+\end_layout
+
+\end_inset
+
+.
+ The update starts in the corner where the goal areas are, and expands over
+ the domain towards the lower right, until all tiles have converged.
+ The number of outer steps between the images in the sequence varies.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/states_tiles.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:states_tiles"
+
+\end_inset
+
+ Map, agents, and tiles.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/states_potential.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:states_potential"
+
+\end_inset
+
+ Potential, agents, and tiles.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/states_states.png
+	lyxscale 50
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:states_states"
+
+\end_inset
+
+ Selective update tile states, and agents.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:selectivetilestatesview"
+
+\end_inset
+
+Selective tile update states.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/states_updating.png
+	lyxscale 20
+	scale 15
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Tile-update-sequence."
+
+\end_inset
+
+Tile update sequence.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Agents
+\end_layout
+
+\begin_layout Standard
+The agents are visualized as sprites.
+ In a separate pass they are rendered as quads based on the current zoom
+ scale.
+ This allows them to be of higher resolution than their representation used
+ during the splatting phase.
+ The textures used for the quads can be set per agent group in the configuration
+ file, which makes it possible to use different agent looks per simulated
+ scenario.
+ During the agent splatting process a separate render target stores which
+ cells are touched by which agents.
+ These 
+\emph on
+
+\begin_inset Quotes eld
+\end_inset
+
+splat areas
+\begin_inset Quotes erd
+\end_inset
+
+
+\emph default
+ can be enabled for display in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+, as can the checkerboard pattern for work-items, both depicted in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Agent-sprites,-splat
+\end_layout
+
+\end_inset
+
+.
+ In 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Agent-sprites,-splat-2
+\end_layout
+
+\end_inset
+
+ the agents have a radius of 
+\begin_inset Formula $1$
+\end_inset
+
+, the doubled agent radius during the splatting is visible, and the splat
+ areas cover a larger area than the actual agents do.
+ Each agent splat covers several cells.
+ Therefore, the conic density texture can at least be represented partially
+ by this rough discretization.
+ In 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Agent-sprites,-splat-2-1
+\end_layout
+
+\end_inset
+
+ the agent radius is only 
+\begin_inset Formula $0.4$
+\end_inset
+
+, and the splatting contributes to less cells.
+ Experimentations showed, that even lower radii result in an insufficient
+ contribution and no usable navigation data can be derived.
+ Hence, in this implementation 
+\begin_inset Formula $0.4$
+\end_inset
+
+ is enforced as the smallest allowed radius.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/splat.png
+	lyxscale 30
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Agent-sprites,-splat-2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - visualization/splat2.png
+	lyxscale 30
+	scale 22
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Agent-sprites,-splat-2-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Agent-sprites,-splat"
+
+\end_inset
+
+Agent sprites, splat areas, and work-items.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Inspired by the impressive agent visualizations of other works, it was originall
+y intended to include some form of animated agent meshes, and a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+3D
+\end_layout
+
+\end_inset
+
+ environment.
+ Because writing a renderer and animation system is a lot of work, various
+ open-source renderers were compared.
+ Of those capable enough, the Ogre library 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ogre"
+
+\end_inset
+
+ seemed to be the only one allowing to interface with the Qt 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GUI
+\end_layout
+
+\end_inset
+
+ system 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Qt"
+
+\end_inset
+
+.
+ Still, Ogre manages a scene graph on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ side.
+ An extension exists that improves performance with instantiated and animated
+ objects 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "OgreExtension"
+
+\end_inset
+
+, but at the time this was tested in the application, it could not work
+ directly with agent properties stored on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ The round-trip of transferring the agent positions, orientations, and radii
+ from the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ to the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+, updating the scene graph, and then rendering the agents on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ with Ogre, was just too costly.
+ The rendering slowed the simulation down significantly, and only a few
+ number of agents could be visualized with this approach, in an acceptable
+ time frame.
+ As a consequence, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+3D
+\end_layout
+
+\end_inset
+
+ rendering is not available in the program.
+ Nonetheless, a custom solution based on such works as 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gpugems3:animation"
+
+\end_inset
+
+ might still allow a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+3D
+\end_layout
+
+\end_inset
+
+ scene with acceptable performance.
+\end_layout
+
+\begin_layout Standard
+After the visualization the agent properties are fed back into the Splatterer.
+ This closes the simulation loop depicted in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Basic-building-blocks
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

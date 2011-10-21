@@ -1,0 +1,3237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="256"
+   height="256"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.1 r9760"
+   sodipodi:docname="officeFloor.svg"
+   inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/officeFloor.png"
+   inkscape:export-xdpi="200.03906"
+   inkscape:export-ydpi="200.03906">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="186.58759"
+     inkscape:cy="132.10419"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-object-midpoints="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-global="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1149"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2985"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="-2.5,128.51282"
+       id="guide3759" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0.5,-796.875)">
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:square;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 0,1052.3622 0,-255.00002 255,0 0,255.00002 z"
+       id="path2987"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3763"
+       width="25"
+       height="20"
+       x="102.5"
+       y="877.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3765"
+       width="2"
+       height="10"
+       x="102.5"
+       y="887.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3767"
+       width="2"
+       height="10"
+       x="104.5"
+       y="887.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3769"
+       width="2"
+       height="10"
+       x="106.5"
+       y="887.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3771"
+       width="2"
+       height="10"
+       x="108.5"
+       y="887.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="887.86218"
+       x="110.5"
+       height="10"
+       width="2"
+       id="rect3775"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="887.86218"
+       x="112.5"
+       height="10"
+       width="2"
+       id="rect3777"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="887.86218"
+       x="114.5"
+       height="10"
+       width="2"
+       id="rect3779"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="887.86218"
+       x="116.5"
+       height="10"
+       width="2"
+       id="rect3781"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3783"
+       width="2"
+       height="10"
+       x="118.5"
+       y="887.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="877.86218"
+       x="102.5"
+       height="10"
+       width="2"
+       id="rect3791"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="877.86218"
+       x="108.5"
+       height="10"
+       width="2"
+       id="rect3797"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3799"
+       width="2"
+       height="10"
+       x="110.5"
+       y="877.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3801"
+       width="2"
+       height="10"
+       x="112.5"
+       y="877.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3803"
+       width="2"
+       height="10"
+       x="114.5"
+       y="877.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3805"
+       width="2"
+       height="10"
+       x="116.5"
+       y="877.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="877.86218"
+       x="118.5"
+       height="10"
+       width="2"
+       id="rect3807"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="870.36218"
+       x="102"
+       height="7"
+       width="26"
+       id="rect3823"
+       style="fill:#000000;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       style="fill:#000000;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3825"
+       width="2"
+       height="9"
+       x="102"
+       y="878.36218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,917.36218 0,0 -20,0 0,-15 20,0 0,0"
+       id="path3850"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3852"
+       d="m 40,910.36218 0,7 20,0 0,-15 -20,0 0,-6.99999"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20,917.36218 0,7 -20,0 0,-22 20,0 0,5"
+       id="path3854"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3856"
+       d="m 80,895.36218 0,7 -20,0 0,-20 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,895.36218 0,7 20,0 0,-20 -20,0 0,3"
+       id="path3858"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3860"
+       d="m 20,895.36218 0,7 -20,0 0,-20 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,869.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       id="path3862"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path3864"
+       d="m 40,869.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20,869.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       id="path3866"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,855.36218 0,7 -20,0 0,-20 20,0 0,3"
+       id="path3868"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path3870"
+       d="m 40,855.36218 0,7 20,0 0,-20 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20,855.36218 0,7 -20,0 0,-20 20,0 0,3"
+       id="path3872"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3874"
+       d="m 80,829.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,829.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       id="path3876"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3878"
+       d="m 20,829.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20,804.36218 0,-7 -20,0 0,25 20,0 0,-8"
+       id="path3880"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,797.36218 0,0 -20,0 0,13 20,0 0,-3"
+       id="path3882"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path3884"
+       d="m 40,797.36218 0,0 20,0 0,13 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3886"
+       d="m 100,845.36218 0,7 28,0 0,-20 -28,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100,819.36218 0,-7 28,0 0,20 -28,0 0,-3"
+       id="path3888"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="877.86218"
+       x="102.5"
+       height="20"
+       width="25"
+       id="rect3890"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="887.86218"
+       x="102.5"
+       height="10"
+       width="2"
+       id="rect3892"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="887.86218"
+       x="104.5"
+       height="10"
+       width="2"
+       id="rect3894"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="887.86218"
+       x="106.5"
+       height="10"
+       width="2"
+       id="rect3896"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="887.86218"
+       x="108.5"
+       height="10"
+       width="2"
+       id="rect3898"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3900"
+       width="2"
+       height="10"
+       x="110.5"
+       y="887.86218" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3902"
+       width="2"
+       height="10"
+       x="112.5"
+       y="887.86218" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3904"
+       width="2"
+       height="10"
+       x="114.5"
+       y="887.86218" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3906"
+       width="2"
+       height="10"
+       x="116.5"
+       y="887.86218" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="887.86218"
+       x="118.5"
+       height="10"
+       width="2"
+       id="rect3908"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3910"
+       width="2"
+       height="10"
+       x="102.5"
+       y="877.86218" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3912"
+       width="2"
+       height="10"
+       x="108.5"
+       y="877.86218" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="877.86218"
+       x="110.5"
+       height="10"
+       width="2"
+       id="rect3914"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="877.86218"
+       x="112.5"
+       height="10"
+       width="2"
+       id="rect3916"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="877.86218"
+       x="114.5"
+       height="10"
+       width="2"
+       id="rect3918"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="877.86218"
+       x="116.5"
+       height="10"
+       width="2"
+       id="rect3920"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3922"
+       width="2"
+       height="10"
+       x="118.5"
+       y="877.86218" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3928"
+       width="26"
+       height="7"
+       x="102"
+       y="870.36218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png" />
+    <rect
+       y="878.36218"
+       x="102"
+       height="9"
+       width="2"
+       id="rect3930"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3932"
+       d="m 80,910.36218 0,7 -20,0 0,-15 20,0 0,0"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,917.36218 0,0 20,0 0,-15 -20,0 0,0"
+       id="path3934"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3936"
+       d="m 20,917.36218 0,7 -20,0 0,-22 20,0 0,5"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,895.36218 0,7 -20,0 0,-20 20,0 0,3"
+       id="path3938"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path3940"
+       d="m 40,895.36218 0,7 20,0 0,-20 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20,895.36218 0,7 -20,0 0,-20 20,0 0,3"
+       id="path3942"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3944"
+       d="m 80,869.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,869.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       id="path3946"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3948"
+       d="m 20,869.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3950"
+       d="m 80,855.36218 0,7 -20,0 0,-20 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,855.36218 0,7 20,0 0,-20 -20,0 0,3"
+       id="path3952"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3954"
+       d="m 20,855.36218 0,7 -20,0 0,-20 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,829.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       id="path3956"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path3958"
+       d="m 40,829.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20,829.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       id="path3960"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3962"
+       d="m 20,804.36218 0,-7 -20,0 0,25 20,0 0,-8"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3964"
+       d="m 80,797.36218 0,0 -20,0 0,13 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,797.36218 0,0 20,0 0,13 -20,0 0,-3"
+       id="path3966"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100,845.36218 0,7 28,0 0,-20 -28,0 0,3"
+       id="path3968"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3970"
+       d="m 100,819.36218 0,-7 28,0 0,20 -28,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 102.5,916.875 0,7 25,0 0,-25 -25,0 0,3"
+       id="path4992"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path4994"
+       d="m 102.5,908.875 0,15 25,0 0,-25 -25,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="877.86218"
+       x="-153.5"
+       height="20"
+       width="25"
+       id="rect5004"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="887.86218"
+       x="-153.5"
+       height="10"
+       width="2"
+       id="rect5006"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="887.86218"
+       x="-151.5"
+       height="10"
+       width="2"
+       id="rect5008"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="887.86218"
+       x="-149.5"
+       height="10"
+       width="2"
+       id="rect5010"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="887.86218"
+       x="-147.5"
+       height="10"
+       width="2"
+       id="rect5012"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5014"
+       width="2"
+       height="10"
+       x="-145.5"
+       y="887.86218"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5016"
+       width="2"
+       height="10"
+       x="-143.5"
+       y="887.86218"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5018"
+       width="2"
+       height="10"
+       x="-141.5"
+       y="887.86218"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5020"
+       width="2"
+       height="10"
+       x="-139.5"
+       y="887.86218"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="887.86218"
+       x="-137.5"
+       height="10"
+       width="2"
+       id="rect5022"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5024"
+       width="2"
+       height="10"
+       x="-153.5"
+       y="877.86218"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5026"
+       width="2"
+       height="10"
+       x="-147.5"
+       y="877.86218"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="877.86218"
+       x="-145.5"
+       height="10"
+       width="2"
+       id="rect5028"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="877.86218"
+       x="-143.5"
+       height="10"
+       width="2"
+       id="rect5030"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="877.86218"
+       x="-141.5"
+       height="10"
+       width="2"
+       id="rect5032"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="877.86218"
+       x="-139.5"
+       height="10"
+       width="2"
+       id="rect5034"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5036"
+       width="2"
+       height="10"
+       x="-137.5"
+       y="877.86218"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       style="fill:#000000;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5038"
+       width="26"
+       height="7"
+       x="-154"
+       y="870.36218"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="878.36218"
+       x="-154"
+       height="9"
+       width="2"
+       id="rect5040"
+       style="fill:#000000;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5042"
+       d="m 176,917.36218 0,0 20,0 0,-15 -20,0 0,0"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216,910.36218 0,7 -20,0 0,-15 20,0 0,-6.99999"
+       id="path5044"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5046"
+       d="m 236,917.36218 0,7 20,0 0,-22 -20,0 0,5"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176,895.36218 0,7 20,0 0,-20 -20,0 0,3"
+       id="path5048"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5050"
+       d="m 216,895.36218 0,7 -20,0 0,-20 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 236,895.36218 0,7 20,0 0,-20 -20,0 0,3"
+       id="path5052"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5054"
+       d="m 176,869.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216,869.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       id="path5056"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5058"
+       d="m 236,869.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5060"
+       d="m 176,855.36218 0,7 20,0 0,-20 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216,855.36218 0,7 -20,0 0,-20 20,0 0,3"
+       id="path5062"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5064"
+       d="m 236,855.36218 0,7 20,0 0,-20 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176,829.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       id="path5066"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5068"
+       d="m 216,829.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 236,829.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       id="path5070"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5072"
+       d="m 236,804.36218 0,-7 20,0 0,25 -20,0 0,-8"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5074"
+       d="m 176,797.36218 0,0 20,0 0,13 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216,797.36218 0,0 -20,0 0,13 20,0 0,-3"
+       id="path5076"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 156,845.36218 0,7 -28,0 0,-20 28,0 0,3"
+       id="path5078"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5080"
+       d="m 156,819.36218 0,-7 -28,0 0,20 28,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5082"
+       width="25"
+       height="20"
+       x="-153.5"
+       y="877.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5084"
+       width="2"
+       height="10"
+       x="-153.5"
+       y="887.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5086"
+       width="2"
+       height="10"
+       x="-151.5"
+       y="887.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5088"
+       width="2"
+       height="10"
+       x="-149.5"
+       y="887.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5090"
+       width="2"
+       height="10"
+       x="-147.5"
+       y="887.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       y="887.86218"
+       x="-145.5"
+       height="10"
+       width="2"
+       id="rect5092"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       y="887.86218"
+       x="-143.5"
+       height="10"
+       width="2"
+       id="rect5094"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       y="887.86218"
+       x="-141.5"
+       height="10"
+       width="2"
+       id="rect5096"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       y="887.86218"
+       x="-139.5"
+       height="10"
+       width="2"
+       id="rect5098"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5100"
+       width="2"
+       height="10"
+       x="-137.5"
+       y="887.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       y="877.86218"
+       x="-153.5"
+       height="10"
+       width="2"
+       id="rect5102"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       y="877.86218"
+       x="-147.5"
+       height="10"
+       width="2"
+       id="rect5104"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5106"
+       width="2"
+       height="10"
+       x="-145.5"
+       y="877.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5108"
+       width="2"
+       height="10"
+       x="-143.5"
+       y="877.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5110"
+       width="2"
+       height="10"
+       x="-141.5"
+       y="877.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5112"
+       width="2"
+       height="10"
+       x="-139.5"
+       y="877.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       y="877.86218"
+       x="-137.5"
+       height="10"
+       width="2"
+       id="rect5114"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="870.36218"
+       x="-154"
+       height="7"
+       width="26"
+       id="rect5116"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(-1,1)" />
+    <rect
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5118"
+       width="2"
+       height="9"
+       x="-154"
+       y="878.36218"
+       transform="scale(-1,1)" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176,910.36218 0,7 20,0 0,-15 -20,0 0,0"
+       id="path5120"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5122"
+       d="m 216,917.36218 0,0 -20,0 0,-15 20,0 0,0"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 236,917.36218 0,7 20,0 0,-22 -20,0 0,5"
+       id="path5124"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5126"
+       d="m 176,895.36218 0,7 20,0 0,-20 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216,895.36218 0,7 -20,0 0,-20 20,0 0,3"
+       id="path5128"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5130"
+       d="m 236,895.36218 0,7 20,0 0,-20 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176,869.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       id="path5132"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5134"
+       d="m 216,869.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 236,869.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       id="path5136"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176,855.36218 0,7 20,0 0,-20 -20,0 0,3"
+       id="path5138"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5140"
+       d="m 216,855.36218 0,7 -20,0 0,-20 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 236,855.36218 0,7 20,0 0,-20 -20,0 0,3"
+       id="path5142"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5144"
+       d="m 176,829.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216,829.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       id="path5146"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5148"
+       d="m 236,829.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 236,804.36218 0,-7 20,0 0,25 -20,0 0,-8"
+       id="path5150"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176,797.36218 0,0 20,0 0,13 -20,0 0,-3"
+       id="path5152"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5154"
+       d="m 216,797.36218 0,0 -20,0 0,13 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5156"
+       d="m 156,845.36218 0,7 -28,0 0,-20 28,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 156,819.36218 0,-7 -28,0 0,20 28,0 0,-3"
+       id="path5158"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5160"
+       d="m 153.5,916.875 0,7 -25,0 0,-25 25,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 153.5,908.875 0,15 -25,0 0,-25 25,0 0,3"
+       id="path5162"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-971.86218"
+       x="102.5"
+       height="20"
+       width="25"
+       id="rect5164"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-961.86218"
+       x="102.5"
+       height="10"
+       width="2"
+       id="rect5166"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-961.86218"
+       x="104.5"
+       height="10"
+       width="2"
+       id="rect5168"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-961.86218"
+       x="106.5"
+       height="10"
+       width="2"
+       id="rect5170"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-961.86218"
+       x="108.5"
+       height="10"
+       width="2"
+       id="rect5172"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5174"
+       width="2"
+       height="10"
+       x="110.5"
+       y="-961.86218"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5176"
+       width="2"
+       height="10"
+       x="112.5"
+       y="-961.86218"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5178"
+       width="2"
+       height="10"
+       x="114.5"
+       y="-961.86218"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5180"
+       width="2"
+       height="10"
+       x="116.5"
+       y="-961.86218"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-961.86218"
+       x="118.5"
+       height="10"
+       width="2"
+       id="rect5182"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5184"
+       width="2"
+       height="10"
+       x="102.5"
+       y="-971.86218"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5186"
+       width="2"
+       height="10"
+       x="108.5"
+       y="-971.86218"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-971.86218"
+       x="110.5"
+       height="10"
+       width="2"
+       id="rect5188"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-971.86218"
+       x="112.5"
+       height="10"
+       width="2"
+       id="rect5190"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-971.86218"
+       x="114.5"
+       height="10"
+       width="2"
+       id="rect5192"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-971.86218"
+       x="116.5"
+       height="10"
+       width="2"
+       id="rect5194"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5196"
+       width="2"
+       height="10"
+       x="118.5"
+       y="-971.86218"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       style="fill:#000000;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5198"
+       width="26"
+       height="7"
+       x="102"
+       y="-979.36218"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-971.36218"
+       x="102"
+       height="9"
+       width="2"
+       id="rect5200"
+       style="fill:#000000;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5202"
+       d="m 80,932.36218 0,0 -20,0 0,15 20,0 0,0"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,939.36218 0,-7 20,0 0,15 -20,0 0,7"
+       id="path5204"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5206"
+       d="m 20,932.36218 0,-7 -20,0 0,22 20,0 0,-5"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,954.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       id="path5208"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5210"
+       d="m 40,954.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20,954.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       id="path5212"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5214"
+       d="m 80,980.36218 0,7.00002 -20,0 0,-20.00002 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,980.36218 0,7.00002 20,0 0,-20.00002 -20,0 0,3"
+       id="path5216"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5218"
+       d="m 20,980.36218 0,7.00002 -20,0 0,-20.00002 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5220"
+       d="m 80,994.3622 0,-7 -20,0 0,20 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,994.3622 0,-7 20,0 0,20 -20,0 0,-3"
+       id="path5222"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5224"
+       d="m 20,994.3622 0,-7 -20,0 0,20 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,1020.3622 0,7 -20,0 0,-20 20,0 0,3"
+       id="path5226"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5228"
+       d="m 40,1020.3622 0,7 20,0 0,-20 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20,1020.3622 0,7 -20,0 0,-20 20,0 0,3"
+       id="path5230"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5232"
+       d="m 20,1045.3622 0,7 -20,0 0,-25 20,0 0,8"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5234"
+       d="m 80,1052.3622 0,0 -20,0 0,-13 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,1052.3622 0,0 20,0 0,-13 -20,0 0,3"
+       id="path5236"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100,1004.3622 0,-7 28,0 0,20 -28,0 0,-3"
+       id="path5238"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5240"
+       d="m 100,1030.3622 0,7 28,0 0,-20 -28,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5242"
+       width="25"
+       height="20"
+       x="102.5"
+       y="-971.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5244"
+       width="2"
+       height="10"
+       x="102.5"
+       y="-961.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5246"
+       width="2"
+       height="10"
+       x="104.5"
+       y="-961.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5248"
+       width="2"
+       height="10"
+       x="106.5"
+       y="-961.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5250"
+       width="2"
+       height="10"
+       x="108.5"
+       y="-961.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-961.86218"
+       x="110.5"
+       height="10"
+       width="2"
+       id="rect5252"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-961.86218"
+       x="112.5"
+       height="10"
+       width="2"
+       id="rect5254"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-961.86218"
+       x="114.5"
+       height="10"
+       width="2"
+       id="rect5256"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-961.86218"
+       x="116.5"
+       height="10"
+       width="2"
+       id="rect5258"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5260"
+       width="2"
+       height="10"
+       x="118.5"
+       y="-961.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-971.86218"
+       x="102.5"
+       height="10"
+       width="2"
+       id="rect5262"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-971.86218"
+       x="108.5"
+       height="10"
+       width="2"
+       id="rect5264"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5266"
+       width="2"
+       height="10"
+       x="110.5"
+       y="-971.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5268"
+       width="2"
+       height="10"
+       x="112.5"
+       y="-971.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5270"
+       width="2"
+       height="10"
+       x="114.5"
+       y="-971.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5272"
+       width="2"
+       height="10"
+       x="116.5"
+       y="-971.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       y="-971.86218"
+       x="118.5"
+       height="10"
+       width="2"
+       id="rect5274"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-979.36218"
+       x="102"
+       height="7"
+       width="26"
+       id="rect5276"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="scale(1,-1)" />
+    <rect
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5278"
+       width="2"
+       height="9"
+       x="102"
+       y="-971.36218"
+       transform="scale(1,-1)" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,939.36218 0,-7 -20,0 0,15 20,0 0,0"
+       id="path5280"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5282"
+       d="m 40,932.36218 0,0 20,0 0,15 -20,0 0,0"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20,932.36218 0,-7 -20,0 0,22 20,0 0,-5"
+       id="path5284"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5286"
+       d="m 80,954.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,954.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       id="path5288"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5290"
+       d="m 20,954.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,980.36218 0,7.00002 -20,0 0,-20.00002 20,0 0,3"
+       id="path5292"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5294"
+       d="m 40,980.36218 0,7.00002 20,0 0,-20.00002 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20,980.36218 0,7.00002 -20,0 0,-20.00002 20,0 0,3"
+       id="path5296"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,994.3622 0,-7 -20,0 0,20 20,0 0,-3"
+       id="path5298"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5300"
+       d="m 40,994.3622 0,-7 20,0 0,20 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20,994.3622 0,-7 -20,0 0,20 20,0 0,-3"
+       id="path5302"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5304"
+       d="m 80,1020.3622 0,7 -20,0 0,-20 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 40,1020.3622 0,7 20,0 0,-20 -20,0 0,3"
+       id="path5306"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5308"
+       d="m 20,1020.3622 0,7 -20,0 0,-20 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 20,1045.3622 0,7 -20,0 0,-25 20,0 0,8"
+       id="path5310"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,1052.3622 0,0 -20,0 0,-13 20,0 0,3"
+       id="path5312"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5314"
+       d="m 40,1052.3622 0,0 20,0 0,-13 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5316"
+       d="m 100,1004.3622 0,-7 28,0 0,20 -28,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 100,1030.3622 0,7 28,0 0,-20 -28,0 0,3"
+       id="path5318"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5320"
+       d="m 102.5,932.84938 0,-7 25,0 0,25 -25,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 102.5,940.84938 0,-15 25,0 0,25 -25,0 0,-3"
+       id="path5322"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5324"
+       width="25"
+       height="20"
+       x="-153.5"
+       y="-971.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5326"
+       width="2"
+       height="10"
+       x="-153.5"
+       y="-961.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5328"
+       width="2"
+       height="10"
+       x="-151.5"
+       y="-961.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5330"
+       width="2"
+       height="10"
+       x="-149.5"
+       y="-961.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5332"
+       width="2"
+       height="10"
+       x="-147.5"
+       y="-961.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       y="-961.86218"
+       x="-145.5"
+       height="10"
+       width="2"
+       id="rect5334"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       y="-961.86218"
+       x="-143.5"
+       height="10"
+       width="2"
+       id="rect5336"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       y="-961.86218"
+       x="-141.5"
+       height="10"
+       width="2"
+       id="rect5338"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       y="-961.86218"
+       x="-139.5"
+       height="10"
+       width="2"
+       id="rect5340"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5342"
+       width="2"
+       height="10"
+       x="-137.5"
+       y="-961.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       y="-971.86218"
+       x="-153.5"
+       height="10"
+       width="2"
+       id="rect5344"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       y="-971.86218"
+       x="-147.5"
+       height="10"
+       width="2"
+       id="rect5346"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5348"
+       width="2"
+       height="10"
+       x="-145.5"
+       y="-971.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5350"
+       width="2"
+       height="10"
+       x="-143.5"
+       y="-971.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5352"
+       width="2"
+       height="10"
+       x="-141.5"
+       y="-971.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5354"
+       width="2"
+       height="10"
+       x="-139.5"
+       y="-971.86218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       y="-971.86218"
+       x="-137.5"
+       height="10"
+       width="2"
+       id="rect5356"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       y="-979.36218"
+       x="-154"
+       height="7"
+       width="26"
+       id="rect5358"
+       style="fill:#000000;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       style="fill:#000000;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5360"
+       width="2"
+       height="9"
+       x="-154"
+       y="-971.36218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176,932.36218 0,0 20,0 0,15 -20,0 0,0"
+       id="path5362"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5364"
+       d="m 216,939.36218 0,-7 -20,0 0,15 20,0 0,7"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 236,932.36218 0,-7 20,0 0,22 -20,0 0,-5"
+       id="path5366"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5368"
+       d="m 176,954.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216,954.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       id="path5370"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5372"
+       d="m 236,954.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176,980.36218 0,7.00002 20,0 0,-20.00002 -20,0 0,3"
+       id="path5374"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5376"
+       d="m 216,980.36218 0,7.00002 -20,0 0,-20.00002 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 236,980.36218 0,7.00002 20,0 0,-20.00002 -20,0 0,3"
+       id="path5378"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176,994.3622 0,-7 20,0 0,20 -20,0 0,-3"
+       id="path5380"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5382"
+       d="m 216,994.3622 0,-7 -20,0 0,20 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 236,994.3622 0,-7 20,0 0,20 -20,0 0,-3"
+       id="path5384"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5386"
+       d="m 176,1020.3622 0,7 20,0 0,-20 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216,1020.3622 0,7 -20,0 0,-20 20,0 0,3"
+       id="path5388"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5390"
+       d="m 236,1020.3622 0,7 20,0 0,-20 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 236,1045.3622 0,7 20,0 0,-25 -20,0 0,8"
+       id="path5392"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176,1052.3622 0,0 20,0 0,-13 -20,0 0,3"
+       id="path5394"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5396"
+       d="m 216,1052.3622 0,0 -20,0 0,-13 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5398"
+       d="m 156,1004.3622 0,-7 -28,0 0,20 28,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 156,1030.3622 0,7 -28,0 0,-20 28,0 0,3"
+       id="path5400"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-971.86218"
+       x="-153.5"
+       height="20"
+       width="25"
+       id="rect5402"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-961.86218"
+       x="-153.5"
+       height="10"
+       width="2"
+       id="rect5404"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-961.86218"
+       x="-151.5"
+       height="10"
+       width="2"
+       id="rect5406"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-961.86218"
+       x="-149.5"
+       height="10"
+       width="2"
+       id="rect5408"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-961.86218"
+       x="-147.5"
+       height="10"
+       width="2"
+       id="rect5410"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5412"
+       width="2"
+       height="10"
+       x="-145.5"
+       y="-961.86218" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5414"
+       width="2"
+       height="10"
+       x="-143.5"
+       y="-961.86218" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5416"
+       width="2"
+       height="10"
+       x="-141.5"
+       y="-961.86218" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5418"
+       width="2"
+       height="10"
+       x="-139.5"
+       y="-961.86218" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-961.86218"
+       x="-137.5"
+       height="10"
+       width="2"
+       id="rect5420"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5422"
+       width="2"
+       height="10"
+       x="-153.5"
+       y="-971.86218" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5424"
+       width="2"
+       height="10"
+       x="-147.5"
+       y="-971.86218" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-971.86218"
+       x="-145.5"
+       height="10"
+       width="2"
+       id="rect5426"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-971.86218"
+       x="-143.5"
+       height="10"
+       width="2"
+       id="rect5428"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-971.86218"
+       x="-141.5"
+       height="10"
+       width="2"
+       id="rect5430"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       y="-971.86218"
+       x="-139.5"
+       height="10"
+       width="2"
+       id="rect5432"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5434"
+       width="2"
+       height="10"
+       x="-137.5"
+       y="-971.86218" />
+    <rect
+       transform="scale(-1,-1)"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5436"
+       width="26"
+       height="7"
+       x="-154"
+       y="-979.36218"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png" />
+    <rect
+       transform="scale(-1,-1)"
+       y="-971.36218"
+       x="-154"
+       height="9"
+       width="2"
+       id="rect5438"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5440"
+       d="m 176,939.36218 0,-7 20,0 0,15 -20,0 0,0"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216,932.36218 0,0 -20,0 0,15 20,0 0,0"
+       id="path5442"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5444"
+       d="m 236,932.36218 0,-7 20,0 0,22 -20,0 0,-5"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176,954.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       id="path5446"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5448"
+       d="m 216,954.36218 0,-7 -20,0 0,20 20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 236,954.36218 0,-7 20,0 0,20 -20,0 0,-3"
+       id="path5450"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5452"
+       d="m 176,980.36218 0,7.00002 20,0 0,-20.00002 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216,980.36218 0,7.00002 -20,0 0,-20.00002 20,0 0,3"
+       id="path5454"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5456"
+       d="m 236,980.36218 0,7.00002 20,0 0,-20.00002 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5458"
+       d="m 176,994.3622 0,-7 20,0 0,20 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216,994.3622 0,-7 -20,0 0,20 20,0 0,-3"
+       id="path5460"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5462"
+       d="m 236,994.3622 0,-7 20,0 0,20 -20,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176,1020.3622 0,7 20,0 0,-20 -20,0 0,3"
+       id="path5464"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path5466"
+       d="m 216,1020.3622 0,7 -20,0 0,-20 20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 236,1020.3622 0,7 20,0 0,-20 -20,0 0,3"
+       id="path5468"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5470"
+       d="m 236,1045.3622 0,7 20,0 0,-25 -20,0 0,8"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5472"
+       d="m 176,1052.3622 0,0 20,0 0,-13 -20,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 216,1052.3622 0,0 -20,0 0,-13 20,0 0,3"
+       id="path5474"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 156,1004.3622 0,-7 -28,0 0,20 28,0 0,-3"
+       id="path5476"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5478"
+       d="m 156,1030.3622 0,7 -28,0 0,-20 28,0 0,3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       sodipodi:nodetypes="cccccc"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 153.5,932.84938 0,-7 -25,0 0,25 25,0 0,-3"
+       id="path5480"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:connector-curvature="0"
+       id="path5482"
+       d="m 153.5,940.84938 0,-15 -25,0 0,25 25,0 0,-3"
+       style="fill:none;stroke:#ff7f2a;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="cccccc" />
+    <rect
+       inkscape:export-filename="/home/hell/Documents/projects/crowd/document/graphics/chapter - visualization/path4626.png"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       style="fill:#ff7f2a;stroke:#ff7f2a;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5484"
+       width="51"
+       height="2"
+       x="102.5"
+       y="923.875" />
+  </g>
+</svg>

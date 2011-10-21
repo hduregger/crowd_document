@@ -1,0 +1,5102 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass classicthesis
+\use_default_options true
+\maintain_unincluded_children false
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+General Purpose Computation on the GPU
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:GPGPU"
+
+\end_inset
+
+Originally, 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ were introduced to accelerate the rendering of 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+3D
+\end_layout
+
+\end_inset
+
+ scenes with dedicated hardware for vertex transformation, lighting, and
+ texturing.
+ The 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+API
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ and Direct3D emerged and defined the way of programming this new hardware.
+ Their fixed-function pipelines largely determined how the data was processed
+ and only allowed tweaking a handful of steps through configuration variables
+ and commands.
+\end_layout
+
+\begin_layout Standard
+Over the years the hardware features and flexibility increased and assembly
+ languages provided advanced programmability to certain steps in the graphics
+ pipeline.
+ Soon, high-level programming languages like 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+Cg
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+HLSL
+\end_layout
+
+\end_inset
+
+, and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GLSL
+\end_layout
+
+\end_inset
+
+ simplified the process and added functionality.
+\end_layout
+
+\begin_layout Standard
+Eventually, developers started to use the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ not only for graphics, but also for physics and other mathematical problems.
+ This 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPGPU
+\end_layout
+
+\end_inset
+
+ in turn caused processor manufacturers to add more functionality to the
+ hardware to serve the new requirements.
+ Eventually dedicated 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPGPU
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+API
+\end_layout
+
+\end_inset
+
+ like NVIDIA's 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CUDA
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+'s 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CAL
+\end_layout
+
+\end_inset
+
+, and Microsoft's DirectCompute surfaced.
+\end_layout
+
+\begin_layout Section
+OpenCL
+\end_layout
+
+\begin_layout Standard
+The various efforts accumulated into the 
+\begin_inset Flex CT - acronym full
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "OpenCL"
+
+\end_inset
+
+ as an attempt at simplifying the software development process by unifying
+ the parallel programming 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+API
+\end_layout
+
+\end_inset
+
+ for heterogeneous architectures.
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ is supported on multiple devices, for instance 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+APU
+\end_layout
+
+\end_inset
+
+, and also 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+Cell
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Platform Model
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ provides a standardized view on the components of a hardware system.
+ It is based on a 
+\emph on
+platform
+\emph default
+ model consisting of a 
+\emph on
+host
+\emph default
+ with access to several 
+\emph on
+devices
+\emph default
+, as illustrated in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:The-OpenCL-platform_a
+\end_layout
+
+\end_inset
+
+.
+ The devices are divided into 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+, which again are segmented into the actual 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+PE
+\end_layout
+
+\end_inset
+
+ performing the work.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/opencl_processing.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-OpenCL-platform_a"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/opencl_processing_GPU.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-OpenCL-platform_b"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+The 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ platform model.
+\end_layout
+
+\end_inset
+
+The 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ platform model.
+ (a) 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ processing components.
+ (b) Their analogy in the Radeon HD 6950.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Task-parallel and data-parallel programming paradigms are supported through
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+SPMD
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+SIMD
+\end_layout
+
+\end_inset
+
+ 
+\emph on
+commands
+\emph default
+ respectively.
+ The commands execute in a 
+\emph on
+context
+\emph default
+ that defines memory access and synchronization over several devices.
+ These commands are injected into a 
+\emph on
+command-queue
+\emph default
+ by the host application where they can be retrieved and executed by the
+ device.
+ The command-queue is defined with a
+\emph on
+ 
+\emph default
+context
+\emph on
+ 
+\emph default
+but limited to a single device.
+ Special commands execute 
+\emph on
+kernels
+\emph default
+ which are designated functions of compiled 
+\emph on
+programs.
+
+\emph default
+ These programs are written in a language based on the C programming language.
+\end_layout
+
+\begin_layout Subsection
+Virtual Index Space
+\end_layout
+
+\begin_layout Standard
+When requesting kernel executions, the application programmer can specify
+ the number of spawned kernel instances by defining an index space with
+ one, two, or three dimensions.
+ This 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ is a tuple and can cover different ranges in each direction.
+ If the range for a direction is not specified, the range is implicitly
+ defined as one.
+ For instance, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $\left(4,8\right)$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang american
+ is identical to 
+\begin_inset Formula $\left(4,8,1\right)$
+\end_inset
+
+, and defines a range of four entries along the x-axis, eight along the
+ y-axis and one in the z-direction of the index space.
+ All invoked kernel instances (
+\emph on
+work-items
+\emph default
+) hold a unique 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ID
+\end_layout
+
+\end_inset
+
+ that maps to an entry inside the index space.
+ This 
+\emph on
+global
+\emph default
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ID
+\end_layout
+
+\end_inset
+
+ is a triple 
+\begin_inset Formula $\left(x,y,z\right)$
+\end_inset
+
+ with an entry for each direction.
+ The entries are based on an offset that can be passed with the command.
+ In applications that use matrix multiplications, this indexing scheme can
+ be useful for defining which work-item processes what matrix entry.
+ Such assignments are important for the optimization of memory access patterns.
+ But the developer is also free to ignore the identifiers.
+\end_layout
+
+\begin_layout Standard
+Multiple work-items are combined into 
+\emph on
+work-groups
+\emph default
+.
+ This is based on the work-group size passed to the command.
+ The work-group size is again a tuple and unspecified components are implicitly
+ defined as one.
+ The 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ value of each direction must be an integer multiple of the work-group size
+ specified for that direction.
+ With this information the number of work-groups in each direction can be
+ determined.
+ The 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ID
+\end_layout
+
+\end_inset
+
+ of a work-item's group and its index inside the group (
+\emph on
+local 
+\emph default
+
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ID
+\end_layout
+
+\end_inset
+
+) can also be retrieved in a kernel.
+ This allows for sophisticated work assignments and communication between
+ work-items.
+ In general, the programmer may not make assumptions about the execution
+ order of work-items, but the elements of a work-group are defined to execute
+ concurrently in a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+.
+ The relation between the index space and the identifiers is depicted in
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:indexSpace
+\end_layout
+
+\end_inset
+
+.
+ The 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+2D
+\end_layout
+
+\end_inset
+
+ example shows 
+\begin_inset Formula $16$
+\end_inset
+
+ work-items inside an 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ of 
+\begin_inset Formula $\left(4,4\right)$
+\end_inset
+
+ and a work-group size of 
+\begin_inset Formula $\left(2,2\right)$
+\end_inset
+
+, resulting in four work-groups.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/index.pdf
+	scale 110
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:indexSpace"
+
+\end_inset
+
+
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ example in two dimensions.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+NDRange
+\end_layout
+
+\end_inset
+
+ example in two dimensions, with its relation to work-group size, global
+ and local identifiers.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Memory
+\end_layout
+
+\begin_layout Standard
+The storage on a device is primarily divided into 
+\emph on
+global
+\emph default
+ and 
+\emph on
+local
+\emph default
+ 
+\emph on
+memory
+\emph default
+, but also features 
+\emph on
+constant
+\emph default
+ and 
+\emph on
+private
+\emph default
+ regions.
+ Global can refer to larger storage areas, for instance, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+RAM
+\end_layout
+
+\end_inset
+
+ located on a graphics card's circuit board, sometimes called 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VRAM
+\end_layout
+
+\end_inset
+
+, and local would be the smaller, but faster scratch pad memory installed
+ inside high-end 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ This assignment is transparent to the application programmer and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ also allows global and local memory to be regions inside the same hardware
+ components.
+ For instance, with a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ device the global and local memory both reside in 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+RAM
+\end_layout
+
+\end_inset
+
+, and in the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ implementation for the Radeon HD 4000 series of 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ the local memory is emulated in 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VRAM
+\end_layout
+
+\end_inset
+
+ and does not provide any speed advantages 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "OpenCLPerformanceIssues"
+
+\end_inset
+
+.
+ This makes porting applications between platforms not necessarily a trivial
+ task and it remains beneficial to study hardware specifications and implementat
+ion details for the purpose of finding opportunities for device specific
+ optimizations.
+ Constant memory can not be changed during kernel execution, and private
+ memory is only visible to single work-items.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:OpenCLMemoryRegions
+\end_layout
+
+\end_inset
+
+ shows an overview of the memory layout.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/memory.pdf
+	scale 110
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:OpenCLMemoryRegions"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/memory_radeon.pdf
+	scale 110
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:memoryRegionsRadeon"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+The 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ memory structure.
+\end_layout
+
+\end_inset
+
+The 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ memory structure.
+ (a) 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ memory regions.
+ (b) Their analogy in the Radeon HD 6950.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Developers can access global memory through 
+\emph on
+buffer
+\emph default
+ and 
+\emph on
+image objects
+\emph default
+.
+ The former is a linear array and kernels can access the sequentially stored
+ elements through pointers.
+ The latter allows special, filtered access through 
+\emph on
+sampler
+\emph default
+ 
+\emph on
+objects
+\emph default
+, and storage details are transparent to the programmer.
+ An example for a tiled memory layout for image data is given in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDProgrammingGuide"
+
+\end_inset
+
+.
+ The implementation may further store the image data in a format different
+ from how the data is presented in the kernel.
+ For instance, an integer might internally be stored as a floating-point
+ number.
+ Again the underlying hardware may provide variable support.
+ On graphics cards the image objects are sometimes mapped to dedicated hardware
+ intended for texture manipulation.
+ The standard further defines interfaces to data stored with 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ and Direct3D.
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ additionally simplifies the development of parallel programs on the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ by exposing 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+UAV
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+UAV
+\end_layout
+
+\end_inset
+
+ is a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ hardware feature that allows 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+PE
+\end_layout
+
+\end_inset
+
+ to store data into arbitrary locations inside buffers and images.
+ In applications developed with 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ developers have to render geometry in order to run instances of their general
+ purpose shader programs.
+ A simplified representation of the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ processing pipeline is shown in 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+fig:Simplified-OpenGL-pipeline
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/shader_pipeline.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Simplified-OpenGL-pipeline"
+
+\end_inset
+
+Simplified 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ pipeline.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The geometry is transformed by vertex and geometry shaders and finally rasterize
+d into several fragments.
+ For each fragment an instance of the fragment shader program is run.
+ Unfortunately the output of a fragment shader has a predefined storage
+ location inside buffers and textures.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ output restriction has been somewhat lifted by the very recent 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ 4.2 standard.
+ Here pixel shaders may write to arbitrary locations and atomic operations
+ are also supported.
+ Still, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ 4.2 features are likely only available on 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ capable hardware.
+ Which means that 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPGPU
+\end_layout
+
+\end_inset
+
+ on older hardware must still be performed with workarounds.
+ On newer hardware 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ remains more approachable and flexible for 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPGPU
+\end_layout
+
+\end_inset
+
+ tasks, because of how kernels can be issued and memory is accessed.
+\end_layout
+
+\end_inset
+
+ In order to write into arbitrary regions, developers have to raster geometry
+ so that the fragment output is mapped to the intended target region.
+ In many cases algorithms must also be inverted into a gather scheme, where
+ the rendered fragment defines the destination and fetches the data from
+ other regions.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/uav_direct.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:uav_direct"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/uav_gather.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:uav_gather"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/uav_uav.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:uav_uav"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:uav"
+
+\end_inset
+
+Different relations between program invocation and storage location.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:uav
+\end_layout
+
+\end_inset
+
+ visualizes the issue.
+ In 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenGL
+\end_layout
+
+\end_inset
+
+ the raster location directly corresponds to an output region (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:uav_direct
+\end_layout
+
+\end_inset
+
+).
+ By gathering data from an arbitrary location in an input texture, the informati
+on can be passed to another location (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:uav_gather
+\end_layout
+
+\end_inset
+
+).
+ With the exposure of 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+UAV
+\end_layout
+
+\end_inset
+
+ in 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ each kernel invocation can directly write to arbitrary positions in the
+ buffer or image (
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:uav_uav
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Still, some memory operations are restricted.
+ For instance it is not allowed to read and write to the same image inside
+ a kernel.
+ If an algorithm reads from a source image, processes the data, and then
+ wants to write it back to the same image, this is not possible.
+ Instead it can use double-buffering methods.
+ They are also named 
+\emph on
+ping-pong
+\emph default
+ schemes, because the data is pushed back and forth between two identical
+ images.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+alg:Pseudo-code-to-illustrate-ping-pong
+\end_layout
+
+\end_inset
+
+ illustrates the technique.
+ In the pseudo-code a host application stores the handles to the two images
+ in an array with two entries and retrieves them by their indexes.
+ After each kernel invocation the indexes, and therefore images, can be
+ swapped with a simple reassignment to 
+\begin_inset Formula $one-index$
+\end_inset
+
+.
+ 
+\begin_inset listings
+lstparams "float,language=C,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Pseudo-code-to-illustrate-ping-pong"
+
+\end_inset
+
+Pseudo-code illustrating ping-pong scheme.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Image[2] images;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+int source      = 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+int destination = 1;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+loop 
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	process(images[source], images[destination]);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	source      = 1 - source;
+\end_layout
+
+\begin_layout Plain Layout
+
+	destination = 1 - destination;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Data that is repeatedly referenced inside a kernel invocation should be
+ copied to local memory first.
+ On modern 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ the program can thereby benefit from the lower latency of the scratch pad
+ memory.
+ Shared access to local memory is restricted to work-items within a single
+ work-group, but can be synchronized between participating items with special
+ 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+barrier
+\end_layout
+
+\end_inset
+
+ instructions.
+ The 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+barrier
+\end_layout
+
+\end_inset
+
+ forces any work-item inside a work-group to wait until all other items
+ in the group have executed the instruction.
+ If a 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+barrier
+\end_layout
+
+\end_inset
+
+ instruction is encountered by any work-item in a group, then all work-items
+ inside the group must encounter it.
+ Special care has to be taken so that this is also assured inside conditional
+ statements and loops, else undefined behavior might occur.
+ The programmer may also use 
+\emph on
+fence
+\emph default
+ instructions to ascertain that memory operations to global or local memory
+ have finished.
+\end_layout
+
+\begin_layout Standard
+Albeit not a magic wand, 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ is a functioning attempt at unifying the interface to current heterogeneous
+ platforms.
+ It allows the development of parallel programs, without the limitations
+ of OpenGL on 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+, and the intricacies of low-level threading on 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+The Radeon HD 6950
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:3.2TheRadeonHD6950"
+
+\end_inset
+
+Application development for this thesis started out on a Radeon HD 4870.
+ The developers of March of the Froblins already showed that crowd simulation
+ is feasible on such hardware.
+ But their implementation is limited to much lower agent numbers (
+\begin_inset Formula $65000$
+\end_inset
+
+ maximum, 
+\begin_inset Formula $16384$
+\end_inset
+
+ with simplified, and 
+\begin_inset Formula $3000$
+\end_inset
+
+ with detailed visualization 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Froblins2"
+
+\end_inset
+
+) than the one million intended for the application accompanying this thesis.
+ And they apparently optimized the computation of the navigation data by
+ spreading it over several frames, as the update every 
+\begin_inset Formula $n$
+\end_inset
+
+ frames in the demo indicates.
+ Thus, the limited computational power and the restricted 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ support for local memory, as mentioned earlier, induced a switch to the
+ more powerful Radeon HD 6950 graphics card.
+ This section discusses some of its hardware specific features and how they
+ relate to 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ Radeon HD 6950 is part of the 6900 series.
+ It's architecture also carries the name Cayman PRO, with Cayman being the
+ name of the 6900 line's architecture, part of the Northern Islands family
+ of 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+s (the 6000 series).
+ But this document will stick to the numbered naming scheme for the graphics
+ cards to emphasize the heritage between the products, instead of introducing
+ additional names.
+\end_layout
+
+\begin_layout Subsection
+Computation
+\end_layout
+
+\begin_layout Standard
+Most information provided in this section is based on 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDProgrammingGuide"
+
+\end_inset
+
+ which provides a good insight into how 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+'s current graphics cards function.
+ Many examples directly refer to the Radeon HD 5870 design but sometimes
+ this separation is not obvious.
+ For the sake of discussion, it is assumed that many of the properties of
+ the 5870 line carry over to the 6950 architecture.
+ For most of the numbers listed in this document the exact specifications
+ for the 6950 are given in the Programming Guide.
+ Where this is clearly not the case, it will be explicitly mentioned.
+ Based on the knowledge that the 6900 is a minimal redesign of the 6800,
+ which in turn is based on the 5870 architecture, it can be considered unlikely
+ that the functionality of the compute resources and the memory system differs
+ much.
+\end_layout
+
+\begin_layout Standard
+The card uses 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+VLIW
+\end_layout
+
+\end_inset
+
+ in order to achieve 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ILP
+\end_layout
+
+\end_inset
+
+, as mentioned in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HD9600ISA,AMDProgrammingGuide"
+
+\end_inset
+
+.
+ While the 6800 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ still featured an 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ISA
+\end_layout
+
+\end_inset
+
+ with five-way 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+VLIW
+\end_layout
+
+\end_inset
+
+, the 6900 series was redesigned into a four-way 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VLIW
+\end_layout
+
+\end_inset
+
+ architecture, allegedly without any practical performance impact 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Cayman,Cayman2"
+
+\end_inset
+
+.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:The-OpenCL-platform_b
+\end_layout
+
+\end_inset
+
+ shows how the 6950's hierarchy of processing elements maps to 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+'s platform model.
+ The hardware features 
+\emph on
+Stream Cores
+\emph default
+, each
+\emph on
+ 
+\emph default
+including four 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+.
+ Instructions to these four 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ can be issued in a single 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VLIW
+\end_layout
+
+\end_inset
+
+.
+ The 6950 has 
+\begin_inset Formula $16$
+\end_inset
+
+ Stream Cores per 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset Formula $22$
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ overall.
+ This gives a total of 
+\begin_inset Formula $1408$
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ running at 
+\begin_inset Formula $\unit[800]{MHz}$
+\end_inset
+
+ clock speed.
+ Thus it provides a theoretical peak performance of 
+\begin_inset Formula $\#ALUs\cdot ClockSpeed\cdot Operations=1408\cdot800\cdot\unit[10^{6}]{Hz}\cdot2=2252.8$
+\end_inset
+
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GFLOPS
+\end_layout
+
+\end_inset
+
+.
+ The number of operations is two because each 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ can execute a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+FMA
+\end_layout
+
+\end_inset
+
+ instruction in a single cycle.
+ An 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+FMA
+\end_layout
+
+\end_inset
+
+ is a multiplication followed by an addition (
+\begin_inset Formula $a\cdot b+c$
+\end_inset
+
+).
+ This computational power is comparable to what machines in the TOP500 achieved
+ in the year 2000 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "TOP500"
+
+\end_inset
+
+.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+tab:Number-of-compute
+\end_layout
+
+\end_inset
+
+ provides an overview of the number of compute resources, showing how many
+ elements are contained per parent item, and the total number inside the
+ device.
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="right" valignment="top" width="0">
+<column alignment="right" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Name
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Number per Parent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Total Number
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GPU
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\begin_inset space \hspace{}
+\length 5em
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\begin_inset space \hspace*{}
+\length 2em
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Compute Unit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+22
+\begin_inset space \hspace{}
+\length 5em
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+22
+\begin_inset space \hspace*{}
+\length 2em
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Stream Core
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\begin_inset space \hspace{}
+\length 5em
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+352
+\begin_inset space \hspace*{}
+\length 2em
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+ALU
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\begin_inset space \hspace{}
+\length 5em
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1408
+\begin_inset space \hspace*{}
+\length 2em
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Number-of-compute"
+
+\end_inset
+
+Number of compute resources in the 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ Radeon HD 6950 architecture.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Unfortunately, the nomenclature used in the June 2011 edition of 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDProgrammingGuide"
+
+\end_inset
+
+ is inconsistent.
+ Sometimes the 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ are referred to as 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+PE
+\end_layout
+
+\end_inset
+
+, in other sections the Stream Cores correspond to 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+PE
+\end_layout
+
+\end_inset
+
+.
+ This is probably a relict of pre-
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ document versions (likely because 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "HD9600ISA"
+
+\end_inset
+
+ uses a similar naming scheme) and hopefully will be cleaned up.
+ However, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ standard defines work-items with 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+A work-item may execute on one or more processing elements.
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "OpenCL"
+
+\end_inset
+
+, and work-items can not be executed on individual 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ in this 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ Therefore, referring to the Stream Cores as 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+PE
+\end_layout
+
+\end_inset
+
+ seems correct and this naming convention will be adopted throughout this
+ document.
+\end_layout
+
+\begin_layout Standard
+Work-items and work-groups are issued in the row-major order defined on
+ the index space, filling the ranges first in x, then y, and finally z-direction.
+ The maximum number of work-items per work-group is 
+\begin_inset Formula $256$
+\end_inset
+
+.
+ Work-groups are further divided into 
+\emph on
+wavefronts
+\emph default
+ which consist of 
+\begin_inset Formula $64$
+\end_inset
+
+ work-items each, therefore four wavefronts constitute such a work-group.
+\end_layout
+
+\begin_layout Standard
+The wavefronts are executed on compute units.
+ A 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ processes two wavefronts (
+\emph on
+odd
+\emph default
+ and 
+\emph on
+even
+\emph default
+) in an interleaved manner.
+ This allows to hide the read-after-write latency of eight cycles for most
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ operations.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:read-after-write
+\end_layout
+
+\end_inset
+
+ shows an example for the floating-point add instruction.
+ First the odd wavefront is executed.
+ All 
+\begin_inset Formula $16$
+\end_inset
+
+ Stream Cores execute the same 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VLIW
+\end_layout
+
+\end_inset
+
+ on a 
+\emph on
+quarter-wavefront
+\emph default
+ per cycle and the instruction for the whole odd wavefront can be handled
+ in four cycles.
+ Then the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ processes the even wavefront for four cycles, before it changes back to
+ the odd wavefront.
+ The result of the instruction is now available and can be used with the
+ next instruction.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/read-after-write.pdf
+	scale 120
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:read-after-write"
+
+\end_inset
+
+Wavefront processing for an ADD instruction.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The compiler combines 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VLIW
+\end_layout
+
+\end_inset
+
+ of the same type into 
+\emph on
+clauses
+\emph default
+ that are managed by flow control.
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ instructions are grouped with 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LDS
+\end_layout
+
+\end_inset
+
+ operations.
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LDS
+\end_layout
+
+\end_inset
+
+ is the low-latency memory inside the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+, sometimes it is also named 
+\emph on
+local data share
+\emph default
+.
+ Global memory accesses need to be grouped into separate clauses.
+ Clause switching causes an overhead and therefore clauses should contain
+ as many instructions as possible.
+ Apart from the odd-even scheme explained above, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ does only switch clauses at flow-control boundaries.
+ This means that a new clause can only be entered if all instructions of
+ the previous clause have completed.
+ If a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LDS
+\end_layout
+
+\end_inset
+
+ memory request can not be served immediately it will stall the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ until the memory operation has finished.
+ The 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ does not hide this stall by switching to a different clause or wavefront.
+\end_layout
+
+\begin_layout Standard
+To hide the latency of global memory accesses, the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ does switch between wavefronts.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/stall.pdf
+	scale 150
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:stall"
+
+\end_inset
+
+Hiding stalls with multiple wavefronts.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The example in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:stall
+\end_layout
+
+\end_inset
+
+ starts with the first wavefront executing while the other three are idle.
+ It stalls on a global memory access and the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ schedules the next wavefront for execution.
+ As soon as this one stalls the next one starts to execute.
+ This continues until the first wavefront's memory access has completed
+ and the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ can return execution to it at a clause boundary.
+ It is beneficial to have many running wavefronts to increase the opportunity
+ of hiding stalls.
+ The maximum number of concurrent wavefronts that the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ can manage depends on hardware limits and how much register space each
+ kernel occupies 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDProgrammingGuide,Throughput"
+
+\end_inset
+
+, because the register file is dynamically distributed between work-items.
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ may initialize resources during clause switches.
+ For instance, it can load constants whose addresses are available at compile
+ time into the constant cache.
+ This typically includes single constant variables and function parameters.
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\ttfamily},float,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:Example-instructions-grouped"
+
+\end_inset
+
+Instructions grouped into clauses.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\begin_layout Plain Layout
+
+01 TEX: ADDR(1216) CNT(1)
+\end_layout
+
+\begin_layout Plain Layout
+
+       6  VFETCH R6.xy__, R5.x, fc173  FORMAT(32_32_FLOAT)
+\end_layout
+
+\begin_layout Plain Layout
+
+          FETCH_TYPE(NO_INDEX_OFFSET)
+\end_layout
+
+\begin_layout Plain Layout
+
+02 ALU_PUSH_BEFORE: ADDR(272) CNT(4)
+\end_layout
+
+\begin_layout Plain Layout
+
+       7  x: SETGT_DX10  R0.x,  0.0f,  R6.x
+\end_layout
+
+\begin_layout Plain Layout
+
+          y: SETNE_DX10  R0.y,  R6.x,  R6.x
+\end_layout
+
+\begin_layout Plain Layout
+
+       8  z: OR_INT      R0.z,  PV7.x,  PV7.y
+\end_layout
+
+\begin_layout Plain Layout
+
+       9  x: PREDNE_INT  ____,  R0.z,  0.0f  UPDATE_EXEC_MASK UPDATE_PRED
+\end_layout
+
+\begin_layout Plain Layout
+
+03 JUMP  ADDR(6) 
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Three example clauses (
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+01
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+02
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+03
+\end_layout
+
+\end_inset
+
+) are given in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+lis:Example-instructions-grouped
+\end_layout
+
+\end_inset
+
+.
+ The first one represents a read from global memory.
+ The second clause includes three 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ operations.
+ It shows an instance (
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+7
+\end_layout
+
+\end_inset
+
+) where an instruction has been mapped to two (
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+x
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+y
+\end_layout
+
+\end_inset
+
+) of the four 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ (named 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+x
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+y
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+z
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+w
+\end_layout
+
+\end_inset
+
+).
+ The final example clause is a flow-control command.
+ A more detailed definition of the structure of clauses and the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+ISA
+\end_layout
+
+\end_inset
+
+ is given in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "HD9600ISA"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Wavefronts are at the lowest granularity that instruction flow control can
+ regard.
+ If two work-items divert at a conditional statement then all participating
+ work-items must evaluate both statements.
+ Inapplicable results are masked out and only the appropriate ones are used.
+ For instance, if the conditional branches into statements 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ (e.g.
+ 
+\begin_inset listings
+lstparams "language=C"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+if (isTrue) { A } else { B }
+\end_layout
+
+\end_inset
+
+), and each statement would be executed by at least one work-item inside
+ the wavefront, then the execution time of the wavefront for this conditional
+ will be the sum of the execution times of 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ These doubled executions are a reason why conditional statements should
+ be avoided on 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+.
+ Sometimes it is cheaper to just compute a value across all work-items inside
+ a wavefront instead of conditionally skipping the computation and branching.
+ There are cases where the conditional can be translated into multiplications
+ by zero and one.
+ In circumstances where the operations concern vector types the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+select
+\end_layout
+
+\end_inset
+
+ statement can be used.
+ But according to 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDProgrammingGuide"
+
+\end_inset
+
+, the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+select
+\end_layout
+
+\end_inset
+
+ statement should also be used for conditional scalar assignments, as shown
+ in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+lis:Conditional-scalar-assignment
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset listings
+lstparams "float,language=C"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "lis:Conditional-scalar-assignment"
+
+\end_inset
+
+Conditional scalar assignment with 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+select
+\end_layout
+
+\end_inset
+
+ statement.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+if (a) { i = 0; }
+\end_layout
+
+\begin_layout Plain Layout
+
+if (b) { i = 1; }
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\begin_layout Plain Layout
+
+// becomes
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+i = select(i, 0, a);
+\end_layout
+
+\begin_layout Plain Layout
+
+i = select(i, 1, b);
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\end_inset
+
+This prevents the creation of additional clauses which would cause unnecessary
+ overhead.
+\end_layout
+
+\begin_layout Standard
+Due to C language requirements the evaluation of a boolean expression with
+ several terms inside an if statement must take short-cuts 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "CkernighanRitchie"
+
+\end_inset
+
+.
+ For instance, in the expression 
+\begin_inset listings
+lstparams "language=C"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+a && b
+\end_layout
+
+\end_inset
+
+, the left operand 
+\begin_inset listings
+lstparams "language=C"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+a
+\end_layout
+
+\end_inset
+
+ is evaluated first and 
+\begin_inset listings
+lstparams "language=C"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+b
+\end_layout
+
+\end_inset
+
+ is only evaluated if 
+\begin_inset listings
+lstparams "language=C"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+a
+\end_layout
+
+\end_inset
+
+ does not result in zero.
+ To support this in if statements (e.g.
+ 
+\begin_inset listings
+lstparams "language=C"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+if (a && b) {...}
+\end_layout
+
+\end_inset
+
+) the compiler must generate several clauses.
+ This can be prevented by assigning the boolean expression to a variable
+ first and then using that variable inside the if statement (
+\begin_inset listings
+lstparams "language=C"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+int i = a && b; if (i) {...}
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Of similar importance are loops.
+ A loop will be executed until the last work-item inside the wavefront exits
+ the loop.
+ Therefore the execution time of the wavefront is the maximum execution
+ time of its work-items for the loop.
+\end_layout
+
+\begin_layout Subsection
+Memory
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:RadeonMemory"
+
+\end_inset
+
+The relation between the Radeon's memory structure and 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ is shown in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:memoryRegionsRadeon
+\end_layout
+
+\end_inset
+
+.
+ Individual 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+PE
+\end_layout
+
+\end_inset
+
+ store their private variables in the register file.
+ All 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+PE
+\end_layout
+
+\end_inset
+
+ of a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ can exchange data through the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LDS
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset Flex CT - auto cross-reference
+status open
+
+\begin_layout Plain Layout
+
+tab:MemorySize
+\end_layout
+
+\end_inset
+
+ lists the different memory components with their size and peak read bandwidth
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDProgrammingGuide"
+
+\end_inset
+
+.
+ The 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VRAM
+\end_layout
+
+\end_inset
+
+ can store 
+\begin_inset Formula $\unit[2]{GB}$
+\end_inset
+
+ of data on the Radeon HD 6950 but only part of that is available through
+ 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+.
+ The register file might seem large, but as mentioned above it has to be
+ shared between the 
+\begin_inset Formula $16$
+\end_inset
+
+ Stream Cores (
+\begin_inset Formula $\unit[256]{kB}/16=\unit[16]{kB}$
+\end_inset
+
+) and multiple wavefronts.
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="4">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0">
+<column alignment="right" valignment="top" width="0">
+<column alignment="right" valignment="top" width="0pt">
+<column alignment="right" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Name
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Size
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Total Size
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Peak Read
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Flex CT - Table Headline
+status collapsed
+
+\begin_layout Plain Layout
+Bandwidth
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+VRAM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2 GB / GPU
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2 GB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+160 GB/s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+L2 Cache
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+512 kB / GPU
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+512 kB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+410 GB/s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+L1 Cache
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8 kB / CU
+\begin_inset space \hspace*{}
+\length 0.7em
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+176 kB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1126 GB/s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LDS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+32 kB / CU
+\begin_inset space \hspace*{}
+\length 0.7em
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+704 kB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2253 GB/s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Register
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+256 kB / CU
+\begin_inset space \hspace*{}
+\length 0.7em
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5632 kB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13517 GB/s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Constant Cache
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+48 kB / GPU
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+48 kB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4506 GB/s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:MemorySize"
+
+\end_inset
+
+Memory resources in the 
+\begin_inset Flex CT - acronym short
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+ Radeon HD 6950 architecture.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Constant and global memory reads are cached through Level 1 (
+\emph on
+L1
+\emph default
+) and Level 2 (
+\emph on
+L2
+\emph default
+) caches, but there are also read instructions that explicitly bypass the
+ caches.
+ Moreover, according to 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDProgrammingGuide"
+
+\end_inset
+
+ (August 2011), 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+AMD
+\end_layout
+
+\end_inset
+
+'s 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+SDK
+\end_layout
+
+\end_inset
+
+ with version 2.4 only caches reads from buffers if the buffer pointer is
+ explicitly marked with the C language keywords 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+const
+\end_layout
+
+\end_inset
+
+ (value pointed to can not be changed) and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+restrict
+\end_layout
+
+\end_inset
+
+ (no aliasing with other pointers).
+ In 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDForumsCoalescedReads"
+
+\end_inset
+
+ it is stated that the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+SDK
+\end_layout
+
+\end_inset
+
+ 2.5 allows the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ to cache loads from writable buffers in certain circumstances.
+ During experiments with different kernels and the 2.5 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+SDK
+\end_layout
+
+\end_inset
+
+, caching was performed even if the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+const
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+restrict
+\end_layout
+
+\end_inset
+
+ keywords were absent.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDForumsCoalescedReads"
+
+\end_inset
+
+ also indicates that load coalescing is supported, which lowers the number
+ of addresses that need to be transmitted to global memory for lookup.
+ Apparently, images are always cached.
+ As mentioned earlier, special constant variables can reside in the constant
+ cache.
+\end_layout
+
+\begin_layout Standard
+Writes to global memory are managed through a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+WC
+\end_layout
+
+\end_inset
+
+ cache.
+ It caches multiple write requests before committing them to global memory
+ in order to achieve better access patterns.
+ The data then moves over two distinct memory lanes, the 
+\emph on
+Fast Path 
+\emph default
+and the 
+\emph on
+Complete Path
+\emph default
+.
+ On the Fast Path no complicated operations are performed and the data can
+ be quickly committed to memory.
+\end_layout
+
+\begin_layout Standard
+The Complete Path provides functionality necessary for 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ 
+\emph on
+atomic instructions
+\emph default
+.
+ For operations that return the old datum (e.g.
+ 
+\emph on
+atomic_add
+\emph default
+) it writes the old and the new entry into global memory at locations given
+ in the instruction.
+ Then it notifies the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+PE
+\end_layout
+
+\end_inset
+
+ so that it can read the old value with special load requests that bypass
+ the L2 cache.
+ This notification is also used with 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+OpenCL
+\end_layout
+
+\end_inset
+
+ fence instructions.
+ The Complete Path additionally manages data writes of less than 
+\begin_inset Formula $32$
+\end_inset
+
+ bits (e.g.
+ 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+char
+\end_layout
+
+\end_inset
+
+
+\emph default
+ and 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+short
+\end_layout
+
+\end_inset
+
+
+\emph default
+).
+ Operations on the Complete Path suffer an extra delay compared to the ones
+ on the Fast Path, therefore developers should try to use atomics with 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LDS
+\end_layout
+
+\end_inset
+
+ and rewrite their algorithms to use data types with 
+\begin_inset Formula $32$
+\end_inset
+
+ bits.
+ The global memory paths are wide enough to transmit the 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float4
+\end_layout
+
+\end_inset
+
+
+\emph default
+ vector data type and programs should make use of it.
+ The Fast Path supports coalesced writes, which lowers the number of destination
+ addresses that have to be transmitted to the memory controller that supervises
+ access to 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+VRAM
+\end_layout
+
+\end_inset
+
+.
+ Because the data items are laid out in a sequential fashion a single destinatio
+n address is sufficient, instead of one address per participating work-item.
+ The performance gain is however marginal because the memory controller
+ takes far longer to handle the requests than it takes to transmit them.
+\end_layout
+
+\begin_layout Standard
+Each address of a global memory access maps to a certain 
+\emph on
+channel
+\emph default
+ and 
+\emph on
+bank
+\emph default
+ controller.
+ 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Memory-address-assignment
+\end_layout
+
+\end_inset
+
+ shows how memory addresses might map to the controllers on the 6950.
+ According to 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AMDProgrammingGuide"
+
+\end_inset
+
+ it features eight channels, but the exact location of the channel bits
+ and the number and location of bank bits is taken from the description
+ of the Radeon HD 5870.
+ For the sake of discussion, it is assumed that the 6950 has the same address
+ layout.
+ If two 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+PE
+\end_layout
+
+\end_inset
+
+ request memory that maps to the same channel (bank), a 
+\emph on
+channel conflict
+\emph default
+ (
+\emph on
+bank conflict
+\emph default
+) occurs and the controller serializes the access.
+ As an example, two addresses 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ with 
+\begin_inset Formula 
+\[
+(A/256)\bmod8\equiv(B/256)\bmod8\equiv0
+\]
+
+\end_inset
+
+ will map to the first channel controller and cause a conflict.
+ This problem is similar to cache line conflicts encountered in 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CPU
+\end_layout
+
+\end_inset
+
+ architectures.
+ It hardly ever occurs with memory accesses of 
+\emph on
+stride
+\emph default
+ one, with stride being the address spacing between memory accesses initiated
+ by two work-items.
+ But strides of larger powers of two that coincide with the address assignment
+ as given in the example above are prone to this problem.
+ In matrix processing two neighboring elements in a column are sometimes
+ separated by a stride that is a power of two.
+ Concurrent access to such neighbors may lead to a conflict.
+ Sometimes this can be prevented by padding the matrix with an extra column,
+ thereby generating a stride that is not a power of two.
+ In general it is difficult to predict bank conflicts for 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPU
+\end_layout
+
+\end_inset
+
+ programs, because many 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ are concurrently requesting memory accesses.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/global_channel.pdf
+	scale 110
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Memory-address-assignment"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename graphics/chapter - gpgpu/local_banks.pdf
+	scale 110
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Memory-address-assignment2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Argument
+status collapsed
+
+\begin_layout Plain Layout
+Address assignment to memory controllers.
+\end_layout
+
+\end_inset
+
+Address assignment to memory controllers.
+ (a) Global memory address with to bank and channel bits.
+ (b) Local memory address with bank assignment.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LDS
+\end_layout
+
+\end_inset
+
+ each local memory address maps to a bank as illustrated in 
+\begin_inset Flex CT - auto cross-reference
+status collapsed
+
+\begin_layout Plain Layout
+
+fig:Memory-address-assignment2
+\end_layout
+
+\end_inset
+
+, and 
+\begin_inset Formula $32$
+\end_inset
+
+ concurrent accesses can be served per cycle.
+ Nonetheless, if two work-items request data that maps to the same bank
+ then the processing is stalled.
+ As mentioned earlier the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ continues executing the wavefront and fills in the data as it arrives.
+ Because 
+\begin_inset Formula $16$
+\end_inset
+
+ work-items (quarter-wavefront) are processed per cycle the 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LDS
+\end_layout
+
+\end_inset
+
+ manages to deliver two values of four-bytes length (e.g.
+ two 
+\emph on
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+float
+\end_layout
+
+\end_inset
+
+
+\emph default
+s) per cycle, as long as no addresses inside the wavefront map to the same
+ bank.
+ As an exception, when all 
+\begin_inset Formula $16$
+\end_inset
+
+ work-items of a 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+CU
+\end_layout
+
+\end_inset
+
+ access the same address the system can distribute the value to all Stream
+ Cores in a single-cycle scatter operation.
+ The 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+LDS
+\end_layout
+
+\end_inset
+
+ does not feature any special support for coalescing, but it has dedicated
+ hardware that performs atomic operations much faster than the global memory.
+\end_layout
+
+\begin_layout Standard
+The Radeon HD 6950's ancestry can be seen in its ability to stream large
+ amounts of data through parallel programs with limited interdependence,
+ as is typical for many applications in computer graphics.
+ In 
+\begin_inset Flex CT - acronym
+status collapsed
+
+\begin_layout Plain Layout
+
+GPGPU
+\end_layout
+
+\end_inset
+
+ conditional statements and complicated flow logic make it more difficult
+ to keep the throughput high and the 
+\begin_inset Flex CT - acronym plural
+status collapsed
+
+\begin_layout Plain Layout
+
+ALU
+\end_layout
+
+\end_inset
+
+ working to capacity.
+ Still, given the right application and the optimal implementation consumer-leve
+l graphics cards in general can provide an impressive performance at a reasonabl
+e affordability.
+\end_layout
+
+\end_body
+\end_document

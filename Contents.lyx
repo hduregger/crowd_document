@@ -1,0 +1,997 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass classicthesis
+\use_default_options true
+\maintain_unincluded_children false
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_numerical
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%*************************
+\end_layout
+
+\begin_layout Plain Layout
+
+% Table of Contents
+\end_layout
+
+\begin_layout Plain Layout
+
+%*************************
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+phantomsection
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+refstepcounter{dummy}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+pdfbookmark[1]{
+\backslash
+contentsname}{tableofcontents} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{tocdepth}{3} % <-- 2 includes up to subsections in the ToC 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{secnumdepth}{3} % <-- 3 section numbers up to subsubsections
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+manualmark 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+markboth{
+\backslash
+spacedlowsmallcaps{
+\backslash
+contentsname}}{
+\backslash
+spacedlowsmallcaps{
+\backslash
+contentsname}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+tableofcontents  
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+automark[section]{chapter} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+chaptermark}[1]{
+\backslash
+markboth{
+\backslash
+spacedlowsmallcaps{#1}}{
+\backslash
+spacedlowsmallcaps{#1}}} 
+\backslash
+renewcommand{
+\backslash
+sectionmark}[1]{
+\backslash
+markright{
+\backslash
+thesection
+\backslash
+enspace
+\backslash
+spacedlowsmallcaps{#1}}}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begingroup
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+let
+\backslash
+clearpage
+\backslash
+relax
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+let
+\backslash
+cleardoublepage
+\backslash
+relax
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%*************************
+\end_layout
+
+\begin_layout Plain Layout
+
+% List of Figures     
+\end_layout
+
+\begin_layout Plain Layout
+
+%*************************
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+phantomsection
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+refstepcounter{dummy}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+addcontentsline{toc}{chapter}{
+\backslash
+listfigurename}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+pdfbookmark[1]{
+\backslash
+listfigurename}{lof}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+listoffigures
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 8ex
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%*************************
+\end_layout
+
+\begin_layout Plain Layout
+
+% List of Tables
+\end_layout
+
+\begin_layout Plain Layout
+
+%*************************
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+phantomsection
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+refstepcounter{dummy}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+addcontentsline{toc}{chapter}{
+\backslash
+listtablename}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+pdfbookmark[1]{
+\backslash
+listtablename}{lot}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+listoftables
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 8ex
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%*************************
+\end_layout
+
+\begin_layout Plain Layout
+
+% List of Listings
+\end_layout
+
+\begin_layout Plain Layout
+
+%*************************
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+phantomsection
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+refstepcounter{dummy}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+addcontentsline{toc}{chapter}{
+\backslash
+lstlistlistingname}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+pdfbookmark[1]{
+\backslash
+lstlistlistingname}{lol}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstlistoflistings 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 8ex
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%*************************
+\end_layout
+
+\begin_layout Plain Layout
+
+% Acronyms
+\end_layout
+
+\begin_layout Plain Layout
+
+%*************************
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+phantomsection
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+refstepcounter{dummy}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+pdfbookmark[1]{Acronyms}{acronyms}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+markboth{
+\backslash
+spacedlowsmallcaps{Acronyms}}{
+\backslash
+spacedlowsmallcaps{Acronyms}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+chapter*{Acronyms}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{acronym}[UML]
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{1D}{one-dimensional}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{2D}{two-dimensional}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{3D}{three-dimensional}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{ALU}{arithmetic logic unit}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{AMD}{Advanced Micro Devices}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{API}{application programming interface}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{APP}{Accelerated Parallel Processing}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{APU}{accelerated processing unit}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{BSP}{binary space partitioning}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{CAL}{Compute Abstraction Layer}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{Cell}{Cell Broadband Engine Architecture} 
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{Cg}{C for graphics}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{CPU}{central processing unit}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{CU}{compute unit}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{CUDA}{Compute Unified Device Architecture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{FIM}{Fast Iterative Method}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{FMA}{fused multiply-add}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{FMM}{Fast Marching Method}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{FPS}{Frames Per Second}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{GFLOPS}{giga floating point operations per second}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{GLSL}{OpenGL Shading Language}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{GPGPU}{General-Purpose Computation on the GPU}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{GPU}{graphics processing unit}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{GUI}{graphical user interface}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{HLSL}{High Level Shading Language}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{ID}{identifier}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{IK}{inverse kinematics}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{ILP}{instruction-level parallelism}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{ISA}{instruction set architecture}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{LDS}{local data store}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{LOD}{level of detail}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{MRT}{Multiple Render Targets}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{NaN}{Not a Number}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{NDRange}{N-dimensional Range}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{OpenCL}{Open Computing Language}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{OpenGL}{Open Graphics Library}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{OUM}{Ordered Upwind Method}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{PC}{personal computer}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{PE}{processing element}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{PLE}{Principle of Least Effort}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{PNG}{Portable Network Graphics}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{RAM}{random-access memory}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{RGBA}{Red Green Blue Alpha}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{RVO}{Reciprocal Velocity Obstacle}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{SaP}{Sweep and Prune}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{SDK}{software development kit}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{SIMD}{Single Instruction, Multiple Data}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{SPE}{synergistic processing element}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{SPMD}{Single Program, Multiple Data}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{UAV}{Unordered Access View}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{USP}{unique selling proposition}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{VLIW}{very long instruction word}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{VO}{Velocity Obstacle}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{VRAM}{video random-access memory}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+acro{WC}{write-combining}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{acronym}              
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+endgroup
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
